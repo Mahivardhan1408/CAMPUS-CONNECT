@@ -2,245 +2,844 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CampusConnect is your smart college companion for notices, lost and found items, events, and student listings.">
-    <title>CampusConnect | Smart College Companion</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CampusConnect - Your Smart College Companion">
+  <title>CampusConnect - Your Smart College Companion</title>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --green: #15803d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      color: white;
+      padding: 24px 6%;
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      color: #cbd5e1;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 14px 6%;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav button {
+      border: 0;
+      background: transparent;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    nav button:hover,
+    nav button.active {
+      background: #dbeafe;
+      color: var(--primary-dark);
+    }
+
+    main {
+      width: 88%;
+      max-width: 1200px;
+      margin: 30px auto;
+      min-height: 65vh;
+    }
+
+    .page-section {
+      display: none;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    .hero {
+      padding: 30px;
+      border-radius: 16px;
+      color: white;
+      background: linear-gradient(120deg, #1d4ed8, #7c3aed);
+      margin-bottom: 24px;
+    }
+
+    .hero h2 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      max-width: 700px;
+    }
+
+    .section-heading {
+      margin: 24px 0 16px;
+    }
+
+    .section-heading h2 {
+      font-size: 26px;
+      margin-bottom: 5px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+
+    .content-card {
+      background: var(--card);
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+    }
+
+    .content-card h3 {
+      margin: 10px 0;
+      font-size: 19px;
+    }
+
+    .content-card p {
+      margin: 8px 0;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1d4ed8;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .event-icon {
+      display: block;
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      color: var(--green) !important;
+      font-size: 23px !important;
+      font-weight: bold;
+    }
+
+    .primary-btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 16px;
+      background: var(--primary);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .primary-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .secondary-btn {
+      background: #e2e8f0;
+      color: #172033;
+    }
+
+    .secondary-btn:hover {
+      background: #cbd5e1;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font: inherit;
+      background: white;
+      color: var(--text);
+    }
+
+    .toolbar input {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .category-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .category-btn {
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      border-radius: 20px;
+      background: white;
+      cursor: pointer;
+    }
+
+    .category-btn.active,
+    .category-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .form-card {
+      background: white;
+      padding: 22px;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .form-card h3 {
+      margin-bottom: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .empty-message,
+    .success-message {
+      padding: 16px;
+      margin: 16px 0;
+      border-radius: 8px;
+      background: #e0f2fe;
+      color: #075985;
+    }
+
+    .success-message {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 24px 6%;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    footer p {
+      margin: 5px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 24px;
+      }
+
+      main {
+        width: 92%;
+        margin: 20px auto;
+      }
+
+      .hero {
+        padding: 22px;
+      }
+
+      .hero h2 {
+        font-size: 24px;
+      }
+
+      nav {
+        position: static;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <header class="site-header">
-        <div class="brand">
-            <div class="brand-icon">CC</div>
-            <div>
-                <h1>CampusConnect</h1>
-                <p>Your Smart College Companion</p>
-            </div>
+  <header>
+    <h1>🎓 CampusConnect</h1>
+    <p>Your Smart College Companion</p>
+    <p>Announcements • Events • Lost & Found • Student Marketplace</p>
+  </header>
+
+  <nav aria-label="Main navigation">
+    <button type="button" class="active" data-page="home">🏠 Home</button>
+    <button type="button" data-page="announcements">📢 Announcements</button>
+    <button type="button" data-page="events">🎉 Events</button>
+    <button type="button" data-page="lost">🔎 Lost & Found</button>
+    <button type="button" data-page="marketplace">🛍️ Marketplace</button>
+  </nav>
+
+  <main>
+    <!-- HOME -->
+    <section id="home" class="page-section active">
+      <div class="hero">
+        <h2>Welcome to CampusConnect!</h2>
+        <p>
+          Your one-stop platform for campus announcements, college events,
+          lost and found items, and student-to-student buying and selling.
+          Stay informed and connected with your college community.
+        </p>
+        <button class="primary-btn" type="button" data-go="announcements">
+          Explore Announcements
+        </button>
+        <button class="primary-btn" type="button" data-go="marketplace">
+          Browse Marketplace
+        </button>
+      </div>
+
+      <div class="section-heading">
+        <h2>What can you do here?</h2>
+        <p>Choose a section to get started.</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="content-card">
+          <span class="event-icon">📢</span>
+          <h3>Announcements</h3>
+          <p>Read academic updates, examination information, department notices, and campus reminders.</p>
+          <button class="primary-btn" type="button" data-go="announcements">View Notices</button>
+        </article>
+
+        <article class="content-card">
+          <span class="event-icon">🎉</span>
+          <h3>College Events</h3>
+          <p>Discover technical workshops, project exhibitions, cultural activities, and student meetups.</p>
+          <button class="primary-btn" type="button" data-go="events">View Events</button>
+        </article>
+
+        <article class="content-card">
+          <span class="event-icon">🔎</span>
+          <h3>Lost & Found</h3>
+          <p>Browse listed lost or found belongings and submit a report for an item.</p>
+          <button class="primary-btn" type="button" data-go="lost">Open Lost & Found</button>
+        </article>
+
+        <article class="content-card">
+          <span class="event-icon">🛍️</span>
+          <h3>Student Marketplace</h3>
+          <p>Browse second-hand books, stationery, and electronics listed by students.</p>
+          <button class="primary-btn" type="button" data-go="marketplace">Browse Items</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- ANNOUNCEMENTS -->
+    <section id="announcements" class="page-section">
+      <div class="section-heading">
+        <h2>📢 College Announcements</h2>
+        <p>Read important information and reminders. Confirm official dates with your college.</p>
+      </div>
+
+      <div class="toolbar">
+        <input id="noticeSearch" type="search" placeholder="Search announcements..." aria-label="Search announcements">
+      </div>
+
+      <div id="noticeList" class="card-grid">
+        <article class="content-card notice-item" data-search="examination timetable academic semester">
+          <span class="tag">Academic</span>
+          <h3>📚 Examination Timetable</h3>
+          <p><strong>Date:</strong> Check the official notice board.</p>
+          <p>Students should review the confirmed subject-wise timetable, examination rooms, and reporting times before their exams.</p>
+          <p><strong>Action:</strong> Contact your department for the latest official schedule.</p>
+        </article>
+
+        <article class="content-card notice-item" data-search="workshop artificial intelligence machine learning technical">
+          <span class="tag">Technical</span>
+          <h3>🤖 AI and Machine Learning Workshop</h3>
+          <p><strong>Date:</strong> To be announced.</p>
+          <p>A proposed learning session covering AI fundamentals, machine learning applications, and student project ideas.</p>
+          <p><strong>Action:</strong> Ask your department coordinator whether registration is available.</p>
+        </article>
+
+        <article class="content-card notice-item" data-search="library books reading timings">
+          <span class="tag">Library</span>
+          <h3>📖 Library Reminder</h3>
+          <p>Carry your valid college ID, return borrowed books on time, and keep the library quiet for other students.</p>
+          <p><strong>Timings:</strong> Confirm current opening hours with the library.</p>
+        </article>
+
+        <article class="content-card notice-item" data-search="placement career aptitude interview">
+          <span class="tag">Placement</span>
+          <h3>🚀 Career Preparation</h3>
+          <p>Students can practise aptitude, programming, communication skills, resume preparation, and interview questions.</p>
+          <p><strong>Action:</strong> Contact the placement cell for confirmed training sessions.</p>
+        </article>
+      </div>
+
+      <p id="noticeEmpty" class="empty-message" hidden>No announcements match your search.</p>
+    </section>
+
+    <!-- EVENTS -->
+    <section id="events" class="page-section">
+      <div class="section-heading">
+        <h2>🎉 College Events</h2>
+        <p>Explore learning, innovation, and cultural activities.</p>
+      </div>
+
+      <div class="toolbar">
+        <input id="eventSearch" type="search" placeholder="Search events..." aria-label="Search events">
+      </div>
+
+      <div id="eventList" class="card-grid">
+        <article class="content-card event-item" data-search="AI innovation challenge machine learning">
+          <span class="event-icon">🤖</span>
+          <span class="tag">Technical</span>
+          <h3>AI Innovation Challenge</h3>
+          <p>Explore AI-based solutions to real-world problems. Students can develop ideas involving chatbots, computer vision, and automation.</p>
+          <p><strong>Date:</strong> To be announced</p>
+          <p><strong>Venue:</strong> To be confirmed</p>
+          <p><strong>Registration:</strong> Contact your department.</p>
+        </article>
+
+        <article class="content-card event-item" data-search="project expo exhibition prototype engineering">
+          <span class="event-icon">💡</span>
+          <span class="tag">Innovation</span>
+          <h3>Student Project Expo</h3>
+          <p>Showcase software applications, engineering prototypes, mini-projects, and creative ideas. Receive feedback and learn from other students.</p>
+          <p><strong>Date:</strong> To be announced</p>
+          <p><strong>Venue:</strong> To be confirmed</p>
+        </article>
+
+        <article class="content-card event-item" data-search="cultural day music dance art">
+          <span class="event-icon">🎭</span>
+          <span class="tag">Cultural</span>
+          <h3>Campus Cultural Day</h3>
+          <p>Celebrate student talent through music, dance, art, and performances.</p>
+          <p><strong>Date:</strong> To be announced</p>
+          <p><strong>Participation:</strong> Check official college updates.</p>
+        </article>
+
+        <article class="content-card event-item" data-search="programming coding algorithms meetup">
+          <span class="event-icon">🧑‍💻</span>
+          <span class="tag">Learning</span>
+          <h3>Programming Practice Meetup</h3>
+          <p>Practise coding problems, discuss algorithms, share programming tips, and collaborate on beginner-friendly projects.</p>
+          <p><strong>Date:</strong> To be announced</p>
+          <p><strong>Location:</strong> To be confirmed</p>
+        </article>
+      </div>
+
+      <p id="eventEmpty" class="empty-message" hidden>No events match your search.</p>
+    </section>
+
+    <!-- LOST AND FOUND -->
+    <section id="lost" class="page-section">
+      <div class="section-heading">
+        <h2>🔎 Lost & Found</h2>
+        <p>Report a lost or found item to help reconnect belongings with their owners.</p>
+      </div>
+
+      <form id="lostForm" class="form-card">
+        <h3>Submit an Item Report</h3>
+
+        <div class="form-group">
+          <label for="lostType">Report type</label>
+          <select id="lostType" required>
+            <option value="Lost">I lost an item</option>
+            <option value="Found">I found an item</option>
+          </select>
         </div>
-        <span class="status">Student Portal</span>
-    </header>
 
-    <nav class="navigation" aria-label="Main navigation">
-        <button class="nav-btn active" data-section="dashboard">Dashboard</button>
-        <button class="nav-btn" data-section="announcements">Announcements</button>
-        <button class="nav-btn" data-section="lost-found">Lost &amp; Found</button>
-        <button class="nav-btn" data-section="events">Events</button>
-        <button class="nav-btn" data-section="marketplace">Marketplace</button>
-    </nav>
+        <div class="form-group">
+          <label for="lostName">Item name</label>
+          <input id="lostName" required maxlength="80" placeholder="Example: Water bottle">
+        </div>
 
-    <main class="container">
-        <section id="dashboard" class="page active">
-            <div class="hero">
-                <span class="eyebrow">YOUR CAMPUS, CONNECTED</span>
-                <h2>Welcome to CampusConnect!</h2>
-                <p>Everything you need for campus life, all in one place.</p>
-                <button class="primary-btn" data-go="announcements">
-                    Explore Announcements
-                </button>
-            </div>
+        <div class="form-group">
+          <label for="lostLocation">Location</label>
+          <input id="lostLocation" required maxlength="120" placeholder="Example: Library">
+        </div>
 
-            <h2 class="section-heading">Explore Your Campus</h2>
-            <div class="card-grid">
-                <button class="feature-card" data-go="announcements">
-                    <span class="feature-icon">📢</span>
-                    <h3>Announcements</h3>
-                    <p>Read important notices and college updates.</p>
-                    <span class="card-link">View notices →</span>
-                </button>
-                <button class="feature-card" data-go="lost-found">
-                    <span class="feature-icon">🔎</span>
-                    <h3>Lost &amp; Found</h3>
-                    <p>Report lost items and share things you find.</p>
-                    <span class="card-link">Find an item →</span>
-                </button>
-                <button class="feature-card" data-go="events">
-                    <span class="feature-icon">🎉</span>
-                    <h3>College Events</h3>
-                    <p>Discover activities and campus events.</p>
-                    <span class="card-link">Explore events →</span>
-                </button>
-                <button class="feature-card" data-go="marketplace">
-                    <span class="feature-icon">🛍️</span>
-                    <h3>Student Marketplace</h3>
-                    <p>Browse books, electronics, and stationery.</p>
-                    <span class="card-link">Browse listings →</span>
-                </button>
-            </div>
+        <div class="form-group">
+          <label for="lostDescription">Description</label>
+          <textarea id="lostDescription" required maxlength="500" placeholder="Describe the item without sharing private information"></textarea>
+        </div>
 
-            <div class="info-banner">
-                <span>💡</span>
-                <div>
-                    <h3>One campus. One community.</h3>
-                    <p>Stay informed, share resources, and make campus life easier.</p>
-                </div>
-            </div>
-        </section>
+        <button class="primary-btn" type="submit">Add Report</button>
+      </form>
 
-        <section id="announcements" class="page" hidden>
-            <div class="page-heading">
-                <span class="eyebrow">STAY INFORMED</span>
-                <h2>Announcements</h2>
-                <p>Find important college notices and updates.</p>
-            </div>
+      <div class="section-heading">
+        <h3>Recent Reports</h3>
+        <p>Reports added here are saved in this browser only.</p>
+      </div>
 
-            <input id="notice-search" class="search-input" type="search"
-                   placeholder="Search announcements..."
-                   aria-label="Search announcements">
+      <div id="lostList" class="card-grid"></div>
+      <p id="lostEmpty" class="empty-message">No reports have been added in this browser yet.</p>
+    </section>
 
-            <div id="notice-list" class="content-list">
-                <article class="content-card notice-item"
-                         data-search="examination exam timetable schedule">
-                    <span class="tag">Academic</span>
-                    <h3>Examination Updates</h3>
-                    <p>Check official college communications for the latest examination timetable and instructions.</p>
-                </article>
-                <article class="content-card notice-item"
-                         data-search="college library books study hours">
-                    <span class="tag">Campus</span>
-                    <h3>Library Information</h3>
-                    <p>Visit the college library for study resources and information about available facilities.</p>
-                </article>
-                <article class="content-card notice-item"
-                         data-search="student registration academic forms">
-                    <span class="tag">Students</span>
-                    <h3>Student Updates</h3>
-                    <p>Check with your department for registration deadlines and other academic updates.</p>
-                </article>
-            </div>
-            <p id="notice-empty" class="empty-message" hidden>
-                No matching announcements found.
-            </p>
-        </section>
+    <!-- MARKETPLACE -->
+    <section id="marketplace" class="page-section">
+      <div class="section-heading">
+        <h2>🛍️ Student Marketplace</h2>
+        <p>Browse second-hand items and contact the seller to arrange collection.</p>
+      </div>
 
-        <section id="lost-found" class="page" hidden>
-            <div class="page-heading">
-                <span class="eyebrow">HELP YOUR CAMPUS COMMUNITY</span>
-                <h2>Lost &amp; Found</h2>
-                <p>Post an item you lost or found on campus.</p>
-            </div>
+      <div class="toolbar">
+        <input id="marketSearch" type="search" placeholder="Search items, descriptions, or categories..." aria-label="Search marketplace">
+      </div>
 
-            <form id="lost-form" class="form-card">
-                <label for="lost-name">Item name</label>
-                <input id="lost-name" type="text" maxlength="80"
-                       placeholder="e.g. Blue water bottle" required>
+      <div class="category-buttons" aria-label="Filter marketplace category">
+        <button class="category-btn active" type="button" data-category="all">All Items</button>
+        <button class="category-btn" type="button" data-category="books">📚 Books</button>
+        <button class="category-btn" type="button" data-category="electronics">🎧 Electronics</button>
+        <button class="category-btn" type="button" data-category="stationery">✏️ Stationery</button>
+        <button class="category-btn" type="button" data-category="other">📦 Other</button>
+      </div>
 
-                <label for="lost-type">Report type</label>
-                <select id="lost-type" required>
-                    <option value="">Choose Lost or Found</option>
-                    <option value="Lost">I lost this item</option>
-                    <option value="Found">I found this item</option>
-                </select>
+      <div id="marketList" class="card-grid">
+        <article class="content-card market-item" data-category="books" data-search="engineering mathematics textbook used book">
+          <span class="event-icon">📘</span>
+          <span class="tag">Books</span>
+          <h3>Engineering Mathematics Textbook</h3>
+          <p>Used textbook for engineering mathematics revision. Ask the seller about the edition and condition.</p>
+          <p class="price">₹250</p>
+          <p><strong>Condition:</strong> Used</p>
+          <p><strong>Collection:</strong> Arrange a public campus meetup.</p>
+          <button class="primary-btn contact-seller" type="button" data-item="Engineering Mathematics Textbook" data-price="₹250">Contact Seller</button>
+        </article>
 
-                <label for="lost-location">Location</label>
-                <input id="lost-location" type="text" maxlength="100"
-                       placeholder="e.g. College library" required>
+        <article class="content-card market-item" data-category="electronics" data-search="wired headphones audio electronics">
+          <span class="event-icon">🎧</span>
+          <span class="tag">Electronics</span>
+          <h3>Wired Headphones</h3>
+          <p>Pre-owned wired headphones for lectures and online classes. Ask the seller to demonstrate that they work.</p>
+          <p class="price">₹300</p>
+          <p><strong>Condition:</strong> Used</p>
+          <p><strong>Collection:</strong> Arrange a public campus meetup.</p>
+          <button class="primary-btn contact-seller" type="button" data-item="Wired Headphones" data-price="₹300">Contact Seller</button>
+        </article>
 
-                <button class="primary-btn" type="submit">Post Item</button>
-            </form>
+        <article class="content-card market-item" data-category="stationery" data-search="geometry drawing instruments stationery kit">
+          <span class="event-icon">✏️</span>
+          <span class="tag">Stationery</span>
+          <h3>Geometry Kit</h3>
+          <p>Pre-owned geometry kit for engineering drawing. Confirm the included instruments before purchase.</p>
+          <p class="price">₹100</p>
+          <p><strong>Condition:</strong> Used</p>
+          <p><strong>Collection:</strong> Arrange a public campus meetup.</p>
+          <button class="primary-btn contact-seller" type="button" data-item="Geometry Kit" data-price="₹100">Contact Seller</button>
+        </article>
 
-            <h3 class="section-heading">Recent Reports</h3>
-            <div id="lost-list" class="content-list"></div>
-            <p id="lost-empty" class="empty-message">
-                No reports yet. Add the first item above!
-            </p>
-            <p class="small-note">
-                Demo only: reports are stored in this browser and are not shared with other visitors.
-            </p>
-        </section>
+        <article class="content-card market-item" data-category="books" data-search="Python programming notes coding">
+          <span class="event-icon">📗</span>
+          <span class="tag">Books</span>
+          <h3>Python Programming Notes</h3>
+          <p>Notes covering Python basics, conditions, loops, functions, and examples. Ask to preview them before buying.</p>
+          <p class="price">₹80</p>
+          <p><strong>Condition:</strong> Pre-owned notes</p>
+          <p><strong>Collection:</strong> Arrange a public campus meetup.</p>
+          <button class="primary-btn contact-seller" type="button" data-item="Python Programming Notes" data-price="₹80">Contact Seller</button>
+        </article>
+      </div>
 
-        <section id="events" class="page" hidden>
-            <div class="page-heading">
-                <span class="eyebrow">CAMPUS LIFE</span>
-                <h2>College Events</h2>
-                <p>Explore activities and ideas for campus life.</p>
-            </div>
+      <p id="marketEmpty" class="empty-message" hidden>No items match your search or category.</p>
 
-            <div class="card-grid">
-                <article class="content-card">
-                    <span class="event-icon">💻</span>
-                    <span class="tag">Technology</span>
-                    <h3>Technical Fest</h3>
-                    <p>Explore coding challenges, project exhibitions, and technology activities.</p>
-                    <p class="small-note">Check with your college for event dates.</p>
-                </article>
-                <article class="content-card">
-                    <span class="event-icon">🎭</span>
-                    <span class="tag">Culture</span>
-                    <h3>Cultural Fest</h3>
-                    <p>Discover music, dance, art, and opportunities to showcase student talent.</p>
-                    <p class="small-note">Check with your college for event dates.</p>
-                </article>
-                <article class="content-card">
-                    <span class="event-icon">🚀</span>
-                    <span class="tag">Innovation</span>
-                    <h3>Project Exhibition</h3>
-                    <p>Share innovative ideas, demonstrate projects, and learn from other students.</p>
-                    <p class="small-note">Ask your department about participation.</p>
-                </article>
-            </div>
-        </section>
+      <div class="form-card">
+        <h3>How to Get an Item</h3>
+        <p><strong>1.</strong> Choose the item you want.</p>
+        <p><strong>2.</strong> Click Contact Seller and provide your contact details in the email draft.</p>
+        <p><strong>3.</strong> Agree on the final price, condition, and availability.</p>
+        <p><strong>4.</strong> Arrange collection in a public campus location. Inspect the item before paying.</p>
+        <p><strong>Important:</strong> Listings are examples. Contact details must be supplied by the actual seller.</p>
+      </div>
+    </section>
+  </main>
 
-        <section id="marketplace" class="page" hidden>
-            <div class="page-heading">
-                <span class="eyebrow">BUY • SELL • SHARE</span>
-                <h2>Student Marketplace</h2>
-                <p>Browse sample student listings by category.</p>
-            </div>
+  <footer>
+    <p><strong>CampusConnect</strong> — Your Smart College Companion</p>
+    <p>Announcements • Events • Lost & Found • Student Marketplace</p>
+    <p>Student project demonstration. Confirm official college information independently.</p>
+  </footer>
 
-            <div class="category-filters" aria-label="Marketplace categories">
-                <button class="category-btn active" data-category-filter="all">All</button>
-                <button class="category-btn" data-category-filter="books">Books</button>
-                <button class="category-btn" data-category-filter="electronics">Electronics</button>
-                <button class="category-btn" data-category-filter="stationery">Stationery</button>
-            </div>
+  <script>
+    // NAVIGATION: show exactly the selected page.
+    const pageButtons = document.querySelectorAll("[data-page]");
+    const pages = document.querySelectorAll(".page-section");
 
-            <input id="market-search" class="search-input" type="search"
-                   placeholder="Search listings..."
-                   aria-label="Search marketplace listings">
+    function showPage(pageId) {
+      const target = document.getElementById(pageId);
+      if (!target || !target.classList.contains("page-section")) return;
 
-            <div id="market-list" class="card-grid">
-                <article class="content-card market-item" data-category="books">
-                    <span class="feature-icon">📚</span>
-                    <span class="tag">Books</span>
-                    <h3>Engineering Textbook</h3>
-                    <p>Example listing for an engineering textbook.</p>
-                    <p class="price">₹300</p>
-                </article>
-                <article class="content-card market-item" data-category="electronics">
-                    <span class="feature-icon">🧮</span>
-                    <span class="tag">Electronics</span>
-                    <h3>Scientific Calculator</h3>
-                    <p>Example listing for a scientific calculator.</p>
-                    <p class="price">₹500</p>
-                </article>
-                <article class="content-card market-item" data-category="stationery">
-                    <span class="feature-icon">📝</span>
-                    <span class="tag">Stationery</span>
-                    <h3>Notebook Set</h3>
-                    <p>Example listing for a set of notebooks.</p>
-                    <p class="price">₹100</p>
-                </article>
-                <article class="content-card market-item" data-category="books">
-                    <span class="feature-icon">📖</span>
-                    <span class="tag">Books</span>
-                    <h3>Programming Notes</h3>
-                    <p>Example listing for programming study notes.</p>
-                    <p class="price">₹80</p>
-                </article>
-            </div>
-            <p id="market-empty" class="empty-message" hidden>
-                No matching listings found.
-            </p>
-            <p class="small-note">
-                Sample listings only. This version does not process orders or payments.
-            </p>
-        </section>
-    </main>
+      pages.forEach(page => {
+        page.classList.toggle("active", page.id === pageId);
+      });
 
-    <footer class="site-footer">
-        <p>© 2026 CampusConnect</p>
-        <p>Your Smart College Companion</p>
-    </footer>
+      pageButtons.forEach(button => {
+        const selected = button.dataset.page === pageId;
+        button.classList.toggle("active", selected);
+        button.setAttribute("aria-current", selected ? "page" : "false");
+      });
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    pageButtons.forEach(button => {
+      button.addEventListener("click", () => showPage(button.dataset.page));
+    });
+
+    document.querySelectorAll("[data-go]").forEach(button => {
+      button.addEventListener("click", () => showPage(button.dataset.go));
+    });
+
+    // SEARCH: filter announcements.
+    const noticeSearch = document.getElementById("noticeSearch");
+    const noticeItems = [...document.querySelectorAll(".notice-item")];
+
+    noticeSearch.addEventListener("input", () => {
+      const query = noticeSearch.value.trim().toLowerCase();
+      let visible = 0;
+
+      noticeItems.forEach(item => {
+        const matches = item.textContent.toLowerCase().includes(query) ||
+          (item.dataset.search || "").toLowerCase().includes(query);
+        item.hidden = !matches;
+        if (matches) visible++;
+      });
+
+      document.getElementById("noticeEmpty").hidden = visible > 0;
+    });
+
+    // SEARCH: filter events.
+    const eventSearch = document.getElementById("eventSearch");
+    const eventItems = [...document.querySelectorAll(".event-item")];
+
+    eventSearch.addEventListener("input", () => {
+      const query = eventSearch.value.trim().toLowerCase();
+      let visible = 0;
+
+      eventItems.forEach(item => {
+        const matches = item.textContent.toLowerCase().includes(query) ||
+          (item.dataset.search || "").toLowerCase().includes(query);
+        item.hidden = !matches;
+        if (matches) visible++;
+      });
+
+      document.getElementById("eventEmpty").hidden = visible > 0;
+    });
+
+    // MARKETPLACE: category and search filters work together.
+    let selectedCategory = "all";
+    const marketSearch = document.getElementById("marketSearch");
+    const marketItems = [...document.querySelectorAll(".market-item")];
+    const categoryButtons = [...document.querySelectorAll(".category-btn")];
+
+    function filterMarketplace() {
+      const query = marketSearch.value.trim().toLowerCase();
+      let visible = 0;
+
+      marketItems.forEach(item => {
+        const categoryMatches = selectedCategory === "all" ||
+          item.dataset.category === selectedCategory;
+
+        const searchText = (
+          item.textContent + " " + (item.dataset.search || "")
+        ).toLowerCase();
+
+        const searchMatches = searchText.includes(query);
+        const matches = categoryMatches && searchMatches;
+
+        item.hidden = !matches;
+        if (matches) visible++;
+      });
+
+      document.getElementById("marketEmpty").hidden = visible > 0;
+    }
+
+    categoryButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        selectedCategory = button.dataset.category;
+
+        categoryButtons.forEach(categoryButton => {
+          const selected = categoryButton === button;
+          categoryButton.classList.toggle("active", selected);
+          categoryButton.setAttribute("aria-pressed", String(selected));
+        });
+
+        filterMarketplace();
+      });
+    });
+
+    marketSearch.addEventListener("input", filterMarketplace);
+
+    // MARKETPLACE: open a prefilled email draft.
+    // Replace the placeholder with each real seller's email.
+    document.querySelectorAll(".contact-seller").forEach(button => {
+      button.addEventListener("click", () => {
+        const item = button.dataset.item;
+        const price = button.dataset.price;
+
+        const recipient = prompt(
+          "Enter the seller's actual email address for " + item + ":"
+        );
+
+        if (!recipient) return;
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(recipient.trim())) {
+          alert("Please enter a valid email address.");
+          return;
+        }
+
+        const subject = "CampusConnect item enquiry: " + item;
+        const body =
+          "Hello,\n\nI am interested in your CampusConnect listing.\n" +
+          "Item: " + item + "\n" +
+          "Listed price: " + price + "\n\n" +
+          "Is the item still available? Could we arrange a safe campus collection?\n\n" +
+          "My name and contact details:\n";
+
+        const mailto = "mailto:" + recipient.trim() +
+          "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(body);
+
+        window.location.href = mailto;
+      });
+    });
+
+    // LOST & FOUND: save reports in this browser.
+    // This is not a shared database; other visitors cannot see these reports.
+    const lostForm = document.getElementById("lostForm");
+    const lostList = document.getElementById("lostList");
+    const lostEmpty = document.getElementById("lostEmpty");
+    const lostStorageKey = "campusconnect-lost-reports-v1";
+
+    function loadLostReports() {
+      try {
+        const stored = JSON.parse(localStorage.getItem(lostStorageKey) || "[]");
+        return Array.isArray(stored) ? stored : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function renderLostReports() {
+      const reports = loadLostReports();
+      lostList.replaceChildren();
+      lostEmpty.hidden = reports.length > 0;
+
+      reports.forEach(report => {
+        const card = document.createElement("article");
+        card.className = "content-card";
+
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = report.type;
+
+        const heading = document.createElement("h3");
+        heading.textContent = report.name;
+
+        const location = document.createElement("p");
+        location.textContent = "Location: " + report.location;
+
+        const description = document.createElement("p");
+        description.textContent = report.description;
+
+        card.append(tag, heading, location, description);
+        lostList.appendChild(card);
+      });
+    }
+
+    lostForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const report = {
+        type: document.getElementById("lostType").value,
+        name: document.getElementById("lostName").value.trim(),
+        location: document.getElementById("lostLocation").value.trim(),
+        description: document.getElementById("lostDescription").value.trim()
+      };
+
+      if (!report.name || !report.location || !report.description) {
+        alert("Please complete all fields.");
+        return;
+      }
+
+      const reports = loadLostReports();
+      reports.unshift(report);
+
+      try {
+        localStorage.setItem(lostStorageKey, JSON.stringify(reports));
+      } catch {
+        alert("This browser could not save the report. Please check browser storage settings.");
+        return;
+      }
+
+      lostForm.reset();
+      renderLostReports();
+      alert("Report added in this browser.");
+    });
+
+    // Initial page setup.
+    renderLostReports();
+    filterMarketplace();
+    showPage("home");
+  </script>
 </body>
 </html>
