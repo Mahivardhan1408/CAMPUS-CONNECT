@@ -3,1319 +3,1277 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CampusConnect | Your Campus, Connected</title>
-<meta name="description" content="Discover campus events, announcements, student marketplace and Lost & Found with CampusConnect.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#073b3a">
+<title>CampusConnect | Student Community</title>
+<meta name="description" content="Discover campus events, announcements, student listings and lost-and-found information.">
 
 <style>
 :root {
-  --primary: #6558f5;
-  --primary-dark: #4938d9;
-  --pink: #ff5fa2;
-  --orange: #ffad5c;
-  --green: #1eaf82;
-  --blue: #368cff;
-  --ink: #222344;
-  --muted: #777991;
-  --line: #ececf5;
-  --surface: #ffffff;
-  --background: #f6f6fc;
-  --shadow: 0 10px 35px rgba(39, 34, 100, .07);
+  --aqua: #25dbc3;
+  --aqua-dark: #00a995;
+  --teal: #073b3a;
+  --teal-2: #0c5551;
+  --ink: #173b3b;
+  --muted: #718585;
+  --bg: #effaf8;
+  --white: #fff;
+  --line: #dcece9;
+  --coral: #ff7b72;
+  --orange: #ffbf69;
+  --blue: #6caeff;
+  --purple: #a895ff;
+  --shadow: 0 12px 35px rgba(7,59,58,.075);
 }
 
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
-
 body {
   margin: 0;
-  font-family: Inter, "Segoe UI", Arial, sans-serif;
-  background: var(--background);
   color: var(--ink);
+  background: var(--bg);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
 }
-
 button, input, select, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
 button { cursor: pointer; }
 a { color: inherit; text-decoration: none; }
-
-.test-banner {
-  display: block;
-  background: #fff000;
-  color: #171717;
-  padding: 12px;
-  text-align: center;
-  font-weight: 900;
-  letter-spacing: 1px;
-  border-bottom: 3px solid #171717;
+button:focus-visible, a:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 3px solid #25dbc377;
+  outline-offset: 2px;
 }
+[hidden] { display: none !important; }
 
-.topbar {
-  background: white;
-  border-bottom: 1px solid var(--line);
+.header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 20;
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--line);
 }
-
-.nav-wrap {
-  max-width: 1440px;
-  margin: auto;
+.nav {
+  max-width: 1400px;
   min-height: 76px;
-  padding: 12px 30px;
+  margin: auto;
+  padding: 12px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 22px;
 }
-
 .brand {
   display: flex;
   align-items: center;
   gap: 11px;
   flex-shrink: 0;
 }
-
 .brand-icon {
-  width: 45px;
-  height: 45px;
+  width: 46px;
+  height: 46px;
   display: grid;
   place-items: center;
   border-radius: 15px;
-  background: linear-gradient(135deg, #6558f5, #bb62f5);
-  color: white;
+  background: linear-gradient(135deg, var(--aqua), var(--aqua-dark));
+  color: var(--teal);
   font-size: 24px;
-  box-shadow: 0 6px 15px #6558f544;
 }
-
-.brand-name { font-size: 21px; font-weight: 850; letter-spacing: -.7px; }
-.brand-name span { color: var(--primary); }
-.brand-sub { color: var(--muted); font-size: 11px; margin-top: 3px; }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  flex-wrap: wrap;
-}
-
+.brand-title { font-size: 20px; font-weight: 900; letter-spacing: -.7px; }
+.brand-title span { color: var(--aqua-dark); }
+.brand-sub { font-size: 10px; color: var(--muted); margin-top: 3px; }
+.nav-links { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
 .nav-links a {
-  padding: 11px 13px;
-  border-radius: 12px;
-  font-size: 13px;
-  color: #5f607c;
-  font-weight: 650;
+  padding: 11px 12px;
+  border-radius: 11px;
+  color: #637a79;
+  font-size: 12px;
+  font-weight: 750;
   transition: .2s;
 }
-
 .nav-links a:hover, .nav-links a.active {
-  color: var(--primary);
-  background: #f0efff;
+  background: #dff9f4;
+  color: var(--teal-2);
 }
-
-.profile {
-  width: 43px;
-  height: 43px;
+.avatar {
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  color: white;
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--pink), #ffad5c);
+  background: var(--teal);
+  color: var(--aqua);
+  font-weight: 900;
   flex-shrink: 0;
 }
 
-.page {
-  max-width: 1440px;
-  padding: 28px 30px 60px;
-  margin: auto;
-}
-
-.welcome {
-  background: linear-gradient(115deg, #6558f5 0%, #8870fa 48%, #c46cf3 100%);
-  border-radius: 28px;
-  padding: 36px 40px;
-  min-height: 240px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 25px;
-  color: white;
-  box-shadow: 0 16px 40px #6658f533;
-}
-
-.welcome:before {
-  content: "";
-  position: absolute;
-  width: 310px;
-  height: 310px;
-  border-radius: 50%;
-  right: 12%;
-  top: -190px;
-  background: #ffffff18;
-}
-
-.welcome:after {
-  content: "";
-  position: absolute;
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  right: -50px;
-  bottom: -150px;
-  background: #ffffff18;
-}
-
-.welcome-content { position: relative; z-index: 1; max-width: 680px; }
-
-.eyebrow {
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  opacity: .9;
-}
-
-.welcome h1 {
-  font-size: clamp(30px, 4vw, 45px);
-  line-height: 1.12;
-  letter-spacing: -1.7px;
-  margin: 14px 0;
-}
-
-.welcome p { color: #f0edff; line-height: 1.7; max-width: 560px; margin: 0 0 23px; }
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 17px;
-  border-radius: 12px;
-  border: 0;
-  font-weight: 750;
-  font-size: 13px;
-  transition: transform .2s, opacity .2s;
-}
-
-.button:hover { transform: translateY(-2px); }
-.button-white { background: white; color: var(--primary-dark); }
-.button-primary { background: var(--primary); color: white; }
-.button-outline { border: 1px solid var(--line); background: white; color: var(--ink); }
-.button-pink { background: #fff0f7; color: #d82c7d; }
-
-.welcome-art {
-  position: relative;
-  z-index: 1;
-  width: 190px;
-  height: 160px;
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  font-size: 100px;
-  border-radius: 35px;
-  background: #ffffff18;
-  transform: rotate(4deg);
-}
-
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  margin: 35px 0 18px;
-}
-
-.section-heading h2 { font-size: 21px; margin: 0; letter-spacing: -.6px; }
-.section-heading p { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
-.small-link { color: var(--primary); font-weight: 750; font-size: 13px; }
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 17px;
-}
-
-.stat-card {
-  padding: 21px;
-  border: 1px solid var(--line);
-  background: white;
-  border-radius: 19px;
-  box-shadow: var(--shadow);
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.stat-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  font-size: 24px;
-  flex-shrink: 0;
-}
-
-.purple { background: #eeebff; }
-.orange { background: #fff0df; }
-.green { background: #e1fbf0; }
-.pink { background: #ffe6f1; }
-.blue { background: #e4f1ff; }
-
-.stat-number { font-size: 27px; font-weight: 850; letter-spacing: -1px; }
-.stat-label { font-size: 12px; color: var(--muted); margin-top: 5px; }
-
-.two-columns {
-  display: grid;
-  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 1fr);
-  gap: 22px;
-  margin-top: 35px;
-  align-items: start;
-}
-
-.panel {
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 21px;
-  padding: 23px;
-  box-shadow: var(--shadow);
-  min-width: 0;
-}
-
-.panel-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 18px;
-}
-
-.panel-heading h3 { margin: 0; font-size: 17px; }
-.panel-heading span { font-size: 12px; color: var(--muted); }
-
-.announcement {
-  display: flex;
-  align-items: flex-start;
-  gap: 13px;
-  padding: 17px 0;
-  border-bottom: 1px solid #f0f0f7;
-}
-
-.announcement:last-child { border-bottom: 0; padding-bottom: 0; }
-
-.announcement-icon {
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border-radius: 14px;
-  font-size: 21px;
-  flex-shrink: 0;
-}
-
-.announcement h4 { margin: 2px 0 7px; font-size: 14px; }
-.announcement p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
-.meta { font-size: 11px; color: #999ab0; margin-top: 8px; }
-
-.tag {
-  display: inline-block;
-  padding: 5px 8px;
-  font-size: 10px;
-  font-weight: 800;
-  border-radius: 7px;
-  background: #f0efff;
-  color: var(--primary);
-  margin-bottom: 7px;
-}
-
-.event-list { display: grid; gap: 14px; }
-
-.event {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-  padding: 13px;
-  background: #fbfaff;
-  border: 1px solid #f0effa;
-  border-radius: 16px;
-}
-
-.event-date {
-  width: 59px;
-  height: 66px;
-  border-radius: 13px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #eeebff;
-  color: var(--primary);
-  flex-shrink: 0;
-}
-
-.event-date strong { font-size: 22px; line-height: 1.2; }
-.event-date span { font-size: 10px; font-weight: 850; text-transform: uppercase; }
-.event-info { flex: 1; min-width: 0; }
-.event-info h4 { font-size: 13px; margin: 0 0 7px; }
-.event-info p { font-size: 11px; color: var(--muted); margin: 0; line-height: 1.5; }
-.event-action { border: 0; background: #efedff; color: var(--primary); border-radius: 10px; padding: 9px 11px; font-weight: 800; font-size: 11px; }
-
-.quick-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 17px;
-}
-
-.quick-card {
-  border-radius: 20px;
-  background: white;
-  border: 1px solid var(--line);
-  padding: 23px;
-  box-shadow: var(--shadow);
-  transition: transform .2s, box-shadow .2s;
-}
-
-.quick-card:hover { transform: translateY(-4px); box-shadow: 0 16px 35px #332d6a12; }
-.quick-card .emoji { font-size: 32px; }
-.quick-card h3 { font-size: 15px; margin: 15px 0 8px; }
-.quick-card p { font-size: 12px; line-height: 1.65; color: var(--muted); margin: 0 0 16px; }
-
-.toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 19px;
-}
-
-.search-box {
-  flex: 1;
-  min-width: 200px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 0 13px;
-}
-
-.search-box input { border: 0; outline: none; background: transparent; width: 100%; padding: 13px 0; color: var(--ink); }
-
-.filter-select, .field input, .field select, .field textarea {
-  width: 100%;
-  border: 1px solid #e6e6f1;
-  border-radius: 11px;
-  padding: 12px;
-  outline: none;
-  background: white;
-  color: var(--ink);
-}
-
-.filter-select { width: auto; min-width: 150px; }
-
-input:focus, select:focus, textarea:focus { border-color: var(--primary) !important; box-shadow: 0 0 0 3px #6558f518; }
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.content-card {
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 19px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-}
-
-.card-art {
-  height: 135px;
-  display: grid;
-  place-items: center;
-  font-size: 58px;
-  position: relative;
-}
-
-.card-body { padding: 18px; display: flex; flex-direction: column; flex: 1; }
-.card-body h3 { font-size: 16px; margin: 3px 0 9px; }
-.card-body p { font-size: 12px; color: var(--muted); line-height: 1.7; margin: 0 0 15px; flex: 1; }
-.card-meta { color: var(--muted); font-size: 11px; margin-bottom: 13px; }
-.card-footer { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: auto; }
-.price { color: var(--green); font-size: 18px; font-weight: 850; }
-.card-footer .button { padding: 10px 12px; font-size: 11px; }
-
-.form-panel { max-width: 760px; margin: auto; }
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.field { margin-bottom: 17px; }
-.field label { display: block; font-size: 12px; font-weight: 750; margin-bottom: 8px; }
-.field textarea { min-height: 100px; resize: vertical; }
-.field.full { grid-column: 1 / -1; }
-.form-note { background: #f3f1ff; color: #5b51b5; border-radius: 12px; padding: 13px; font-size: 12px; line-height: 1.6; margin-bottom: 20px; }
-
-.empty-state { grid-column: 1 / -1; background: white; border-radius: 16px; padding: 38px 20px; text-align: center; color: var(--muted); border: 1px dashed #dcd9f4; }
-.empty-state strong { display: block; font-size: 19px; color: var(--ink); margin-bottom: 9px; }
-
-.page-section { display: none; }
-.page-section.active { display: block; animation: fadeIn .3s ease; }
-
-@keyframes fadeIn {
+.container { max-width: 1400px; margin: auto; padding: 28px; }
+.view { display: none; }
+.view.active { display: block; animation: appear .22s ease; }
+@keyframes appear {
   from { opacity: 0; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.toast {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  z-index: 100;
-  max-width: 350px;
-  padding: 16px 20px;
-  border-radius: 14px;
-  background: #222344;
+.hero {
+  min-height: 280px;
+  position: relative;
+  overflow: hidden;
+  padding: 38px 42px;
+  border-radius: 27px;
   color: white;
-  font-size: 13px;
-  box-shadow: 0 10px 35px #0002;
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  background: linear-gradient(115deg, #073b3a 0%, #0c6960 55%, #18bca7 100%);
+  box-shadow: 0 20px 45px #073b3a22;
+}
+.hero::before, .hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero::before {
+  width: 350px; height: 350px;
+  right: 12%; top: -230px;
+  border: 55px solid #ffffff12;
+}
+.hero::after {
+  width: 240px; height: 240px;
+  right: -70px; bottom: -160px;
+  background: #25dbc326;
+}
+.hero-content { max-width: 720px; position: relative; z-index: 1; }
+.eyebrow {
+  color: var(--aqua);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-size: clamp(32px, 4vw, 49px);
+  line-height: 1.1;
+  letter-spacing: -1.8px;
+  margin: 15px 0;
+}
+.hero p { max-width: 590px; color: #d9f2ed; line-height: 1.8; font-size: 14px; }
+.hero-art {
+  position: relative;
+  z-index: 1;
+  width: 185px;
+  height: 165px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  font-size: 91px;
+  border: 1px solid #ffffff27;
+  border-radius: 32px;
+  background: #ffffff13;
+  transform: rotate(4deg);
 }
 
-.toast.show { display: block; animation: fadeIn .2s ease; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 11px;
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 800;
+  transition: transform .18s, background .18s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--teal); color: white; }
+.btn-primary:hover { background: var(--teal-2); }
+.btn-aqua { background: var(--aqua); color: var(--teal); }
+.btn-light { background: white; color: var(--teal); }
+.btn-outline { background: white; color: var(--teal); border-color: var(--line); }
+.btn-danger { background: #fff0ef; color: #b63f39; }
+.hero .btn-primary { background: var(--aqua); color: var(--teal); }
 
-.footer {
-  text-align: center;
+.section-head {
+  margin: 32px 0 17px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+.section-head h2 { font-size: 21px; letter-spacing: -.6px; margin: 0; }
+.section-head p { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+.link { border: 0; background: none; color: var(--aqua-dark); font-size: 12px; font-weight: 850; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 16px;
+}
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+.stat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+  flex-shrink: 0;
+}
+.mint { background: #d9faf1; }
+.peach { background: #fff0df; }
+.sky { background: #e3f0ff; }
+.rose { background: #ffe5e6; }
+.lavender { background: #eee9ff; }
+.stat-number { font-size: 27px; font-weight: 900; letter-spacing: -1px; }
+.stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+.columns {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 20px;
+  align-items: start;
+  margin-top: 27px;
+}
+.panel {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 19px;
+  background: white;
+  box-shadow: var(--shadow);
+  min-width: 0;
+}
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.panel-head h3 { margin: 0; font-size: 16px; }
+
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 16px 0;
+  border-bottom: 1px solid #edf3f1;
+}
+.notice:last-child { border-bottom: 0; }
+.notice-icon {
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  font-size: 21px;
+  background: #d9faf1;
+}
+.notice-main { flex: 1; min-width: 0; }
+.notice h4 { margin: 3px 0 6px; font-size: 13px; }
+.notice p { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.65; }
+.meta { font-size: 11px; color: var(--muted); line-height: 1.7; margin-top: 6px; }
+.pill {
+  display: inline-block;
+  padding: 5px 8px;
+  border-radius: 7px;
+  background: #e1f9f3;
+  color: #087a6c;
+  font-size: 10px;
+  font-weight: 850;
+}
+.notice .link { margin-top: 8px; padding: 0; }
+
+.event-mini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #e7f1ef;
+  background: #f8fdfc;
+  border-radius: 14px;
+  margin-bottom: 11px;
+}
+.event-date {
+  width: 52px;
+  min-height: 59px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #d9faf1;
+  color: var(--teal);
+  flex-shrink: 0;
+}
+.event-date strong { font-size: 20px; }
+.event-date span { font-size: 10px; font-weight: 850; text-transform: uppercase; }
+.event-mini-info { flex: 1; min-width: 0; }
+.event-mini-info h4 { margin: 0 0 5px; font-size: 12px; }
+.event-mini-info p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 16px;
+}
+.quick {
+  padding: 22px;
+  background: white;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--aqua);
+  border-radius: 17px;
+  box-shadow: var(--shadow);
+  transition: transform .2s;
+}
+.quick:nth-child(2) { border-top-color: var(--orange); }
+.quick:nth-child(3) { border-top-color: var(--blue); }
+.quick:nth-child(4) { border-top-color: var(--coral); }
+.quick:hover { transform: translateY(-4px); }
+.quick .emoji { font-size: 30px; }
+.quick h3 { font-size: 14px; margin: 13px 0 8px; }
+.quick p { color: var(--muted); font-size: 12px; line-height: 1.7; margin: 0 0 15px; }
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.search {
+  display: flex;
+  flex: 1;
+  min-width: 200px;
+  align-items: center;
+  gap: 9px;
+  padding: 0 13px;
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 11px;
+}
+.search input { width: 100%; border: 0; outline: none; padding: 13px 0; background: transparent; }
+.select {
+  min-width: 155px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: white;
+  color: var(--ink);
+  padding: 12px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 18px;
+}
+.card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .2s, box-shadow .2s;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 18px 36px #073b3a14; }
+.card-art {
+  min-height: 125px;
+  display: grid;
+  place-items: center;
+  font-size: 54px;
+  position: relative;
+  background: linear-gradient(135deg,#d9faf1,#e6f4ff);
+}
+.card-art.peach { background: linear-gradient(135deg,#fff0df,#ffe1d9); }
+.card-art.sky { background: linear-gradient(135deg,#e3f0ff,#e6e4ff); }
+.card-art.rose { background: linear-gradient(135deg,#ffe5e6,#fff0df); }
+.card-art.lavender { background: linear-gradient(135deg,#eee9ff,#ddf5ff); }
+.card-body { padding: 17px; flex: 1; display: flex; flex-direction: column; }
+.card-body h3 { font-size: 15px; line-height: 1.45; margin: 9px 0; }
+.card-description {
   color: var(--muted);
   font-size: 12px;
-  padding: 35px 10px 0;
+  line-height: 1.7;
+  margin: 0 0 14px;
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid #edf3f1;
+}
+.price { font-size: 19px; font-weight: 900; color: #078a73; }
+.card-bottom .btn { padding: 10px 12px; font-size: 11px; }
+
+.form-wrap { max-width: 800px; margin: auto; }
+.form-note {
+  padding: 14px;
+  border-radius: 12px;
+  background: #e4f9f4;
+  color: #176b61;
+  font-size: 12px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: 12px; font-weight: 800; margin-bottom: 8px; }
+.field input, .field select, .field textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  background: white;
+  outline: none;
+}
+.field textarea { min-height: 110px; resize: vertical; }
+.field.full { grid-column: 1/-1; }
+.form-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.empty {
+  grid-column: 1/-1;
+  padding: 35px 20px;
+  text-align: center;
+  border: 1px dashed #b8dcd5;
+  background: white;
+  border-radius: 16px;
+  color: var(--muted);
   line-height: 1.8;
 }
+.empty strong { display: block; color: var(--ink); font-size: 17px; margin-bottom: 5px; }
 
-.footer strong { color: var(--primary); }
-
-.mobile-menu { display: none; }
-
-@media (max-width: 1050px) {
-  .nav-wrap { padding: 12px 18px; flex-wrap: wrap; }
-  .nav-links { order: 3; width: 100%; justify-content: center; }
-  .page { padding: 22px 18px 45px; }
-  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .quick-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.footer {
+  padding: 35px 20px 25px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.9;
 }
+.footer .brand { justify-content: center; margin-bottom: 12px; }
+.footer p { margin: 4px; }
 
-@media (max-width: 700px) {
-  .nav-wrap { gap: 10px; }
-  .nav-links { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 3px; }
-  .nav-links a { white-space: nowrap; padding: 9px 11px; }
-  .brand-name { font-size: 18px; }
-  .welcome { padding: 27px 23px; min-height: auto; border-radius: 22px; }
-  .welcome-art { display: none; }
-  .welcome h1 { font-size: 33px; }
-  .two-columns { grid-template-columns: 1fr; }
-  .cards-grid { grid-template-columns: 1fr; }
+/* Details dialog */
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(4,34,34,.62);
+  backdrop-filter: blur(5px);
+}
+.dialog {
+  position: relative;
+  width: min(620px,100%);
+  max-height: min(85vh,850px);
+  overflow-y: auto;
+  border-radius: 22px;
+  background: white;
+  box-shadow: 0 25px 90px #001f1f55;
+  animation: appear .2s ease;
+}
+.dialog-art {
+  min-height: 145px;
+  display: grid;
+  place-items: center;
+  font-size: 67px;
+  background: linear-gradient(135deg,#d9faf1,#e4f3ff);
+}
+.dialog-content { padding: 25px; }
+.dialog h2 { font-size: 24px; line-height: 1.3; margin: 12px 0; }
+.dialog-description { font-size: 13px; color: #5c7472; line-height: 1.85; white-space: pre-wrap; overflow-wrap: anywhere; }
+.dialog-meta {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 10px;
+  margin: 20px 0;
+}
+.detail-item { padding: 12px; background: #f2faf8; border-radius: 12px; min-width: 0; }
+.detail-item span { display: block; font-size: 10px; color: var(--muted); margin-bottom: 6px; }
+.detail-item strong { display: block; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.dialog-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+.dialog-close {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: white;
+  color: var(--teal);
+  font-size: 23px;
+  box-shadow: 0 3px 14px #073b3a18;
+}
+.toast {
+  position: fixed;
+  z-index: 150;
+  right: 20px;
+  bottom: 20px;
+  max-width: min(380px,calc(100% - 40px));
+  padding: 15px 18px;
+  background: var(--teal);
+  color: white;
+  border-left: 4px solid var(--aqua);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  font-size: 12px;
+  line-height: 1.6;
+}
+@media(max-width:1050px) {
+  .nav { flex-wrap: wrap; padding: 12px 18px; }
+  .nav-links { order: 3; width: 100%; justify-content: center; }
+  .container { padding: 22px 18px; }
+  .stats { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .quick-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:700px) {
+  .nav { gap: 10px; }
+  .nav-links { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
+  .nav-links a { white-space: nowrap; }
+  .hero { padding: 28px 23px; min-height: 0; border-radius: 21px; }
+  .hero h1 { font-size: 34px; }
+  .hero-art { display: none; }
+  .columns { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: 1fr; }
   .quick-grid { gap: 11px; }
-  .quick-card { padding: 17px; }
-  .stats-grid { gap: 11px; }
-  .stat-card { padding: 15px 12px; gap: 10px; }
-  .stat-icon { width: 42px; height: 42px; font-size: 19px; }
+  .quick { padding: 16px; }
+  .stat { padding: 14px 11px; gap: 9px; }
+  .stat-icon { width: 39px; height: 39px; font-size: 19px; }
   .stat-number { font-size: 23px; }
-  .section-heading h2 { font-size: 19px; }
-  .panel { padding: 18px; }
+  .panel { padding: 16px; }
   .form-grid { grid-template-columns: 1fr; }
   .field.full { grid-column: auto; }
-  .filter-select { flex: 1; min-width: 0; }
-  .event { gap: 10px; padding: 10px; }
-  .event-date { width: 49px; }
-  .event-action { padding: 8px; }
+  .section-head h2 { font-size: 19px; }
+  .dialog-content { padding: 19px; }
+  .dialog h2 { font-size: 21px; }
+  .dialog-meta { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:380px) {
+  .stats { grid-template-columns: 1fr; }
+  .quick-grid { grid-template-columns: 1fr; }
+  .dialog-meta { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 
 <body>
-
-<div class="test-banner">
-  ✨ NEW VERSION TEST — CAMPUSCONNECT UPDATED ✨
-</div>
-
-<header class="topbar">
-  <div class="nav-wrap">
-    <a href="#dashboard" class="brand" data-page="dashboard">
-      <div class="brand-icon">🎓</div>
+<header class="header">
+  <div class="nav">
+    <a href="#dashboard" class="brand" data-page="dashboard" aria-label="CampusConnect home">
+      <div class="brand-icon">✳</div>
       <div>
-        <div class="brand-name">Campus<span>Connect</span></div>
-        <div class="brand-sub">Your campus. Your community.</div>
+        <div class="brand-title">Campus<span>Connect</span></div>
+        <div class="brand-sub">Student community portal</div>
       </div>
     </a>
-
     <nav class="nav-links" aria-label="Main navigation">
-      <a href="#dashboard" class="active" data-page="dashboard">🏠 Dashboard</a>
-      <a href="#events" data-page="events">🎉 Events</a>
-      <a href="#marketplace" data-page="marketplace">🛍️ Marketplace</a>
-      <a href="#lost-found" data-page="lost-found">🔎 Lost & Found</a>
-      <a href="#announcements" data-page="announcements">📢 Notices</a>
+      <a href="#dashboard" data-page="dashboard" class="active">⌂ Dashboard</a>
+      <a href="#events" data-page="events">✦ Events</a>
+      <a href="#marketplace" data-page="marketplace">▣ Marketplace</a>
+      <a href="#lost-found" data-page="lost-found">⌕ Lost & Found</a>
+      <a href="#announcements" data-page="announcements">▤ Bulletin</a>
     </nav>
-
-    <div class="profile" title="Student profile">S</div>
+    <div class="avatar" title="Student">S</div>
   </div>
 </header>
 
-<main class="page">
+<main class="container">
 
-<!-- DASHBOARD -->
-<section id="dashboard" class="page-section active">
-  <div class="welcome">
-    <div class="welcome-content">
-      <div class="eyebrow">YOUR CAMPUS, ONE CLICK AWAY ✨</div>
-      <h1>Campus life,<br>but more connected.</h1>
-      <p>Discover exciting events, stay updated with campus news, find what you need, and meet your student community.</p>
-      <a href="#events" data-page="events" class="button button-white">Explore campus events →</a>
+<section id="dashboard" class="view active">
+  <div class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">YOUR CAMPUS. YOUR COMMUNITY.</div>
+      <h1>Good things happen<br>when we connect.</h1>
+      <p>Find campus activities, discover useful resources, share opportunities and stay connected with your student community.</p>
+      <button class="btn btn-aqua" onclick="navigate('events')">Explore campus events ↗</button>
     </div>
-    <div class="welcome-art" aria-hidden="true">🎓</div>
+    <div class="hero-art" aria-hidden="true">🎓</div>
   </div>
 
-  <div class="section-heading">
-    <div>
-      <h2>Your campus at a glance</h2>
-      <p>Everything happening around your student community.</p>
-    </div>
+  <div class="section-head">
+    <div><h2>Your campus at a glance</h2><p>Explore what's happening around your community.</p></div>
   </div>
 
-  <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-icon purple">📢</div>
-      <div><div class="stat-number" id="notice-count">6</div><div class="stat-label">Campus notices</div></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon orange">🎉</div>
-      <div><div class="stat-number" id="event-count">6</div><div class="stat-label">Upcoming events</div></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon green">🛍️</div>
-      <div><div class="stat-number" id="market-count">6</div><div class="stat-label">Marketplace listings</div></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon pink">🔎</div>
-      <div><div class="stat-number" id="lost-count">5</div><div class="stat-label">Lost & Found posts</div></div>
-    </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-icon mint">▤</div><div><div class="stat-number" id="stat-notices">0</div><div class="stat-label">Bulletin posts</div></div></div>
+    <div class="stat"><div class="stat-icon peach">✦</div><div><div class="stat-number" id="stat-events">0</div><div class="stat-label">Events listed</div></div></div>
+    <div class="stat"><div class="stat-icon sky">▣</div><div><div class="stat-number" id="stat-market">0</div><div class="stat-label">Marketplace items</div></div></div>
+    <div class="stat"><div class="stat-icon rose">⌕</div><div><div class="stat-number" id="stat-lost">0</div><div class="stat-label">Lost & Found posts</div></div></div>
   </div>
 
-  <div class="two-columns">
+  <div class="columns">
     <div class="panel">
-      <div class="panel-heading">
-        <h3>📢 Latest announcements</h3>
-        <a class="small-link" href="#announcements" data-page="announcements">View all →</a>
-      </div>
-      <div id="dashboard-notices"></div>
+      <div class="panel-head"><h3>Campus Bulletin</h3><button class="link" onclick="navigate('announcements')">View all →</button></div>
+      <div id="home-notices"></div>
     </div>
-
     <div class="panel">
-      <div class="panel-heading">
-        <h3>📅 Coming up</h3>
-        <a class="small-link" href="#events" data-page="events">All events →</a>
-      </div>
-      <div class="event-list" id="dashboard-events"></div>
+      <div class="panel-head"><h3>Upcoming Events</h3><button class="link" onclick="navigate('events')">Explore →</button></div>
+      <div id="home-events"></div>
     </div>
   </div>
 
-  <div class="section-heading">
-    <div>
-      <h2>Make campus life easier</h2>
-      <p>Jump straight to what you need.</p>
-    </div>
-  </div>
-
+  <div class="section-head"><div><h2>Explore the community</h2><p>Everything you need, all in one place.</p></div></div>
   <div class="quick-grid">
-    <a href="#events" data-page="events" class="quick-card">
-      <div class="emoji">🎭</div>
-      <h3>Explore Events</h3>
-      <p>Discover workshops, competitions, cultural activities and more.</p>
-      <span class="small-link">Find your next event →</span>
-    </a>
-    <a href="#marketplace" data-page="marketplace" class="quick-card">
-      <div class="emoji">🛒</div>
-      <h3>Student Marketplace</h3>
-      <p>Browse books, electronics and useful items from students.</p>
-      <span class="small-link">Explore listings →</span>
-    </a>
-    <a href="#lost-found" data-page="lost-found" class="quick-card">
-      <div class="emoji">🧭</div>
-      <h3>Lost & Found</h3>
-      <p>Report a lost item or help someone find their belongings.</p>
-      <span class="small-link">Find an item →</span>
-    </a>
-    <a href="#announcements" data-page="announcements" class="quick-card">
-      <div class="emoji">📣</div>
-      <h3>Campus Notices</h3>
-      <p>Check important updates, club news and student reminders.</p>
-      <span class="small-link">Read notices →</span>
-    </a>
+    <a class="quick" href="#events" data-page="events"><div class="emoji">🎉</div><h3>Campus Events</h3><p>Discover workshops, competitions, clubs and student activities.</p><span class="link">Explore events ↗</span></a>
+    <a class="quick" href="#marketplace" data-page="marketplace"><div class="emoji">🛍️</div><h3>Marketplace</h3><p>Browse books, study supplies, electronics and other listings.</p><span class="link">Browse items ↗</span></a>
+    <a class="quick" href="#lost-found" data-page="lost-found"><div class="emoji">🔎</div><h3>Lost & Found</h3><p>Review item reports and help reconnect belongings with owners.</p><span class="link">View reports ↗</span></a>
+    <a class="quick" href="#announcements" data-page="announcements"><div class="emoji">📣</div><h3>Community Bulletin</h3><p>Read updates, learning opportunities and community notices.</p><span class="link">Read posts ↗</span></a>
   </div>
 </section>
 
-<!-- EVENTS -->
-<section id="events" class="page-section">
-  <div class="section-heading">
-    <div>
-      <h2>🎉 Campus Events</h2>
-      <p>Find something interesting to learn, create or experience.</p>
-    </div>
-    <button class="button button-primary" onclick="showPage('add-event')">＋ Add an event</button>
-  </div>
-
+<section id="events" class="view">
+  <div class="section-head"><div><h2>✦ Campus Events</h2><p>Find activities and opportunities to get involved.</p></div><button class="btn btn-primary" onclick="navigate('add-event')">＋ Add Event</button></div>
   <div class="toolbar">
-    <div class="search-box"><span>🔍</span><input id="event-search" placeholder="Search events..." oninput="renderEvents()"></div>
-    <select id="event-filter" class="filter-select" onchange="renderEvents()">
-      <option value="All">All categories</option>
-      <option value="Workshop">Workshop</option>
-      <option value="Technology">Technology</option>
-      <option value="Cultural">Cultural</option>
-      <option value="Sports">Sports</option>
-      <option value="Club">Club</option>
-    </select>
+    <label class="search">⌕ <input id="event-search" placeholder="Search events..." oninput="renderEvents()"></label>
+    <select id="event-filter" class="select" onchange="renderEvents()"><option>All</option><option>Workshop</option><option>Technology</option><option>Cultural</option><option>Sports</option><option>Club</option></select>
   </div>
-  <div class="cards-grid" id="events-grid"></div>
+  <div id="event-grid" class="grid"></div>
 </section>
 
-<!-- ADD EVENT -->
-<section id="add-event" class="page-section">
-  <div class="section-heading">
-    <div><h2>＋ Add a campus event</h2><p>Create a demo event listing.</p></div>
-    <button class="button button-outline" onclick="showPage('events')">← Back to events</button>
-  </div>
-  <div class="panel form-panel">
-    <div class="form-note">Demo mode: your event will be saved in this browser only. Other students will not see it automatically.</div>
+<section id="add-event" class="view">
+  <div class="section-head"><div><h2>Add an Event</h2><p>Share an activity with your community.</p></div><button class="btn btn-outline" onclick="navigate('events')">← Back</button></div>
+  <div class="panel form-wrap">
     <form id="event-form">
       <div class="form-grid">
-        <div class="field">
-          <label for="event-title">Event name *</label>
-          <input id="event-title" required maxlength="80" placeholder="e.g. AI Innovation Workshop">
-        </div>
-        <div class="field">
-          <label for="event-category">Category *</label>
-          <select id="event-category" required>
-            <option value="Workshop">Workshop</option>
-            <option value="Technology">Technology</option>
-            <option value="Cultural">Cultural</option>
-            <option value="Sports">Sports</option>
-            <option value="Club">Club</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="event-date">Event date *</label>
-          <input type="date" id="event-date" required>
-        </div>
-        <div class="field">
-          <label for="event-location">Location *</label>
-          <input id="event-location" required placeholder="e.g. Seminar Hall">
-        </div>
-        <div class="field full">
-          <label for="event-description">Description *</label>
-          <textarea id="event-description" required maxlength="500" placeholder="Tell students what the event is about..."></textarea>
-        </div>
+        <div class="field"><label for="ev-title">Event name *</label><input id="ev-title" required maxlength="100" placeholder="e.g. Coding Workshop"></div>
+        <div class="field"><label for="ev-category">Category *</label><select id="ev-category"><option>Workshop</option><option>Technology</option><option>Cultural</option><option>Sports</option><option>Club</option></select></div>
+        <div class="field"><label for="ev-date">Date *</label><input type="date" id="ev-date" required></div>
+        <div class="field"><label for="ev-location">Location *</label><input id="ev-location" required maxlength="120" placeholder="e.g. Seminar Hall"></div>
+        <div class="field full"><label for="ev-description">Event details *</label><textarea id="ev-description" required maxlength="1500" placeholder="Describe the activity, schedule and who can attend..."></textarea></div>
+        <div class="field full"><label for="ev-organizer">Organiser / club</label><input id="ev-organizer" maxlength="100" placeholder="Club or organiser name"></div>
       </div>
-      <button class="button button-primary" type="submit">Publish demo event</button>
+      <div class="form-actions"><button class="btn btn-primary" type="submit">Publish Event</button><button class="btn btn-outline" type="reset">Clear</button></div>
     </form>
   </div>
 </section>
 
-<!-- MARKETPLACE -->
-<section id="marketplace" class="page-section">
-  <div class="section-heading">
-    <div>
-      <h2>🛍️ Student Marketplace</h2>
-      <p>Discover useful student items and affordable study essentials.</p>
-    </div>
-    <button class="button button-primary" onclick="showPage('sell-item')">＋ List an item</button>
-  </div>
-
+<section id="marketplace" class="view">
+  <div class="section-head"><div><h2>▣ Campus Marketplace</h2><p>Explore useful items for student life.</p></div><button class="btn btn-primary" onclick="navigate('add-listing')">＋ List Item</button></div>
   <div class="toolbar">
-    <div class="search-box"><span>🔍</span><input id="market-search" placeholder="Search books, gadgets, supplies..." oninput="renderMarket()"></div>
-    <select id="market-filter" class="filter-select" onchange="renderMarket()">
-      <option value="All">All categories</option>
-      <option value="Books">Books</option>
-      <option value="Electronics">Electronics</option>
-      <option value="Study">Study supplies</option>
-      <option value="Other">Other</option>
-    </select>
+    <label class="search">⌕ <input id="market-search" placeholder="Search listings..." oninput="renderMarket()"></label>
+    <select id="market-filter" class="select" onchange="renderMarket()"><option>All</option><option>Books</option><option>Electronics</option><option>Study Supplies</option><option>Other</option></select>
   </div>
-  <div class="cards-grid" id="market-grid"></div>
+  <div id="market-grid" class="grid"></div>
 </section>
 
-<!-- ADD ITEM -->
-<section id="sell-item" class="page-section">
-  <div class="section-heading">
-    <div><h2>＋ List an item</h2><p>Add an item to the demo marketplace.</p></div>
-    <button class="button button-outline" onclick="showPage('marketplace')">← Back to marketplace</button>
-  </div>
-  <div class="panel form-panel">
-    <div class="form-note">Demo mode: listings stay in your browser. No payment system or real messaging is connected.</div>
+<section id="add-listing" class="view">
+  <div class="section-head"><div><h2>List an Item</h2><p>Provide clear information about your listing.</p></div><button class="btn btn-outline" onclick="navigate('marketplace')">← Back</button></div>
+  <div class="panel form-wrap">
     <form id="market-form">
       <div class="form-grid">
-        <div class="field">
-          <label for="item-title">Item name *</label>
-          <input id="item-title" required maxlength="80" placeholder="e.g. Engineering Mathematics Book">
-        </div>
-        <div class="field">
-          <label for="item-category">Category *</label>
-          <select id="item-category" required>
-            <option value="Books">Books</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Study">Study supplies</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="item-price">Price in ₹ *</label>
-          <input id="item-price" type="number" min="0" max="1000000" required placeholder="e.g. 250">
-        </div>
-        <div class="field">
-          <label for="item-condition">Condition *</label>
-          <select id="item-condition" required>
-            <option>New</option>
-            <option>Like new</option>
-            <option>Good</option>
-            <option>Used</option>
-          </select>
-        </div>
-        <div class="field full">
-          <label for="item-description">Description *</label>
-          <textarea id="item-description" required maxlength="500" placeholder="Describe the item..."></textarea>
-        </div>
+        <div class="field"><label for="m-title">Item name *</label><input id="m-title" required maxlength="100" placeholder="e.g. Engineering textbook"></div>
+        <div class="field"><label for="m-category">Category *</label><select id="m-category"><option>Books</option><option>Electronics</option><option>Study Supplies</option><option>Other</option></select></div>
+        <div class="field"><label for="m-price">Price (₹) *</label><input id="m-price" type="number" min="0" max="10000000" required placeholder="e.g. 250"></div>
+        <div class="field"><label for="m-condition">Condition *</label><select id="m-condition"><option>New</option><option>Like New</option><option>Good</option><option>Used</option></select></div>
+        <div class="field full"><label for="m-description">Item details *</label><textarea id="m-description" required maxlength="1500" placeholder="Describe the item's condition, specifications and included accessories..."></textarea></div>
+        <div class="field full"><label for="m-contact">Contact information (optional)</label><input id="m-contact" maxlength="150" placeholder="A suitable contact method for interested students"></div>
       </div>
-      <button class="button button-primary" type="submit">Publish demo listing</button>
+      <div class="form-actions"><button class="btn btn-primary" type="submit">Publish Listing</button><button class="btn btn-outline" type="reset">Clear</button></div>
     </form>
   </div>
 </section>
 
-<!-- LOST AND FOUND -->
-<section id="lost-found" class="page-section">
-  <div class="section-heading">
-    <div>
-      <h2>🔎 Lost & Found</h2>
-      <p>Help your campus community reunite with missing belongings.</p>
-    </div>
-    <button class="button button-primary" onclick="showPage('report-item')">＋ Create a report</button>
-  </div>
-
-  <div class="form-note">Please avoid posting phone numbers, home addresses or other private information publicly.</div>
-
+<section id="lost-found" class="view">
+  <div class="section-head"><div><h2>⌕ Lost & Found</h2><p>Review reports and help reconnect items with their owners.</p></div><button class="btn btn-primary" onclick="navigate('add-report')">＋ Add Report</button></div>
   <div class="toolbar">
-    <div class="search-box"><span>🔍</span><input id="lost-search" placeholder="Search items or locations..." oninput="renderLost()"></div>
-    <select id="lost-filter" class="filter-select" onchange="renderLost()">
-      <option value="All">Lost and found</option>
-      <option value="Lost">Lost items</option>
-      <option value="Found">Found items</option>
-    </select>
+    <label class="search">⌕ <input id="lost-search" placeholder="Search items or locations..." oninput="renderLost()"></label>
+    <select id="lost-filter" class="select" onchange="renderLost()"><option>All</option><option>Lost</option><option>Found</option></select>
   </div>
-  <div class="cards-grid" id="lost-grid"></div>
+  <div id="lost-grid" class="grid"></div>
 </section>
 
-<!-- REPORT ITEM -->
-<section id="report-item" class="page-section">
-  <div class="section-heading">
-    <div><h2>＋ Report an item</h2><p>Tell students about a lost or found belonging.</p></div>
-    <button class="button button-outline" onclick="showPage('lost-found')">← Back to Lost & Found</button>
-  </div>
-  <div class="panel form-panel">
-    <div class="form-note">Demo mode: reports are stored only in your current browser.</div>
+<section id="add-report" class="view">
+  <div class="section-head"><div><h2>Report an Item</h2><p>Share the details needed to identify a lost or found item.</p></div><button class="btn btn-outline" onclick="navigate('lost-found')">← Back</button></div>
+  <div class="panel form-wrap">
     <form id="lost-form">
       <div class="form-grid">
-        <div class="field">
-          <label for="report-type">Report type *</label>
-          <select id="report-type" required>
-            <option value="Lost">I lost an item</option>
-            <option value="Found">I found an item</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="report-title">Item name *</label>
-          <input id="report-title" required maxlength="80" placeholder="e.g. Blue water bottle">
-        </div>
-        <div class="field full">
-          <label for="report-location">Last seen / found location *</label>
-          <input id="report-location" required maxlength="120" placeholder="e.g. Library, second floor">
-        </div>
-        <div class="field full">
-          <label for="report-description">Item details *</label>
-          <textarea id="report-description" required maxlength="500" placeholder="Add helpful details that identify the item..."></textarea>
-        </div>
+        <div class="field"><label for="l-type">Report type *</label><select id="l-type"><option>Lost</option><option>Found</option></select></div>
+        <div class="field"><label for="l-title">Item name *</label><input id="l-title" required maxlength="100" placeholder="e.g. Blue water bottle"></div>
+        <div class="field full"><label for="l-location">Location *</label><input id="l-location" required maxlength="150" placeholder="Where was it last seen or found?"></div>
+        <div class="field full"><label for="l-description">Item details *</label><textarea id="l-description" required maxlength="1500" placeholder="Describe identifying features and relevant details..."></textarea></div>
       </div>
-      <button class="button button-primary" type="submit">Publish demo report</button>
+      <div class="form-note">For safety, do not publish student ID numbers, home addresses, passwords or sensitive personal details.</div>
+      <div class="form-actions"><button class="btn btn-primary" type="submit">Publish Report</button><button class="btn btn-outline" type="reset">Clear</button></div>
     </form>
   </div>
 </section>
 
-<!-- ANNOUNCEMENTS -->
-<section id="announcements" class="page-section">
-  <div class="section-heading">
-    <div><h2>📢 Campus Announcements</h2><p>Updates and reminders for your student community.</p></div>
-  </div>
+<section id="announcements" class="view">
+  <div class="section-head"><div><h2>▤ Community Bulletin</h2><p>Updates, opportunities and information for students.</p></div><button class="btn btn-primary" onclick="navigate('add-notice')">＋ Create Post</button></div>
   <div class="toolbar">
-    <div class="search-box"><span>🔍</span><input id="notice-search" placeholder="Search announcements..." oninput="renderNotices()"></div>
-    <select id="notice-filter" class="filter-select" onchange="renderNotices()">
-      <option value="All">All notices</option>
-      <option value="Academic">Academic</option>
-      <option value="Events">Events</option>
-      <option value="Clubs">Clubs</option>
-      <option value="General">General</option>
-    </select>
+    <label class="search">⌕ <input id="notice-search" placeholder="Search bulletin..." oninput="renderNotices()"></label>
+    <select id="notice-filter" class="select" onchange="renderNotices()"><option>All</option><option>Academic</option><option>Events</option><option>Clubs</option><option>General</option></select>
   </div>
-  <div class="panel" id="all-notices"></div>
-  <div class="form-note" style="margin-top:18px">These are sample notices for demonstration, not verified official university announcements. Check your university's official channels for real updates.</div>
+  <div class="panel" id="notice-list"></div>
+</section>
+
+<section id="add-notice" class="view">
+  <div class="section-head"><div><h2>Create a Bulletin Post</h2><p>Share a useful update with the community.</p></div><button class="btn btn-outline" onclick="navigate('announcements')">← Back</button></div>
+  <div class="panel form-wrap">
+    <form id="notice-form">
+      <div class="form-grid">
+        <div class="field"><label for="n-title">Post title *</label><input id="n-title" required maxlength="100"></div>
+        <div class="field"><label for="n-category">Category *</label><select id="n-category"><option>General</option><option>Academic</option><option>Events</option><option>Clubs</option></select></div>
+        <div class="field full"><label for="n-description">Post content *</label><textarea id="n-description" required maxlength="2000" placeholder="Write clear and helpful information..."></textarea></div>
+        <div class="field full"><label for="n-author">Posted by</label><input id="n-author" maxlength="100" placeholder="Club, group or author name"></div>
+      </div>
+      <div class="form-actions"><button class="btn btn-primary" type="submit">Publish Post</button><button class="btn btn-outline" type="reset">Clear</button></div>
+    </form>
+  </div>
 </section>
 
 </main>
 
 <footer class="footer">
-  <div class="brand" style="justify-content:center">
-    <div class="brand-icon">🎓</div>
-    <div class="brand-name">Campus<span>Connect</span></div>
-  </div>
-  <p>Made for a more connected campus community 💜</p>
-  <p>Student project demo · Sample content · No official university affiliation implied</p>
+  <div class="brand"><div class="brand-icon">✳</div><div class="brand-title">Campus<span>Connect</span></div></div>
+  <p>Connecting students. Sharing opportunities. Building community.</p>
+  <p>Student community platform · For official university notices, consult authorised university channels.</p>
 </footer>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="detail-backdrop" class="dialog-backdrop" hidden>
+  <section class="dialog" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+    <button class="dialog-close" id="detail-close" aria-label="Close details">×</button>
+    <div class="dialog-art" id="detail-art">✦</div>
+    <div class="dialog-content">
+      <span id="detail-category" class="pill">Details</span>
+      <h2 id="detail-title">Details</h2>
+      <div id="detail-description" class="dialog-description"></div>
+      <div id="detail-meta" class="dialog-meta"></div>
+      <div id="detail-actions" class="dialog-actions"></div>
+    </div>
+  </section>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
 <script>
 "use strict";
 
-/* Sample content for demonstration only. */
+/*
+ * Starter content for the community portal.
+ * Replace it with verified, current campus information before publishing
+ * it as official university information.
+ */
 
-const defaultNotices = [
-  {
-    id: 1, category: "Academic", icon: "📚", color: "purple",
-    title: "Library study resources",
-    description: "Explore your library's available study materials and academic resources.",
-    date: "Sample notice"
-  },
-  {
-    id: 2, category: "Events", icon: "🎤", color: "orange",
-    title: "Student talent showcase",
-    description: "A sample reminder to discover opportunities to share your skills and creativity.",
-    date: "Sample notice"
-  },
-  {
-    id: 3, category: "Clubs", icon: "🤖", color: "blue",
-    title: "Explore technology clubs",
-    description: "Discover coding, robotics and AI communities that match your interests.",
-    date: "Sample notice"
-  },
-  {
-    id: 4, category: "General", icon: "🌱", color: "green",
-    title: "Keep the campus clean",
-    description: "Help maintain a welcoming environment by using the appropriate waste bins.",
-    date: "Sample notice"
-  },
-  {
-    id: 5, category: "Academic", icon: "💻", color: "pink",
-    title: "Build your project portfolio",
-    description: "Use your free time to document projects and practise technical skills.",
-    date: "Sample notice"
-  },
-  {
-    id: 6, category: "Events", icon: "🏆", color: "purple",
-    title: "Student project exhibition",
-    description: "A sample showcase idea for student innovations and creative projects.",
-    date: "Sample notice"
-  }
+const starterNotices = [
+  {id:"n1",category:"Academic",icon:"📚",title:"Academic Resources & Study Support",description:"Use your department's learning resources, library materials and faculty guidance to support your coursework. Check authorised university channels for current schedules and availability.",author:"Academic Resources",date:"Community information",color:"mint"},
+  {id:"n2",category:"Clubs",icon:"🤖",title:"Explore Technology Communities",description:"Interested in coding, artificial intelligence, robotics or design? Look for student clubs and project groups that match your interests.",author:"Student Community",date:"Community information",color:"sky"},
+  {id:"n3",category:"General",icon:"🌱",title:"Help Keep Shared Spaces Welcoming",description:"Help maintain clean, accessible study areas and shared facilities. Please follow your institution's rules for disposing of waste and using campus spaces.",author:"Campus Community",date:"Community information",color:"mint"},
+  {id:"n4",category:"Academic",icon:"💻",title:"Build Your Project Portfolio",description:"Document your coursework projects, explain your role and record the skills you developed. A clear portfolio can help you present your learning and progress.",author:"Student Resources",date:"Community information",color:"lavender"},
+  {id:"n5",category:"Events",icon:"🎨",title:"Share Your Event Ideas",description:"Planning a workshop, competition or cultural activity? Use the Events section to prepare a listing with a clear description, date and venue.",author:"Community Events",date:"Community information",color:"peach"}
 ];
 
-const defaultEvents = [
-  {id: 101, title: "AI & Innovation Workshop", category: "Technology", date: "2026-11-12", location: "Innovation Lab", description: "Explore artificial intelligence concepts, practical demos and project ideas.", emoji: "🤖", color: "purple"},
-  {id: 102, title: "Creative Design Jam", category: "Workshop", date: "2026-11-15", location: "Design Studio", description: "Create posters, interfaces and creative digital experiences with fellow students.", emoji: "🎨", color: "pink"},
-  {id: 103, title: "Campus Sports Day", category: "Sports", date: "2026-11-20", location: "Sports Ground", description: "A sample sports event featuring team activities and friendly competitions.", emoji: "🏅", color: "orange"},
-  {id: 104, title: "Cultural Evening", category: "Cultural", date: "2026-11-25", location: "Main Auditorium", description: "Celebrate student creativity through music, dance and cultural performances.", emoji: "🎭", color: "pink"},
-  {id: 105, title: "Coding Challenge", category: "Technology", date: "2026-12-02", location: "Computer Lab", description: "Practise programming, logical thinking and collaborative problem-solving.", emoji: "⌨️", color: "blue"},
-  {id: 106, title: "Photography Club Meetup", category: "Club", date: "2026-12-08", location: "Campus Garden", description: "Share photography tips, explore composition and learn from fellow creators.", emoji: "📸", color: "green"}
+const starterEvents = [
+  {id:"e1",title:"AI & Innovation Workshop",category:"Technology",date:"2026-11-12",location:"Innovation Lab",organizer:"Technology Community",description:"Explore artificial intelligence concepts, practical applications and project ideas. Add confirmed schedule, eligibility and registration details before publishing this as a real event.",emoji:"🤖",color:"mint"},
+  {id:"e2",title:"Creative Design Workshop",category:"Workshop",date:"2026-11-15",location:"Design Studio",organizer:"Creative Community",description:"Explore visual design, user experience and digital creativity through practical exercises. Confirm the organiser, schedule and venue before attending.",emoji:"🎨",color:"peach"},
+  {id:"e3",title:"Student Sports Meetup",category:"Sports",date:"2026-11-20",location:"Sports Ground",organizer:"Sports Community",description:"A community activity idea for students interested in friendly team games and recreational sports. Check with the organiser for the confirmed schedule.",emoji:"🏅",color:"sky"},
+  {id:"e4",title:"Cultural Showcase",category:"Cultural",date:"2026-11-25",location:"Main Auditorium",organizer:"Cultural Community",description:"A proposed opportunity to celebrate music, dance and student creativity. Confirm event availability and registration information with the organiser.",emoji:"🎭",color:"rose"},
+  {id:"e5",title:"Coding Challenge",category:"Technology",date:"2026-12-02",location:"Computer Lab",organizer:"Coding Community",description:"Practise programming, logical reasoning and collaborative problem-solving. Confirm the event format and participation requirements with the organiser.",emoji:"⌨️",color:"lavender"},
+  {id:"e6",title:"Photography Community Meetup",category:"Club",date:"2026-12-08",location:"Campus Garden",organizer:"Photography Community",description:"Share photography techniques and creative ideas with fellow learners. Confirm the time and meeting point with the organiser.",emoji:"📸",color:"mint"}
 ];
 
-const defaultMarket = [
-  {id: 201, title: "Engineering Mathematics Notes", category: "Books", price: 150, condition: "Good", description: "Sample listing for organised mathematics revision notes.", emoji: "📘", color: "purple"},
-  {id: 202, title: "Scientific Calculator", category: "Study", price: 450, condition: "Good", description: "A sample calculator listing for engineering coursework.", emoji: "🧮", color: "blue"},
-  {id: 203, title: "Programming Reference Book", category: "Books", price: 220, condition: "Like new", description: "Sample reference book listing for programming learners.", emoji: "📚", color: "orange"},
-  {id: 204, title: "USB Keyboard", category: "Electronics", price: 350, condition: "Good", description: "A sample computer accessory listing.", emoji: "⌨️", color: "green"},
-  {id: 205, title: "Notebook Set", category: "Study", price: 100, condition: "New", description: "Sample listing for stationery and everyday study supplies.", emoji: "📒", color: "pink"},
-  {id: 206, title: "Laptop Stand", category: "Other", price: 300, condition: "Good", description: "A sample desk accessory listing for students.", emoji: "💻", color: "purple"}
+const starterMarket = [
+  {id:"m1",title:"Engineering Mathematics Notes",category:"Books",price:150,condition:"Good",description:"Organised revision notes intended to help with mathematics topics. Review the contents and confirm that they match your syllabus before purchasing.",emoji:"📘",color:"lavender",contact:""},
+  {id:"m2",title:"Scientific Calculator",category:"Study Supplies",price:450,condition:"Good",description:"Calculator listing. Confirm the model, functions, condition and included accessories before making an arrangement.",emoji:"🧮",color:"sky",contact:""},
+  {id:"m3",title:"Programming Reference Book",category:"Books",price:220,condition:"Like New",description:"Programming reference book listing. Check the edition, language and contents before purchasing.",emoji:"📚",color:"peach",contact:""},
+  {id:"m4",title:"USB Keyboard",category:"Electronics",price:350,condition:"Good",description:"Computer keyboard listing. Confirm compatibility, connection type and working condition with the seller.",emoji:"⌨️",color:"mint",contact:""},
+  {id:"m5",title:"Notebook Set",category:"Study Supplies",price:100,condition:"New",description:"Stationery listing for everyday note-taking and study organisation.",emoji:"📒",color:"rose",contact:""},
+  {id:"m6",title:"Laptop Stand",category:"Other",price:300,condition:"Good",description:"Desk accessory listing. Confirm the size, stability and condition before arranging an exchange.",emoji:"💻",color:"lavender",contact:""}
 ];
 
-const defaultLost = [
-  {id: 301, type: "Lost", title: "Blue Water Bottle", location: "Library area", description: "Sample report. Please verify the item with its owner before returning.", emoji: "🧴", color: "blue"},
-  {id: 302, type: "Found", title: "Notebook", location: "Study hall", description: "Sample found-item report. Ask for identifying details to confirm ownership.", emoji: "📓", color: "green"},
-  {id: 303, type: "Lost", title: "Student ID Card", location: "Academic building", description: "Sample report. For real ID cards, contact the campus office or security.", emoji: "🪪", color: "pink"},
-  {id: 304, type: "Found", title: "Umbrella", location: "Common area", description: "Sample report for an umbrella found on campus.", emoji: "☂️", color: "purple"},
-  {id: 305, type: "Lost", title: "Wireless Earbuds Case", location: "Cafeteria area", description: "Sample report for a missing earbuds case.", emoji: "🎧", color: "orange"}
+const starterLost = [
+  {id:"l1",type:"Lost",title:"Blue Water Bottle",location:"Library area",description:"A report about a missing blue water bottle. If you think you found it, compare identifying details privately with the owner.",emoji:"🧴",color:"sky"},
+  {id:"l2",type:"Found",title:"Notebook",location:"Study area",description:"A notebook has been reported found in a study area. Ask the claimant to identify its cover or contents before handing it over.",emoji:"📓",color:"mint"},
+  {id:"l3",type:"Lost",title:"Student ID Card",location:"Academic building",description:"A report about a missing student ID card. For real identity cards, contact campus security or the authorised office rather than posting the ID number publicly.",emoji:"🪪",color:"rose"},
+  {id:"l4",type:"Found",title:"Umbrella",location:"Common area",description:"An umbrella has been reported found in a common area. Confirm identifying features before returning it.",emoji:"☂️",color:"lavender"},
+  {id:"l5",type:"Lost",title:"Earbuds Case",location:"Cafeteria area",description:"A report about a missing earbuds case. Compare its colour and identifying features with the claimant.",emoji:"🎧",color:"peach"}
 ];
 
-function loadSaved(key, defaults) {
-  try {
-    const saved = localStorage.getItem(key);
-    if (saved !== null) return JSON.parse(saved);
-  } catch (error) {
-    console.warn("Local storage is unavailable:", error);
-  }
-  return defaults.map(item => ({...item}));
+function clone(value) {
+  return JSON.parse(JSON.stringify(value));
 }
 
-let notices = loadSaved("cc_notices_v1", defaultNotices);
-let events = loadSaved("cc_events_v1", defaultEvents);
-let market = loadSaved("cc_market_v1", defaultMarket);
-let lostItems = loadSaved("cc_lost_v1", defaultLost);
+function loadData(key, defaults) {
+  try {
+    const value = localStorage.getItem(key);
+    if (value !== null) {
+      const parsed = JSON.parse(value);
+      if (Array.isArray(parsed)) return parsed;
+    }
+  } catch (error) {
+    console.warn("Browser storage unavailable.", error);
+  }
+  return clone(defaults);
+}
 
-function saveData(key, data) {
+let notices = loadData("campusconnect_notices_v3", starterNotices);
+let events = loadData("campusconnect_events_v3", starterEvents);
+let market = loadData("campusconnect_market_v3", starterMarket);
+let lostItems = loadData("campusconnect_lost_v3", starterLost);
+
+function persist(key, data) {
   try {
     localStorage.setItem(key, JSON.stringify(data));
     return true;
   } catch (error) {
-    showToast("Could not save data in this browser. Storage may be disabled.");
+    toast("Your browser could not save this change. Please check its storage settings.");
     return false;
   }
 }
 
 function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, character => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[character]);
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  })[ch]);
 }
 
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.classList.add("show");
-  clearTimeout(showToast.timer);
-  showToast.timer = setTimeout(() => toast.classList.remove("show"), 3200);
+function safeDate(value) {
+  if (!value) return "Not specified";
+  const d = new Date(value + "T12:00:00");
+  if (Number.isNaN(d.getTime())) return "Not specified";
+  return d.toLocaleDateString("en-IN", {
+    day:"numeric", month:"short", year:"numeric"
+  });
 }
 
-function showPage(pageId) {
-  const target = document.getElementById(pageId);
-  if (!target) return;
+function dateParts(value) {
+  if (!value) return {day:"—",month:"TBD"};
+  const d = new Date(value + "T12:00:00");
+  if (Number.isNaN(d.getTime())) return {day:"—",month:"TBD"};
+  return {
+    day:d.toLocaleDateString("en-IN",{day:"2-digit"}),
+    month:d.toLocaleDateString("en-IN",{month:"short"})
+  };
+}
 
-  document.querySelectorAll(".page-section").forEach(section => {
-    section.classList.toggle("active", section.id === pageId);
+let toastTimer;
+function toast(message) {
+  const el = document.getElementById("toast");
+  el.textContent = message;
+  el.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.hidden = true, 3500);
+}
+
+function navigate(id) {
+  const section = document.getElementById(id);
+  if (!section || !section.classList.contains("view")) return;
+
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === id));
+  document.querySelectorAll(".nav-links [data-page]").forEach(a => {
+    a.classList.toggle("active", a.dataset.page === id);
   });
 
-  document.querySelectorAll(".nav-links a").forEach(link => {
-    link.classList.toggle("active", link.dataset.page === pageId);
-  });
+  if (id === "events") renderEvents();
+  if (id === "marketplace") renderMarket();
+  if (id === "lost-found") renderLost();
+  if (id === "announcements") renderNotices();
 
-  if (pageId === "events") renderEvents();
-  if (pageId === "marketplace") renderMarket();
-  if (pageId === "lost-found") renderLost();
-  if (pageId === "announcements") renderNotices();
-
-  if (location.hash !== "#" + pageId) {
-    history.replaceState(null, "", "#" + pageId);
-  }
-
-  window.scrollTo({top: 0, behavior: "smooth"});
+  if (location.hash !== "#" + id) history.replaceState(null,"","#" + id);
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 document.addEventListener("click", event => {
   const link = event.target.closest("[data-page]");
   if (!link) return;
   event.preventDefault();
-  showPage(link.dataset.page);
+  navigate(link.dataset.page);
 });
 
-function formatDate(dateString) {
-  if (!dateString) return "Date to be confirmed";
-  const date = new Date(dateString + "T12:00:00");
-  if (Number.isNaN(date.getTime())) return "Date to be confirmed";
-  return date.toLocaleDateString("en-IN", {
-    day: "numeric", month: "short", year: "numeric"
-  });
+function updateStats() {
+  document.getElementById("stat-notices").textContent = notices.length;
+  document.getElementById("stat-events").textContent = events.length;
+  document.getElementById("stat-market").textContent = market.length;
+  document.getElementById("stat-lost").textContent = lostItems.length;
 }
 
-function eventDateParts(dateString) {
-  const date = new Date(dateString + "T12:00:00");
-  if (Number.isNaN(date.getTime())) return {day: "—", month: "TBD"};
-  return {
-    day: date.toLocaleDateString("en-IN", {day: "2-digit"}),
-    month: date.toLocaleDateString("en-IN", {month: "short"})
-  };
+function renderNoticeRow(item) {
+  return `<article class="notice">
+    <div class="notice-icon">${escapeHTML(item.icon || "📢")}</div>
+    <div class="notice-main">
+      <span class="pill">${escapeHTML(item.category || "General")}</span>
+      <h4>${escapeHTML(item.title)}</h4>
+      <p>${escapeHTML(item.description)}</p>
+      <div class="meta">${escapeHTML(item.author || "Community")} · ${escapeHTML(item.date || "Information")}</div>
+      <button class="link" onclick="openDetails('notice','${escapeHTML(item.id)}')">Read details →</button>
+    </div>
+  </article>`;
 }
 
-function renderDashboard() {
-  document.getElementById("notice-count").textContent = notices.length;
-  document.getElementById("event-count").textContent = events.length;
-  document.getElementById("market-count").textContent = market.length;
-  document.getElementById("lost-count").textContent = lostItems.length;
+function renderHome() {
+  updateStats();
+  document.getElementById("home-notices").innerHTML =
+    notices.slice(0,4).map(renderNoticeRow).join("") ||
+    `<div class="empty">No bulletin posts available.</div>`;
 
-  document.getElementById("dashboard-notices").innerHTML = notices.slice(0, 4).map(notice => `
-    <div class="announcement">
-      <div class="announcement-icon ${escapeHTML(notice.color || "purple")}">${escapeHTML(notice.icon || "📢")}</div>
-      <div>
-        <span class="tag">${escapeHTML(notice.category)}</span>
-        <h4>${escapeHTML(notice.title)}</h4>
-        <p>${escapeHTML(notice.description)}</p>
-        <div class="meta">${escapeHTML(notice.date || "Community notice")}</div>
+  const today = new Date().toISOString().slice(0,10);
+  const upcoming = events.filter(e => !e.date || e.date >= today)
+    .sort((a,b) => String(a.date || "").localeCompare(String(b.date || ""))).slice(0,4);
+
+  document.getElementById("home-events").innerHTML = upcoming.map(e => {
+    const dp = dateParts(e.date);
+    return `<div class="event-mini">
+      <div class="event-date"><strong>${dp.day}</strong><span>${dp.month}</span></div>
+      <div class="event-mini-info"><h4>${escapeHTML(e.title)}</h4><p>📍 ${escapeHTML(e.location || "Location to be confirmed")}</p></div>
+      <button class="link" onclick="openDetails('event','${escapeHTML(e.id)}')">View</button>
+    </div>`;
+  }).join("") || `<div class="empty">No upcoming events listed.</div>`;
+}
+
+function cardMarkup(kind, item) {
+  let category, emoji, color, subtitle, description, action;
+  if (kind === "event") {
+    category = item.category || "Event";
+    emoji = item.emoji || "✦";
+    color = item.color || "mint";
+    subtitle = "📅 " + safeDate(item.date) + " · 📍 " + (item.location || "To be confirmed");
+    description = item.description;
+    action = "View Details";
+  } else if (kind === "market") {
+    category = item.category || "Other";
+    emoji = item.emoji || "🛍️";
+    color = item.color || "mint";
+    subtitle = "Condition: " + (item.condition || "Not specified");
+    description = item.description;
+    action = "View Details";
+  } else {
+    category = item.type + " Item";
+    emoji = item.emoji || "🔎";
+    color = item.color || "mint";
+    subtitle = "📍 " + (item.location || "Location not specified");
+    description = item.description;
+    action = "View Details";
+  }
+
+  return `<article class="card">
+    <div class="card-art ${escapeHTML(color)}">${escapeHTML(emoji)}</div>
+    <div class="card-body">
+      <span class="pill">${escapeHTML(category)}</span>
+      <h3>${escapeHTML(item.title)}</h3>
+      <div class="meta">${escapeHTML(subtitle)}</div>
+      <p class="card-description">${escapeHTML(description)}</p>
+      <div class="card-bottom">
+        ${kind === "market" ? `<span class="price">₹${Number(item.price || 0).toLocaleString("en-IN")}</span>` : `<span class="meta">${kind === "event" ? "Community event" : "Item report"}</span>`}
+        <button class="btn btn-primary" onclick="openDetails('${kind}','${escapeHTML(item.id)}')">${action}</button>
       </div>
     </div>
-  `).join("") || `<div class="empty-state">No announcements yet.</div>`;
-
-  const upcoming = [...events].filter(event => {
-    return event.date >= new Date().toISOString().slice(0, 10);
-  }).sort((a, b) => a.date.localeCompare(b.date)).slice(0, 4);
-
-  document.getElementById("dashboard-events").innerHTML = upcoming.map(event => {
-    const parts = eventDateParts(event.date);
-    return `
-      <div class="event">
-        <div class="event-date"><strong>${parts.day}</strong><span>${parts.month}</span></div>
-        <div class="event-info">
-          <h4>${escapeHTML(event.title)}</h4>
-          <p>📍 ${escapeHTML(event.location)}</p>
-          <p>${escapeHTML(event.category)}</p>
-        </div>
-        <button class="event-action" onclick="registerInterest(${Number(event.id)})">Join</button>
-      </div>
-    `;
-  }).join("") || `<div class="empty-state">No upcoming events listed.</div>`;
+  </article>`;
 }
 
 function renderEvents() {
-  const query = (document.getElementById("event-search")?.value || "").toLowerCase();
+  const q = (document.getElementById("event-search")?.value || "").toLowerCase();
   const category = document.getElementById("event-filter")?.value || "All";
+  const result = events.filter(e =>
+    (category === "All" || e.category === category) &&
+    [e.title,e.category,e.location,e.organizer,e.description].some(v => String(v || "").toLowerCase().includes(q))
+  ).sort((a,b) => String(a.date || "").localeCompare(String(b.date || "")));
 
-  const filtered = [...events].filter(event =>
-    (category === "All" || event.category === category) &&
-    [event.title, event.description, event.location, event.category].some(value =>
-      String(value || "").toLowerCase().includes(query)
-    )
-  ).sort((a, b) => a.date.localeCompare(b.date));
-
-  document.getElementById("events-grid").innerHTML = filtered.map(event => `
-    <article class="content-card">
-      <div class="card-art ${escapeHTML(event.color || "purple")}">${escapeHTML(event.emoji || "🎉")}</div>
-      <div class="card-body">
-        <span class="tag">${escapeHTML(event.category)}</span>
-        <h3>${escapeHTML(event.title)}</h3>
-        <div class="card-meta">📅 ${escapeHTML(formatDate(event.date))}<br>📍 ${escapeHTML(event.location)}</div>
-        <p>${escapeHTML(event.description)}</p>
-        <div class="card-footer">
-          <span class="meta">Student community event</span>
-          <button class="button button-primary" onclick="registerInterest(${Number(event.id)})">I'm interested</button>
-        </div>
-      </div>
-    </article>
-  `).join("") || `<div class="empty-state"><strong>No events found</strong>Try another search or category.</div>`;
-}
-
-function registerInterest(id) {
-  let interests = [];
-  try {
-    interests = JSON.parse(localStorage.getItem("cc_interests_v1") || "[]");
-  } catch (error) {
-    interests = [];
-  }
-
-  if (interests.includes(id)) {
-    showToast("You have already marked interest in this demo event.");
-    return;
-  }
-
-  interests.push(id);
-  try {
-    localStorage.setItem("cc_interests_v1", JSON.stringify(interests));
-    showToast("Interest saved in this browser! This does not register you officially.");
-  } catch (error) {
-    showToast("Browser storage is unavailable.");
-  }
+  document.getElementById("event-grid").innerHTML = result.map(e => cardMarkup("event",e)).join("") ||
+    `<div class="empty"><strong>No matching events</strong>Try another search or category.</div>`;
 }
 
 function renderMarket() {
-  const query = (document.getElementById("market-search")?.value || "").toLowerCase();
+  const q = (document.getElementById("market-search")?.value || "").toLowerCase();
   const category = document.getElementById("market-filter")?.value || "All";
-
-  const filtered = [...market].filter(item =>
-    (category === "All" || item.category === category) &&
-    [item.title, item.description, item.category, item.condition].some(value =>
-      String(value || "").toLowerCase().includes(query)
-    )
+  const result = market.filter(m =>
+    (category === "All" || m.category === category) &&
+    [m.title,m.category,m.condition,m.description].some(v => String(v || "").toLowerCase().includes(q))
   );
 
-  document.getElementById("market-grid").innerHTML = filtered.map(item => `
-    <article class="content-card">
-      <div class="card-art ${escapeHTML(item.color || "purple")}">${escapeHTML(item.emoji || "🛍️")}</div>
-      <div class="card-body">
-        <span class="tag">${escapeHTML(item.category)}</span>
-        <h3>${escapeHTML(item.title)}</h3>
-        <div class="card-meta">Condition: ${escapeHTML(item.condition)}</div>
-        <p>${escapeHTML(item.description)}</p>
-        <div class="card-footer">
-          <span class="price">₹${Number(item.price).toLocaleString("en-IN")}</span>
-          <button class="button button-primary" onclick="contactSeller(${Number(item.id)})">View details</button>
-        </div>
-      </div>
-    </article>
-  `).join("") || `<div class="empty-state"><strong>No listings found</strong>Try another search or category.</div>`;
-}
-
-function contactSeller(id) {
-  const item = market.find(entry => entry.id === id);
-  if (!item) return;
-  showToast(item.title + " — demo listing only. No seller contact or transaction system is connected.");
+  document.getElementById("market-grid").innerHTML = result.map(m => cardMarkup("market",m)).join("") ||
+    `<div class="empty"><strong>No matching listings</strong>Try another search or category.</div>`;
 }
 
 function renderLost() {
-  const query = (document.getElementById("lost-search")?.value || "").toLowerCase();
+  const q = (document.getElementById("lost-search")?.value || "").toLowerCase();
   const type = document.getElementById("lost-filter")?.value || "All";
-
-  const filtered = [...lostItems].filter(item =>
+  const result = lostItems.filter(item =>
     (type === "All" || item.type === type) &&
-    [item.title, item.description, item.location, item.type].some(value =>
-      String(value || "").toLowerCase().includes(query)
-    )
+    [item.title,item.location,item.type,item.description].some(v => String(v || "").toLowerCase().includes(q))
   );
 
-  document.getElementById("lost-grid").innerHTML = filtered.map(item => `
-    <article class="content-card">
-      <div class="card-art ${escapeHTML(item.color || "purple")}">${escapeHTML(item.emoji || "🔎")}</div>
-      <div class="card-body">
-        <span class="tag">${escapeHTML(item.type)} item</span>
-        <h3>${escapeHTML(item.title)}</h3>
-        <div class="card-meta">📍 ${escapeHTML(item.location)}</div>
-        <p>${escapeHTML(item.description)}</p>
-        <div class="card-footer">
-          <span class="meta">Community report</span>
-          <button class="button button-outline" onclick="showToast('Please use your campus lost-property office or security for real item returns.')">Details</button>
-        </div>
-      </div>
-    </article>
-  `).join("") || `<div class="empty-state"><strong>No reports found</strong>Try another search or create a report.</div>`;
+  document.getElementById("lost-grid").innerHTML = result.map(item => cardMarkup("lost",item)).join("") ||
+    `<div class="empty"><strong>No matching reports</strong>Try another search or report an item.</div>`;
 }
 
 function renderNotices() {
-  const query = (document.getElementById("notice-search")?.value || "").toLowerCase();
+  const q = (document.getElementById("notice-search")?.value || "").toLowerCase();
   const category = document.getElementById("notice-filter")?.value || "All";
-
-  const filtered = notices.filter(notice =>
-    (category === "All" || notice.category === category) &&
-    [notice.title, notice.description, notice.category].some(value =>
-      String(value || "").toLowerCase().includes(query)
-    )
+  const result = notices.filter(n =>
+    (category === "All" || n.category === category) &&
+    [n.title,n.description,n.category,n.author].some(v => String(v || "").toLowerCase().includes(q))
   );
-
-  document.getElementById("all-notices").innerHTML = filtered.map(notice => `
-    <div class="announcement">
-      <div class="announcement-icon ${escapeHTML(notice.color || "purple")}">${escapeHTML(notice.icon || "📢")}</div>
-      <div>
-        <span class="tag">${escapeHTML(notice.category)}</span>
-        <h4>${escapeHTML(notice.title)}</h4>
-        <p>${escapeHTML(notice.description)}</p>
-        <div class="meta">${escapeHTML(notice.date || "Community notice")}</div>
-      </div>
-    </div>
-  `).join("") || `<div class="empty-state"><strong>No notices found</strong>Try another search or category.</div>`;
+  document.getElementById("notice-list").innerHTML = result.map(renderNoticeRow).join("") ||
+    `<div class="empty"><strong>No matching posts</strong>Try another search or category.</div>`;
 }
 
-document.getElementById("event-form").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const title = document.getElementById("event-title").value.trim();
-  const category = document.getElementById("event-category").value;
-  const date = document.getElementById("event-date").value;
-  const locationName = document.getElementById("event-location").value.trim();
-  const description = document.getElementById("event-description").value.trim();
-
-  if (!title || !date || !locationName || !description) {
-    showToast("Please complete all required fields.");
-    return;
-  }
-
-  const newEvent = {
-    id: Date.now(), title, category, date,
-    location: locationName, description,
-    emoji: "✨", color: "purple"
+/* Every details button opens a relevant record in the dialog. */
+function openDetails(kind, id) {
+  const collections = {
+    event: events,
+    market: market,
+    lost: lostItems,
+    notice: notices
   };
+  const item = (collections[kind] || []).find(entry => String(entry.id) === String(id));
+  if (!item) {
+    toast("This item is no longer available.");
+    return;
+  }
 
-  events.unshift(newEvent);
-  saveData("cc_events_v1", events);
+  const backdrop = document.getElementById("detail-backdrop");
+  const art = document.getElementById("detail-art");
+  const category = document.getElementById("detail-category");
+  const title = document.getElementById("detail-title");
+  const description = document.getElementById("detail-description");
+  const meta = document.getElementById("detail-meta");
+  const actions = document.getElementById("detail-actions");
+
+  art.textContent = item.emoji || item.icon || "✦";
+  category.textContent = kind === "event" ? item.category :
+    kind === "market" ? item.category :
+    kind === "lost" ? item.type + " Item" : item.category || "Community Bulletin";
+  title.textContent = item.title || "Details";
+  description.textContent = item.description || "No further description provided.";
+  meta.replaceChildren();
+  actions.replaceChildren();
+
+  function addMeta(label, value) {
+    const box = document.createElement("div");
+    box.className = "detail-item";
+    const span = document.createElement("span");
+    span.textContent = label;
+    const strong = document.createElement("strong");
+    strong.textContent = value || "Not specified";
+    box.append(span,strong);
+    meta.append(box);
+  }
+
+  function addButton(label, className, callback) {
+    const button = document.createElement("button");
+    button.className = "btn " + className;
+    button.textContent = label;
+    button.addEventListener("click", callback);
+    actions.append(button);
+  }
+
+  if (kind === "event") {
+    addMeta("EVENT DATE", safeDate(item.date));
+    addMeta("VENUE", item.location);
+    addMeta("CATEGORY", item.category);
+    addMeta("ORGANISED BY", item.organizer || "Not specified");
+    addButton("Save Interest", "btn-primary", () => saveInterest(item));
+  } else if (kind === "market") {
+    addMeta("PRICE", "₹" + Number(item.price || 0).toLocaleString("en-IN"));
+    addMeta("CONDITION", item.condition);
+    addMeta("CATEGORY", item.category);
+    addMeta("SELLER CONTACT", item.contact || "Contact details not provided");
+    if (item.contact) {
+      addButton("Copy Contact", "btn-primary", () => copyText(item.contact));
+    } else {
+      addButton("Contact Information", "btn-primary", () => toast("No seller contact has been provided for this listing."));
+    }
+  } else if (kind === "lost") {
+    addMeta("REPORT TYPE", item.type);
+    addMeta("LOCATION", item.location);
+    addMeta("ITEM", item.title);
+    addMeta("NEXT STEP", "Confirm identifying details before returning an item.");
+    addButton("Lost & Found Guidance", "btn-primary", () => toast("For real items, contact campus security or the authorised lost-property office."));
+  } else {
+    addMeta("CATEGORY", item.category);
+    addMeta("POSTED BY", item.author || "Community");
+    addMeta("DATE / STATUS", item.date || "Community information");
+    addMeta("SOURCE", "Community bulletin");
+  }
+
+  addButton("Close", "btn-outline", closeDetails);
+  backdrop.hidden = false;
+  document.body.style.overflow = "hidden";
+  document.getElementById("detail-close").focus();
+}
+
+function closeDetails() {
+  document.getElementById("detail-backdrop").hidden = true;
+  document.body.style.overflow = "";
+}
+
+document.getElementById("detail-close").addEventListener("click",closeDetails);
+document.getElementById("detail-backdrop").addEventListener("click",event => {
+  if (event.target.id === "detail-backdrop") closeDetails();
+});
+document.addEventListener("keydown",event => {
+  if (event.key === "Escape") closeDetails();
+});
+
+function copyText(value) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(value)
+      .then(() => toast("Contact information copied."))
+      .catch(() => toast("Unable to copy automatically. Please copy the contact information from the details panel."));
+  } else {
+    toast("Contact information: " + value);
+  }
+}
+
+function saveInterest(item) {
+  let saved = [];
+  try {
+    saved = JSON.parse(localStorage.getItem("campusconnect_interests_v3") || "[]");
+    if (!Array.isArray(saved)) saved = [];
+  } catch (error) {
+    saved = [];
+  }
+  const id = String(item.id);
+  if (saved.includes(id)) {
+    toast("You have already saved interest in this event.");
+    return;
+  }
+  saved.push(id);
+  try {
+    localStorage.setItem("campusconnect_interests_v3",JSON.stringify(saved));
+    toast("Your interest has been saved on this device.");
+  } catch (error) {
+    toast("Could not save your interest in this browser.");
+  }
+}
+
+/* Form submission helpers */
+function readValue(id) {
+  return document.getElementById(id).value.trim();
+}
+function makeId(prefix) {
+  return prefix + "-" + Date.now() + "-" + Math.random().toString(36).slice(2,7);
+}
+
+document.getElementById("event-form").addEventListener("submit",event => {
+  event.preventDefault();
+  const item = {
+    id:makeId("event"),
+    title:readValue("ev-title"),
+    category:readValue("ev-category"),
+    date:readValue("ev-date"),
+    location:readValue("ev-location"),
+    description:readValue("ev-description"),
+    organizer:readValue("ev-organizer") || "Community Organiser",
+    emoji:"✦",color:"mint"
+  };
+  events.unshift(item);
+  persist("campusconnect_events_v3",events);
   event.target.reset();
-  renderDashboard();
+  renderHome();
   renderEvents();
-  showPage("events");
-  showToast("Your demo event has been added to this browser!");
+  navigate("events");
+  toast("Event added to this browser.");
 });
 
-document.getElementById("market-form").addEventListener("submit", event => {
+document.getElementById("market-form").addEventListener("submit",event => {
   event.preventDefault();
-
-  const title = document.getElementById("item-title").value.trim();
-  const category = document.getElementById("item-category").value;
-  const price = Number(document.getElementById("item-price").value);
-  const condition = document.getElementById("item-condition").value;
-  const description = document.getElementById("item-description").value.trim();
-
-  if (!title || !description || !Number.isFinite(price) || price < 0) {
-    showToast("Please enter valid item details and a valid price.");
+  const price = Number(readValue("m-price"));
+  if (!Number.isFinite(price) || price < 0) {
+    toast("Please enter a valid price.");
     return;
   }
-
-  market.unshift({
-    id: Date.now(), title, category, price, condition, description,
-    emoji: category === "Books" ? "📚" :
-           category === "Electronics" ? "💻" :
-           category === "Study" ? "📒" : "🛍️",
-    color: "green"
-  });
-
-  saveData("cc_market_v1", market);
+  const category = readValue("m-category");
+  const item = {
+    id:makeId("item"),
+    title:readValue("m-title"),
+    category,
+    price,
+    condition:readValue("m-condition"),
+    description:readValue("m-description"),
+    contact:readValue("m-contact"),
+    emoji:category === "Books" ? "📚" : category === "Electronics" ? "💻" : category === "Study Supplies" ? "📒" : "🛍️",
+    color:"mint"
+  };
+  market.unshift(item);
+  persist("campusconnect_market_v3",market);
   event.target.reset();
-  renderDashboard();
+  renderHome();
   renderMarket();
-  showPage("marketplace");
-  showToast("Your demo listing has been added!");
+  navigate("marketplace");
+  toast("Listing added to this browser.");
 });
 
-document.getElementById("lost-form").addEventListener("submit", event => {
+document.getElementById("lost-form").addEventListener("submit",event => {
   event.preventDefault();
-
-  const type = document.getElementById("report-type").value;
-  const title = document.getElementById("report-title").value.trim();
-  const locationName = document.getElementById("report-location").value.trim();
-  const description = document.getElementById("report-description").value.trim();
-
-  if (!title || !locationName || !description) {
-    showToast("Please complete all required fields.");
-    return;
-  }
-
-  lostItems.unshift({
-    id: Date.now(), type, title, location: locationName, description,
-    emoji: type === "Lost" ? "🔎" : "🎁",
-    color: type === "Lost" ? "pink" : "green"
-  });
-
-  saveData("cc_lost_v1", lostItems);
+  const type = readValue("l-type");
+  const item = {
+    id:makeId("report"),
+    type,
+    title:readValue("l-title"),
+    location:readValue("l-location"),
+    description:readValue("l-description"),
+    emoji:type === "Lost" ? "🔎" : "🎁",
+    color:type === "Lost" ? "rose" : "mint"
+  };
+  lostItems.unshift(item);
+  persist("campusconnect_lost_v3",lostItems);
   event.target.reset();
-  renderDashboard();
+  renderHome();
   renderLost();
-  showPage("lost-found");
-  showToast("Your demo report has been published in this browser!");
+  navigate("lost-found");
+  toast("Item report added to this browser.");
 });
 
-/* Set a useful minimum date for new events. */
-document.getElementById("event-date").min = new Date().toISOString().slice(0, 10);
+document.getElementById("notice-form").addEventListener("submit",event => {
+  event.preventDefault();
+  const category = readValue("n-category");
+  const item = {
+    id:makeId("post"),
+    category,
+    title:readValue("n-title"),
+    description:readValue("n-description"),
+    author:readValue("n-author") || "Community Member",
+    date:"Recently posted",
+    icon:category === "Academic" ? "📚" : category === "Events" ? "🎉" : category === "Clubs" ? "🤝" : "📢",
+    color:"mint"
+  };
+  notices.unshift(item);
+  persist("campusconnect_notices_v3",notices);
+  event.target.reset();
+  renderHome();
+  renderNotices();
+  navigate("announcements");
+  toast("Bulletin post added to this browser.");
+});
 
-/* Initialise the dashboard and support direct links. */
-renderDashboard();
+/* Minimum selectable event date */
+document.getElementById("ev-date").min = new Date().toISOString().slice(0,10);
+
+/* Start page */
+renderHome();
 renderEvents();
 renderMarket();
 renderLost();
 renderNotices();
 
-const requestedPage = location.hash.replace("#", "");
-if (requestedPage && document.getElementById(requestedPage)) {
-  showPage(requestedPage);
+const initialPage = location.hash.slice(1);
+if (document.getElementById(initialPage)?.classList.contains("view")) {
+  navigate(initialPage);
 }
 </script>
 </body>
