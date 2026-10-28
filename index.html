@@ -691,7 +691,8 @@ select:focus-visible, textarea:focus-visible {
         <div class="field"><label for="m-price">Price (₹) *</label><input id="m-price" type="number" min="0" max="10000000" required placeholder="e.g. 250"></div>
         <div class="field"><label for="m-condition">Condition *</label><select id="m-condition"><option>New</option><option>Like New</option><option>Good</option><option>Used</option></select></div>
         <div class="field full"><label for="m-description">Item details *</label><textarea id="m-description" required maxlength="1500" placeholder="Describe the item's condition, specifications and included accessories..."></textarea></div>
-        <div class="field"><label for="m-seller">Seller *</label><select id="m-seller" required><option value="mahivardhan.pasila138969@marwadiuniversity.ac.in">MAHIVARDHAN PASILA</option><option value="rajesh@example.com">Rajesh</option><option value="yashwanth@example.com">Yashwanth</option><option value="nishanth@example.com">Nishanth</option><option value="raghava@example.com">Raghava</option></select></div>
+        <div class="field"><label for="m-seller-name">Seller name *</label><input id="m-seller-name" type="text" required maxlength="100" placeholder="Enter seller name"></div>
+        <div class="field"><label for="m-seller-email">Seller email *</label><input id="m-seller-email" type="email" required maxlength="254" placeholder="Enter seller email address"></div>
         <div class="field"><label for="m-contact">Additional contact information (optional)</label><input id="m-contact" maxlength="150" placeholder="Optional contact method"></div>
       </div>
       <div class="form-actions"><button class="btn btn-primary" type="submit">Publish Listing</button><button class="btn btn-outline" type="reset">Clear</button></div>
@@ -717,7 +718,8 @@ select:focus-visible, textarea:focus-visible {
         <div class="field"><label for="l-title">Item name *</label><input id="l-title" required maxlength="100" placeholder="e.g. Blue water bottle"></div>
         <div class="field full"><label for="l-location">Location *</label><input id="l-location" required maxlength="150" placeholder="Where was it last seen or found?"></div>
         <div class="field full"><label for="l-description">Item details *</label><textarea id="l-description" required maxlength="1500" placeholder="Describe identifying features and relevant details..."></textarea></div>
-        <div class="field full"><label for="l-poster">Posted by *</label><select id="l-poster" required><option value="mahivardhan.pasila138969@marwadiuniversity.ac.in">MAHIVARDHAN PASILA</option><option value="rajesh@example.com">Rajesh</option><option value="yashwanth@example.com">Yashwanth</option><option value="nishanth@example.com">Nishanth</option><option value="raghava@example.com">Raghava</option></select></div>
+        <div class="field"><label for="l-poster-name">Poster name *</label><input id="l-poster-name" type="text" required maxlength="100" placeholder="Enter poster name"></div>
+        <div class="field"><label for="l-poster-email">Poster email *</label><input id="l-poster-email" type="email" required maxlength="254" placeholder="Enter poster email address"></div>
       </div>
       <div class="form-note">For safety, do not publish student ID numbers, home addresses, passwords or sensitive personal details.</div>
       <div class="form-actions"><button class="btn btn-primary" type="submit">Publish Report</button><button class="btn btn-outline" type="reset">Clear</button></div>
@@ -811,12 +813,12 @@ function studentDetails(email) {
 }
 
 const starterMarket = [
-  {id:"m1",title:"Engineering Mathematics Notes",category:"Books",price:150,condition:"Good",description:"Organised revision notes intended to help with mathematics topics. Review the contents and confirm that they match your syllabus before purchasing.",emoji:"📘",color:"lavender",contact:"",sellerName:DEFAULT_STUDENT.name,sellerEmail:DEFAULT_STUDENT.email},
-  {id:"m2",title:"Scientific Calculator",category:"Study Supplies",price:450,condition:"Good",description:"Calculator listing. Confirm the model, functions, condition and included accessories before making an arrangement.",emoji:"🧮",color:"sky",contact:"",sellerName:DEFAULT_STUDENT.name,sellerEmail:DEFAULT_STUDENT.email},
-  {id:"m3",title:"Programming Reference Book",category:"Books",price:220,condition:"Like New",description:"Programming reference book listing. Check the edition, language and contents before purchasing.",emoji:"📚",color:"peach",contact:"",sellerName:DEFAULT_STUDENT.name,sellerEmail:DEFAULT_STUDENT.email},
-  {id:"m4",title:"USB Keyboard",category:"Electronics",price:350,condition:"Good",description:"Computer keyboard listing. Confirm compatibility, connection type and working condition with the seller.",emoji:"⌨️",color:"mint",contact:"",sellerName:DEFAULT_STUDENT.name,sellerEmail:DEFAULT_STUDENT.email},
-  {id:"m5",title:"Notebook Set",category:"Study Supplies",price:100,condition:"New",description:"Stationery listing for everyday note-taking and study organisation.",emoji:"📒",color:"rose",contact:"",sellerName:DEFAULT_STUDENT.name,sellerEmail:DEFAULT_STUDENT.email},
-  {id:"m6",title:"Laptop Stand",category:"Other",price:300,condition:"Good",description:"Desk accessory listing. Confirm the size, stability and condition before arranging an exchange.",emoji:"💻",color:"lavender",contact:"",sellerName:DEFAULT_STUDENT.name,sellerEmail:DEFAULT_STUDENT.email}
+  {id:"m1",title:"Engineering Mathematics Notes",category:"Books",price:150,condition:"Good",description:"Organised revision notes intended to help with mathematics topics. Review the contents and confirm that they match your syllabus before purchasing.",emoji:"📘",color:"lavender",contact:"",sellerName:"Rajesh Kumar",sellerEmail:"rajesh@example.com"},
+  {id:"m2",title:"Scientific Calculator",category:"Study Supplies",price:450,condition:"Good",description:"Calculator listing. Confirm the model, functions, condition and included accessories before making an arrangement.",emoji:"🧮",color:"sky",contact:"",sellerName:"Yashwanth Rao",sellerEmail:"yashwanth@example.com"},
+  {id:"m3",title:"Programming Reference Book",category:"Books",price:220,condition:"Like New",description:"Programming reference book listing. Check the edition, language and contents before purchasing.",emoji:"📚",color:"peach",contact:"",sellerName:"Nishanth Reddy",sellerEmail:"nishanth@example.com"},
+  {id:"m4",title:"USB Keyboard",category:"Electronics",price:350,condition:"Good",description:"Computer keyboard listing. Confirm compatibility, connection type and working condition with the seller.",emoji:"⌨️",color:"mint",contact:"",sellerName:"Raghava Sharma",sellerEmail:"raghava@example.com"},
+  {id:"m5",title:"Notebook Set",category:"Study Supplies",price:100,condition:"New",description:"Stationery listing for everyday note-taking and study organisation.",emoji:"📒",color:"rose",contact:"",sellerName:"Anil Kumar",sellerEmail:"anil@example.com"},
+  {id:"m6",title:"Laptop Stand",category:"Other",price:300,condition:"Good",description:"Desk accessory listing. Confirm the size, stability and condition before arranging an exchange.",emoji:"💻",color:"lavender",contact:"",sellerName:"Priya Patel",sellerEmail:"priya@example.com"}
 ];
 
 const starterLost = [
@@ -971,16 +973,14 @@ function cardMarkup(kind, item) {
     category = item.category || "Other";
     emoji = item.emoji || "🛍️";
     color = item.color || "mint";
-    const seller = studentDetails(item.sellerEmail);
-    item.sellerName = item.sellerName || seller.name;
-    item.sellerEmail = item.sellerEmail || seller.email;
+    item.sellerName = item.sellerName || "Not specified";
+    item.sellerEmail = item.sellerEmail || "Not specified";
     subtitle = "Seller: " + item.sellerName + " · " + item.sellerEmail + " · Condition: " + (item.condition || "Not specified");
     description = item.description;
     action = "View Details";
   } else {
-    const poster = studentDetails(item.posterEmail);
-    item.posterName = item.posterName || poster.name;
-    item.posterEmail = item.posterEmail || poster.email;
+    item.posterName = item.posterName || "Not specified";
+    item.posterEmail = item.posterEmail || "Not specified";
     category = item.type + " Item";
     emoji = item.emoji || "🔎";
     color = item.color || "mint";
@@ -1108,9 +1108,8 @@ function openDetails(kind, id) {
     addMeta("ORGANISED BY", item.organizer || "Not specified");
     addButton("Save Interest", "btn-primary", () => saveInterest(item));
   } else if (kind === "market") {
-    const seller = studentDetails(item.sellerEmail);
-    item.sellerName = item.sellerName || seller.name;
-    item.sellerEmail = item.sellerEmail || seller.email;
+    item.sellerName = item.sellerName || "Not specified";
+    item.sellerEmail = item.sellerEmail || "Not specified";
     addMeta("PRICE", "₹" + Number(item.price || 0).toLocaleString("en-IN"));
     addMeta("CONDITION", item.condition);
     addMeta("CATEGORY", item.category);
@@ -1120,9 +1119,8 @@ function openDetails(kind, id) {
     addButton("Copy Seller Email", "btn-primary", () => copyText(item.sellerEmail));
     if (item.contact) addButton("Copy Additional Contact", "btn-outline", () => copyText(item.contact));
   } else if (kind === "lost") {
-    const poster = studentDetails(item.posterEmail);
-    item.posterName = item.posterName || poster.name;
-    item.posterEmail = item.posterEmail || poster.email;
+    item.posterName = item.posterName || "Not specified";
+    item.posterEmail = item.posterEmail || "Not specified";
     addMeta("REPORT TYPE", item.type);
     addMeta("LOCATION", item.location);
     addMeta("ITEM", item.title);
@@ -1234,8 +1232,8 @@ document.getElementById("market-form").addEventListener("submit",event => {
     condition:readValue("m-condition"),
     description:readValue("m-description"),
     contact:readValue("m-contact"),
-    sellerName:document.getElementById("m-seller").selectedOptions[0].textContent,
-    sellerEmail:readValue("m-seller"),
+    sellerName:readValue("m-seller-name"),
+    sellerEmail:readValue("m-seller-email"),
     emoji:category === "Books" ? "📚" : category === "Electronics" ? "💻" : category === "Study Supplies" ? "📒" : "🛍️",
     color:"mint"
   };
@@ -1257,8 +1255,8 @@ document.getElementById("lost-form").addEventListener("submit",event => {
     title:readValue("l-title"),
     location:readValue("l-location"),
     description:readValue("l-description"),
-    posterName:document.getElementById("l-poster").selectedOptions[0].textContent,
-    posterEmail:readValue("l-poster"),
+    posterName:readValue("l-poster-name"),
+    posterEmail:readValue("l-poster-email"),
     emoji:type === "Lost" ? "🔎" : "🎁",
     color:type === "Lost" ? "rose" : "mint"
   };
