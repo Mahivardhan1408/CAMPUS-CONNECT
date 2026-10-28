@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CampusConnect is your smart college companion for notices, lost and found items, events, and student listings.">
+    <title>CampusConnect | Smart College Companion</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="brand">
+            <div class="brand-icon">CC</div>
+            <div>
+                <h1>CampusConnect</h1>
+                <p>Your Smart College Companion</p>
+            </div>
+        </div>
+        <span class="status">Student Portal</span>
+    </header>
+
+    <nav class="navigation" aria-label="Main navigation">
+        <button class="nav-btn active" data-section="dashboard">Dashboard</button>
+        <button class="nav-btn" data-section="announcements">Announcements</button>
+        <button class="nav-btn" data-section="lost-found">Lost &amp; Found</button>
+        <button class="nav-btn" data-section="events">Events</button>
+        <button class="nav-btn" data-section="marketplace">Marketplace</button>
+    </nav>
+
+    <main class="container">
+        <section id="dashboard" class="page active">
+            <div class="hero">
+                <span class="eyebrow">YOUR CAMPUS, CONNECTED</span>
+                <h2>Welcome to CampusConnect!</h2>
+                <p>Everything you need for campus life, all in one place.</p>
+                <button class="primary-btn" data-go="announcements">
+                    Explore Announcements
+                </button>
+            </div>
+
+            <h2 class="section-heading">Explore Your Campus</h2>
+            <div class="card-grid">
+                <button class="feature-card" data-go="announcements">
+                    <span class="feature-icon">📢</span>
+                    <h3>Announcements</h3>
+                    <p>Read important notices and college updates.</p>
+                    <span class="card-link">View notices →</span>
+                </button>
+                <button class="feature-card" data-go="lost-found">
+                    <span class="feature-icon">🔎</span>
+                    <h3>Lost &amp; Found</h3>
+                    <p>Report lost items and share things you find.</p>
+                    <span class="card-link">Find an item →</span>
+                </button>
+                <button class="feature-card" data-go="events">
+                    <span class="feature-icon">🎉</span>
+                    <h3>College Events</h3>
+                    <p>Discover activities and campus events.</p>
+                    <span class="card-link">Explore events →</span>
+                </button>
+                <button class="feature-card" data-go="marketplace">
+                    <span class="feature-icon">🛍️</span>
+                    <h3>Student Marketplace</h3>
+                    <p>Browse books, electronics, and stationery.</p>
+                    <span class="card-link">Browse listings →</span>
+                </button>
+            </div>
+
+            <div class="info-banner">
+                <span>💡</span>
+                <div>
+                    <h3>One campus. One community.</h3>
+                    <p>Stay informed, share resources, and make campus life easier.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="announcements" class="page" hidden>
+            <div class="page-heading">
+                <span class="eyebrow">STAY INFORMED</span>
+                <h2>Announcements</h2>
+                <p>Find important college notices and updates.</p>
+            </div>
+
+            <input id="notice-search" class="search-input" type="search"
+                   placeholder="Search announcements..."
+                   aria-label="Search announcements">
+
+            <div id="notice-list" class="content-list">
+                <article class="content-card notice-item"
+                         data-search="examination exam timetable schedule">
+                    <span class="tag">Academic</span>
+                    <h3>Examination Updates</h3>
+                    <p>Check official college communications for the latest examination timetable and instructions.</p>
+                </article>
+                <article class="content-card notice-item"
+                         data-search="college library books study hours">
+                    <span class="tag">Campus</span>
+                    <h3>Library Information</h3>
+                    <p>Visit the college library for study resources and information about available facilities.</p>
+                </article>
+                <article class="content-card notice-item"
+                         data-search="student registration academic forms">
+                    <span class="tag">Students</span>
+                    <h3>Student Updates</h3>
+                    <p>Check with your department for registration deadlines and other academic updates.</p>
+                </article>
+            </div>
+            <p id="notice-empty" class="empty-message" hidden>
+                No matching announcements found.
+            </p>
+        </section>
+
+        <section id="lost-found" class="page" hidden>
+            <div class="page-heading">
+                <span class="eyebrow">HELP YOUR CAMPUS COMMUNITY</span>
+                <h2>Lost &amp; Found</h2>
+                <p>Post an item you lost or found on campus.</p>
+            </div>
+
+            <form id="lost-form" class="form-card">
+                <label for="lost-name">Item name</label>
+                <input id="lost-name" type="text" maxlength="80"
+                       placeholder="e.g. Blue water bottle" required>
+
+                <label for="lost-type">Report type</label>
+                <select id="lost-type" required>
+                    <option value="">Choose Lost or Found</option>
+                    <option value="Lost">I lost this item</option>
+                    <option value="Found">I found this item</option>
+                </select>
+
+                <label for="lost-location">Location</label>
+                <input id="lost-location" type="text" maxlength="100"
+                       placeholder="e.g. College library" required>
+
+                <button class="primary-btn" type="submit">Post Item</button>
+            </form>
+
+            <h3 class="section-heading">Recent Reports</h3>
+            <div id="lost-list" class="content-list"></div>
+            <p id="lost-empty" class="empty-message">
+                No reports yet. Add the first item above!
+            </p>
+            <p class="small-note">
+                Demo only: reports are stored in this browser and are not shared with other visitors.
+            </p>
+        </section>
+
+        <section id="events" class="page" hidden>
+            <div class="page-heading">
+                <span class="eyebrow">CAMPUS LIFE</span>
+                <h2>College Events</h2>
+                <p>Explore activities and ideas for campus life.</p>
+            </div>
+
+            <div class="card-grid">
+                <article class="content-card">
+                    <span class="event-icon">💻</span>
+                    <span class="tag">Technology</span>
+                    <h3>Technical Fest</h3>
+                    <p>Explore coding challenges, project exhibitions, and technology activities.</p>
+                    <p class="small-note">Check with your college for event dates.</p>
+                </article>
+                <article class="content-card">
+                    <span class="event-icon">🎭</span>
+                    <span class="tag">Culture</span>
+                    <h3>Cultural Fest</h3>
+                    <p>Discover music, dance, art, and opportunities to showcase student talent.</p>
+                    <p class="small-note">Check with your college for event dates.</p>
+                </article>
+                <article class="content-card">
+                    <span class="event-icon">🚀</span>
+                    <span class="tag">Innovation</span>
+                    <h3>Project Exhibition</h3>
+                    <p>Share innovative ideas, demonstrate projects, and learn from other students.</p>
+                    <p class="small-note">Ask your department about participation.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="marketplace" class="page" hidden>
+            <div class="page-heading">
+                <span class="eyebrow">BUY • SELL • SHARE</span>
+                <h2>Student Marketplace</h2>
+                <p>Browse sample student listings by category.</p>
+            </div>
+
+            <div class="category-filters" aria-label="Marketplace categories">
+                <button class="category-btn active" data-category-filter="all">All</button>
+                <button class="category-btn" data-category-filter="books">Books</button>
+                <button class="category-btn" data-category-filter="electronics">Electronics</button>
+                <button class="category-btn" data-category-filter="stationery">Stationery</button>
+            </div>
+
+            <input id="market-search" class="search-input" type="search"
+                   placeholder="Search listings..."
+                   aria-label="Search marketplace listings">
+
+            <div id="market-list" class="card-grid">
+                <article class="content-card market-item" data-category="books">
+                    <span class="feature-icon">📚</span>
+                    <span class="tag">Books</span>
+                    <h3>Engineering Textbook</h3>
+                    <p>Example listing for an engineering textbook.</p>
+                    <p class="price">₹300</p>
+                </article>
+                <article class="content-card market-item" data-category="electronics">
+                    <span class="feature-icon">🧮</span>
+                    <span class="tag">Electronics</span>
+                    <h3>Scientific Calculator</h3>
+                    <p>Example listing for a scientific calculator.</p>
+                    <p class="price">₹500</p>
+                </article>
+                <article class="content-card market-item" data-category="stationery">
+                    <span class="feature-icon">📝</span>
+                    <span class="tag">Stationery</span>
+                    <h3>Notebook Set</h3>
+                    <p>Example listing for a set of notebooks.</p>
+                    <p class="price">₹100</p>
+                </article>
+                <article class="content-card market-item" data-category="books">
+                    <span class="feature-icon">📖</span>
+                    <span class="tag">Books</span>
+                    <h3>Programming Notes</h3>
+                    <p>Example listing for programming study notes.</p>
+                    <p class="price">₹80</p>
+                </article>
+            </div>
+            <p id="market-empty" class="empty-message" hidden>
+                No matching listings found.
+            </p>
+            <p class="small-note">
+                Sample listings only. This version does not process orders or payments.
+            </p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 CampusConnect</p>
+        <p>Your Smart College Companion</p>
+    </footer>
+</body>
+</html>
