@@ -2,844 +2,368 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CampusConnect - Your Smart College Companion">
-  <title>CampusConnect - Your Smart College Companion</title>
-
-  <style>
-    :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --bg: #f4f7fb;
-      --card: #ffffff;
-      --text: #172033;
-      --muted: #64748b;
-      --border: #e2e8f0;
-      --green: #15803d;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    header {
-      background: #0f172a;
-      color: white;
-      padding: 24px 6%;
-    }
-
-    header h1 {
-      font-size: 30px;
-      margin-bottom: 5px;
-    }
-
-    header p {
-      color: #cbd5e1;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 14px 6%;
-      background: #ffffff;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    nav button {
-      border: 0;
-      background: transparent;
-      padding: 10px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      color: var(--text);
-    }
-
-    nav button:hover,
-    nav button.active {
-      background: #dbeafe;
-      color: var(--primary-dark);
-    }
-
-    main {
-      width: 88%;
-      max-width: 1200px;
-      margin: 30px auto;
-      min-height: 65vh;
-    }
-
-    .page-section {
-      display: none;
-    }
-
-    .page-section.active {
-      display: block;
-    }
-
-    .hero {
-      padding: 30px;
-      border-radius: 16px;
-      color: white;
-      background: linear-gradient(120deg, #1d4ed8, #7c3aed);
-      margin-bottom: 24px;
-    }
-
-    .hero h2 {
-      font-size: 30px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      max-width: 700px;
-    }
-
-    .section-heading {
-      margin: 24px 0 16px;
-    }
-
-    .section-heading h2 {
-      font-size: 26px;
-      margin-bottom: 5px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 18px;
-    }
-
-    .content-card {
-      background: var(--card);
-      padding: 22px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
-    }
-
-    .content-card h3 {
-      margin: 10px 0;
-      font-size: 19px;
-    }
-
-    .content-card p {
-      margin: 8px 0;
-      color: #475569;
-      font-size: 14px;
-    }
-
-    .tag {
-      display: inline-block;
-      background: #dbeafe;
-      color: #1d4ed8;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .event-icon {
-      display: block;
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
-
-    .price {
-      color: var(--green) !important;
-      font-size: 23px !important;
-      font-weight: bold;
-    }
-
-    .primary-btn {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 10px 16px;
-      background: var(--primary);
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .primary-btn:hover {
-      background: var(--primary-dark);
-    }
-
-    .secondary-btn {
-      background: #e2e8f0;
-      color: #172033;
-    }
-
-    .secondary-btn:hover {
-      background: #cbd5e1;
-    }
-
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 18px 0;
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font: inherit;
-      background: white;
-      color: var(--text);
-    }
-
-    .toolbar input {
-      flex: 1;
-      min-width: 220px;
-    }
-
-    .category-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 16px 0;
-    }
-
-    .category-btn {
-      border: 1px solid var(--border);
-      padding: 9px 14px;
-      border-radius: 20px;
-      background: white;
-      cursor: pointer;
-    }
-
-    .category-btn.active,
-    .category-btn:hover {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-
-    .form-card {
-      background: white;
-      padding: 22px;
-      margin: 20px 0;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-
-    .form-card h3 {
-      margin-bottom: 14px;
-    }
-
-    .form-group {
-      margin-bottom: 14px;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-
-    .form-group textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .empty-message,
-    .success-message {
-      padding: 16px;
-      margin: 16px 0;
-      border-radius: 8px;
-      background: #e0f2fe;
-      color: #075985;
-    }
-
-    .success-message {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    footer {
-      background: #0f172a;
-      color: #cbd5e1;
-      padding: 24px 6%;
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    footer p {
-      margin: 5px;
-    }
-
-    [hidden] {
-      display: none !important;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 24px;
-      }
-
-      main {
-        width: 92%;
-        margin: 20px auto;
-      }
-
-      .hero {
-        padding: 22px;
-      }
-
-      .hero h2 {
-        font-size: 24px;
-      }
-
-      nav {
-        position: static;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6558e8">
+<title>CampusConnect | Your Campus, Your Community</title>
+<style>
+:root{--purple:#6857e8;--pink:#ed6aa8;--blue:#438cf5;--green:#20b58a;--ink:#242343;--muted:#777990;--bg:#f7f7fc;--line:#eeedf5;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #b9b2ff;outline-offset:2px}
+.app{min-height:100vh;display:grid;grid-template-columns:245px minmax(0,1fr)}
+.sidebar{background:#fff;border-right:1px solid var(--line);padding:25px 17px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:25px}
+.brand{display:flex;align-items:center;gap:11px;padding:0 7px}
+.logo{width:43px;height:43px;border-radius:15px;background:linear-gradient(135deg,#7768f7,#ec6eaf);display:grid;place-items:center;color:#fff;font-size:23px;box-shadow:0 8px 20px #7768f744}
+.brand strong{font-size:17px;display:block}.brand small{font-size:11px;color:var(--muted)}
+.nav-label{font-size:10px;font-weight:800;letter-spacing:1.5px;color:#a0a0b5;padding:0 11px;margin:0 0 8px}
+.nav{display:grid;gap:5px}
+.nav button{border:0;background:transparent;color:#70718c;text-align:left;padding:12px;border-radius:12px;font-weight:650;display:flex;align-items:center;gap:12px}
+.nav button span:first-child{font-size:19px;width:24px;text-align:center}
+.nav button:hover,.nav button.active{background:#efedff;color:var(--purple)}
+.side-bottom{margin-top:auto;background:linear-gradient(145deg,#f0edff,#fff0f6);padding:16px;border-radius:17px}
+.side-bottom strong{font-size:14px}.side-bottom p{font-size:12px;line-height:1.6;color:#77718d}
+.main{min-width:0;padding:27px clamp(15px,3vw,38px) 50px;max-width:1600px;width:100%;margin:auto}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:25px}
+.crumb{font-size:12px;color:var(--muted);margin-bottom:4px}.page-title{font-size:25px;margin:0;letter-spacing:-.7px}
+.top-actions{display:flex;align-items:center;gap:10px}
+.search{width:min(280px,32vw);position:relative}
+.search input{width:100%;padding:12px 14px 12px 39px;border:1px solid var(--line);border-radius:13px;background:white;outline:none}
+.search span{position:absolute;left:13px;top:11px;color:#85859b}
+.avatar{width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,#f5c7e2,#d6d2ff);display:grid;place-items:center;font-weight:800}
+.view{display:none}.view.active{display:block;animation:appear .22s ease}
+@keyframes appear{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.hero{position:relative;overflow:hidden;border-radius:24px;padding:clamp(24px,4vw,40px);color:white;background:linear-gradient(112deg,#6253e5 0%,#8b67eb 53%,#ec76b5 100%);margin-bottom:22px}
+.hero:after{content:"🎓";position:absolute;right:7%;top:13%;font-size:clamp(70px,11vw,130px);opacity:.19;transform:rotate(12deg)}
+.hero h2{font-size:clamp(26px,3.2vw,38px);line-height:1.15;margin:10px 0;max-width:500px;letter-spacing:-1px}
+.hero p{max-width:510px;color:#f1edff;line-height:1.7;font-size:14px}
+.eyebrow{font-size:11px;font-weight:850;letter-spacing:1.4px;text-transform:uppercase}
+.hero .btn{background:#fff;color:#5c4bdb}
+.btn{border:0;border-radius:11px;padding:11px 15px;font-weight:750;font-size:12px;background:var(--purple);color:white;transition:transform .15s,opacity .15s}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+.btn.light{background:#f0eeff;color:var(--purple)}
+.btn.pink{background:#fff0f7;color:#c74c8b}
+.btn.green{background:#e6fbf4;color:#138665}
+.btn.small{padding:8px 11px;font-size:11px}
+.btn:disabled{opacity:.6;cursor:default;transform:none}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:27px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:17px;padding:17px;min-width:0}
+.stat-top{display:flex;justify-content:space-between;align-items:center;gap:7px}
+.stat-icon{height:37px;width:37px;display:grid;place-items:center;border-radius:12px;font-size:19px}
+.stat strong{display:block;font-size:27px;margin:10px 0 2px;letter-spacing:-1px}
+.stat small{color:var(--muted);font-size:11px}
+.purple-bg{background:#efedff}.pink-bg{background:#fff0f7}.blue-bg{background:#eaf3ff}.green-bg{background:#e7fbf3}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:27px 0 15px}
+.section-head h2{font-size:18px;margin:0;letter-spacing:-.4px}
+.section-head p{font-size:12px;color:var(--muted);margin:5px 0 0}
+.link-btn{border:0;background:none;color:var(--purple);font-size:12px;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.two-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+.card{background:white;border:1px solid var(--line);border-radius:17px;padding:18px;min-width:0}
+.card h3{font-size:14px;margin:9px 0 7px;line-height:1.45}
+.card p{font-size:12px;line-height:1.7;color:var(--muted);margin:7px 0}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;padding:6px 9px;border-radius:30px;background:#f0edff;color:#6755db}
+.tag.pink{background:#fff0f7;color:#ca528c}.tag.blue{background:#eaf3ff;color:#3279db}.tag.green{background:#e5fbf3;color:#168868}.tag.orange{background:#fff3e6;color:#bd7524}
+.meta{display:flex;flex-wrap:wrap;gap:10px;color:#777990;font-size:11px;margin:12px 0}
+.meta span{display:flex;gap:5px;align-items:center}
+.card-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:13px}
+.event-art{min-height:112px;border-radius:13px;padding:14px;display:flex;align-items:flex-end;justify-content:space-between;color:white;gap:8px}
+.event-art .big{font-size:38px}
+.event-art strong{font-size:13px;display:block}
+.art-purple{background:linear-gradient(135deg,#7464ed,#b58df5)}
+.art-pink{background:linear-gradient(135deg,#ed72ad,#ffb4a6)}
+.art-blue{background:linear-gradient(135deg,#398df0,#7ec8ed)}
+.art-green{background:linear-gradient(135deg,#17a984,#91dfba)}
+.art-orange{background:linear-gradient(135deg,#f09a4d,#f7cb75)}
+.art-dark{background:linear-gradient(135deg,#31375e,#6c78bb)}
+.notice{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.notice:last-child{border-bottom:0}
+.notice-icon{flex:0 0 39px;height:39px;display:grid;place-items:center;border-radius:12px;font-size:19px}
+.notice h3{font-size:13px;margin:0 0 4px}
+.notice p{font-size:11px;margin:0;line-height:1.55}
+.notice time{font-size:10px;color:#9a9aae;display:block;margin-top:5px}
+.filter-row{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 19px}
+.chip{border:1px solid #e8e6f1;background:white;color:#777990;border-radius:25px;padding:9px 13px;font-size:11px;font-weight:750}
+.chip.active,.chip:hover{background:#efedff;border-color:#d9d4ff;color:var(--purple)}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:14px 0}
+.toolbar select{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:white;color:#555570;font-size:12px}
+.form-panel{display:none;margin:16px 0;background:#fff;border:1px solid #dedaff;border-radius:18px;padding:20px}
+.form-panel.open{display:block}
+.form-panel h3{margin:0 0 5px;font-size:16px}
+.form-panel>p{font-size:12px;color:var(--muted);margin:0 0 17px}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.field{display:grid;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font-size:11px;font-weight:800;color:#55556e}
+.field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1px solid #e6e4f0;border-radius:10px;background:#fcfcff;color:var(--ink)}
+.field textarea{min-height:85px;resize:vertical}
+.form-actions{display:flex;gap:8px;margin-top:14px}
+.empty{grid-column:1/-1;background:#fff;border:1px dashed #dcd9ee;border-radius:16px;padding:32px;text-align:center;color:var(--muted);font-size:13px}
+.empty strong{display:block;color:var(--ink);margin-bottom:7px;font-size:15px}
+.price{font-size:21px;font-weight:850;letter-spacing:-.6px}
+.product-icon{height:115px;border-radius:13px;display:grid;place-items:center;font-size:55px;margin-bottom:14px;background:linear-gradient(135deg,#f0edff,#fff0f6)}
+.footer{text-align:center;color:#9999ad;font-size:11px;padding:30px 0 5px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#292643;color:white;border-radius:12px;padding:13px 18px;font-size:12px;z-index:10;box-shadow:0 10px 30px #20184b33;transition:.2s;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.muted{color:var(--muted)}
+.mobile-menu{display:none}
+@media(max-width:1050px){.app{grid-template-columns:205px minmax(0,1fr)}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.app{display:block}.sidebar{height:auto;position:static;padding:12px 15px;border-right:0;border-bottom:1px solid var(--line);gap:12px}.brand{padding:0}.side-bottom,.nav-label{display:none}.nav{display:flex;overflow-x:auto;padding-bottom:2px}.nav button{white-space:nowrap;padding:9px 11px;font-size:11px}.nav button span:first-child{font-size:15px;width:auto}.main{padding:18px 14px 35px}.topbar{align-items:flex-start}.page-title{font-size:21px}.search{width:min(180px,42vw)}.topbar .crumb{display:none}.avatar{display:none}.hero{border-radius:19px}.two-grid{grid-template-columns:1fr}.stats{gap:9px}.stat{padding:13px}.stat strong{font-size:23px}.grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.section-head{align-items:flex-start}.event-art{min-height:100px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
-
 <body>
-  <header>
-    <h1>🎓 CampusConnect</h1>
-    <p>Your Smart College Companion</p>
-    <p>Announcements • Events • Lost & Found • Student Marketplace</p>
-  </header>
-
-  <nav aria-label="Main navigation">
-    <button type="button" class="active" data-page="home">🏠 Home</button>
-    <button type="button" data-page="announcements">📢 Announcements</button>
-    <button type="button" data-page="events">🎉 Events</button>
-    <button type="button" data-page="lost">🔎 Lost & Found</button>
-    <button type="button" data-page="marketplace">🛍️ Marketplace</button>
-  </nav>
-
-  <main>
-    <!-- HOME -->
-    <section id="home" class="page-section active">
-      <div class="hero">
-        <h2>Welcome to CampusConnect!</h2>
-        <p>
-          Your one-stop platform for campus announcements, college events,
-          lost and found items, and student-to-student buying and selling.
-          Stay informed and connected with your college community.
-        </p>
-        <button class="primary-btn" type="button" data-go="announcements">
-          Explore Announcements
-        </button>
-        <button class="primary-btn" type="button" data-go="marketplace">
-          Browse Marketplace
-        </button>
-      </div>
-
-      <div class="section-heading">
-        <h2>What can you do here?</h2>
-        <p>Choose a section to get started.</p>
-      </div>
-
-      <div class="card-grid">
-        <article class="content-card">
-          <span class="event-icon">📢</span>
-          <h3>Announcements</h3>
-          <p>Read academic updates, examination information, department notices, and campus reminders.</p>
-          <button class="primary-btn" type="button" data-go="announcements">View Notices</button>
-        </article>
-
-        <article class="content-card">
-          <span class="event-icon">🎉</span>
-          <h3>College Events</h3>
-          <p>Discover technical workshops, project exhibitions, cultural activities, and student meetups.</p>
-          <button class="primary-btn" type="button" data-go="events">View Events</button>
-        </article>
-
-        <article class="content-card">
-          <span class="event-icon">🔎</span>
-          <h3>Lost & Found</h3>
-          <p>Browse listed lost or found belongings and submit a report for an item.</p>
-          <button class="primary-btn" type="button" data-go="lost">Open Lost & Found</button>
-        </article>
-
-        <article class="content-card">
-          <span class="event-icon">🛍️</span>
-          <h3>Student Marketplace</h3>
-          <p>Browse second-hand books, stationery, and electronics listed by students.</p>
-          <button class="primary-btn" type="button" data-go="marketplace">Browse Items</button>
-        </article>
-      </div>
-    </section>
-
-    <!-- ANNOUNCEMENTS -->
-    <section id="announcements" class="page-section">
-      <div class="section-heading">
-        <h2>📢 College Announcements</h2>
-        <p>Read important information and reminders. Confirm official dates with your college.</p>
-      </div>
-
-      <div class="toolbar">
-        <input id="noticeSearch" type="search" placeholder="Search announcements..." aria-label="Search announcements">
-      </div>
-
-      <div id="noticeList" class="card-grid">
-        <article class="content-card notice-item" data-search="examination timetable academic semester">
-          <span class="tag">Academic</span>
-          <h3>📚 Examination Timetable</h3>
-          <p><strong>Date:</strong> Check the official notice board.</p>
-          <p>Students should review the confirmed subject-wise timetable, examination rooms, and reporting times before their exams.</p>
-          <p><strong>Action:</strong> Contact your department for the latest official schedule.</p>
-        </article>
-
-        <article class="content-card notice-item" data-search="workshop artificial intelligence machine learning technical">
-          <span class="tag">Technical</span>
-          <h3>🤖 AI and Machine Learning Workshop</h3>
-          <p><strong>Date:</strong> To be announced.</p>
-          <p>A proposed learning session covering AI fundamentals, machine learning applications, and student project ideas.</p>
-          <p><strong>Action:</strong> Ask your department coordinator whether registration is available.</p>
-        </article>
-
-        <article class="content-card notice-item" data-search="library books reading timings">
-          <span class="tag">Library</span>
-          <h3>📖 Library Reminder</h3>
-          <p>Carry your valid college ID, return borrowed books on time, and keep the library quiet for other students.</p>
-          <p><strong>Timings:</strong> Confirm current opening hours with the library.</p>
-        </article>
-
-        <article class="content-card notice-item" data-search="placement career aptitude interview">
-          <span class="tag">Placement</span>
-          <h3>🚀 Career Preparation</h3>
-          <p>Students can practise aptitude, programming, communication skills, resume preparation, and interview questions.</p>
-          <p><strong>Action:</strong> Contact the placement cell for confirmed training sessions.</p>
-        </article>
-      </div>
-
-      <p id="noticeEmpty" class="empty-message" hidden>No announcements match your search.</p>
-    </section>
-
-    <!-- EVENTS -->
-    <section id="events" class="page-section">
-      <div class="section-heading">
-        <h2>🎉 College Events</h2>
-        <p>Explore learning, innovation, and cultural activities.</p>
-      </div>
-
-      <div class="toolbar">
-        <input id="eventSearch" type="search" placeholder="Search events..." aria-label="Search events">
-      </div>
-
-      <div id="eventList" class="card-grid">
-        <article class="content-card event-item" data-search="AI innovation challenge machine learning">
-          <span class="event-icon">🤖</span>
-          <span class="tag">Technical</span>
-          <h3>AI Innovation Challenge</h3>
-          <p>Explore AI-based solutions to real-world problems. Students can develop ideas involving chatbots, computer vision, and automation.</p>
-          <p><strong>Date:</strong> To be announced</p>
-          <p><strong>Venue:</strong> To be confirmed</p>
-          <p><strong>Registration:</strong> Contact your department.</p>
-        </article>
-
-        <article class="content-card event-item" data-search="project expo exhibition prototype engineering">
-          <span class="event-icon">💡</span>
-          <span class="tag">Innovation</span>
-          <h3>Student Project Expo</h3>
-          <p>Showcase software applications, engineering prototypes, mini-projects, and creative ideas. Receive feedback and learn from other students.</p>
-          <p><strong>Date:</strong> To be announced</p>
-          <p><strong>Venue:</strong> To be confirmed</p>
-        </article>
-
-        <article class="content-card event-item" data-search="cultural day music dance art">
-          <span class="event-icon">🎭</span>
-          <span class="tag">Cultural</span>
-          <h3>Campus Cultural Day</h3>
-          <p>Celebrate student talent through music, dance, art, and performances.</p>
-          <p><strong>Date:</strong> To be announced</p>
-          <p><strong>Participation:</strong> Check official college updates.</p>
-        </article>
-
-        <article class="content-card event-item" data-search="programming coding algorithms meetup">
-          <span class="event-icon">🧑‍💻</span>
-          <span class="tag">Learning</span>
-          <h3>Programming Practice Meetup</h3>
-          <p>Practise coding problems, discuss algorithms, share programming tips, and collaborate on beginner-friendly projects.</p>
-          <p><strong>Date:</strong> To be announced</p>
-          <p><strong>Location:</strong> To be confirmed</p>
-        </article>
-      </div>
-
-      <p id="eventEmpty" class="empty-message" hidden>No events match your search.</p>
-    </section>
-
-    <!-- LOST AND FOUND -->
-    <section id="lost" class="page-section">
-      <div class="section-heading">
-        <h2>🔎 Lost & Found</h2>
-        <p>Report a lost or found item to help reconnect belongings with their owners.</p>
-      </div>
-
-      <form id="lostForm" class="form-card">
-        <h3>Submit an Item Report</h3>
-
-        <div class="form-group">
-          <label for="lostType">Report type</label>
-          <select id="lostType" required>
-            <option value="Lost">I lost an item</option>
-            <option value="Found">I found an item</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="lostName">Item name</label>
-          <input id="lostName" required maxlength="80" placeholder="Example: Water bottle">
-        </div>
-
-        <div class="form-group">
-          <label for="lostLocation">Location</label>
-          <input id="lostLocation" required maxlength="120" placeholder="Example: Library">
-        </div>
-
-        <div class="form-group">
-          <label for="lostDescription">Description</label>
-          <textarea id="lostDescription" required maxlength="500" placeholder="Describe the item without sharing private information"></textarea>
-        </div>
-
-        <button class="primary-btn" type="submit">Add Report</button>
-      </form>
-
-      <div class="section-heading">
-        <h3>Recent Reports</h3>
-        <p>Reports added here are saved in this browser only.</p>
-      </div>
-
-      <div id="lostList" class="card-grid"></div>
-      <p id="lostEmpty" class="empty-message">No reports have been added in this browser yet.</p>
-    </section>
-
-    <!-- MARKETPLACE -->
-    <section id="marketplace" class="page-section">
-      <div class="section-heading">
-        <h2>🛍️ Student Marketplace</h2>
-        <p>Browse second-hand items and contact the seller to arrange collection.</p>
-      </div>
-
-      <div class="toolbar">
-        <input id="marketSearch" type="search" placeholder="Search items, descriptions, or categories..." aria-label="Search marketplace">
-      </div>
-
-      <div class="category-buttons" aria-label="Filter marketplace category">
-        <button class="category-btn active" type="button" data-category="all">All Items</button>
-        <button class="category-btn" type="button" data-category="books">📚 Books</button>
-        <button class="category-btn" type="button" data-category="electronics">🎧 Electronics</button>
-        <button class="category-btn" type="button" data-category="stationery">✏️ Stationery</button>
-        <button class="category-btn" type="button" data-category="other">📦 Other</button>
-      </div>
-
-      <div id="marketList" class="card-grid">
-        <article class="content-card market-item" data-category="books" data-search="engineering mathematics textbook used book">
-          <span class="event-icon">📘</span>
-          <span class="tag">Books</span>
-          <h3>Engineering Mathematics Textbook</h3>
-          <p>Used textbook for engineering mathematics revision. Ask the seller about the edition and condition.</p>
-          <p class="price">₹250</p>
-          <p><strong>Condition:</strong> Used</p>
-          <p><strong>Collection:</strong> Arrange a public campus meetup.</p>
-          <button class="primary-btn contact-seller" type="button" data-item="Engineering Mathematics Textbook" data-price="₹250">Contact Seller</button>
-        </article>
-
-        <article class="content-card market-item" data-category="electronics" data-search="wired headphones audio electronics">
-          <span class="event-icon">🎧</span>
-          <span class="tag">Electronics</span>
-          <h3>Wired Headphones</h3>
-          <p>Pre-owned wired headphones for lectures and online classes. Ask the seller to demonstrate that they work.</p>
-          <p class="price">₹300</p>
-          <p><strong>Condition:</strong> Used</p>
-          <p><strong>Collection:</strong> Arrange a public campus meetup.</p>
-          <button class="primary-btn contact-seller" type="button" data-item="Wired Headphones" data-price="₹300">Contact Seller</button>
-        </article>
-
-        <article class="content-card market-item" data-category="stationery" data-search="geometry drawing instruments stationery kit">
-          <span class="event-icon">✏️</span>
-          <span class="tag">Stationery</span>
-          <h3>Geometry Kit</h3>
-          <p>Pre-owned geometry kit for engineering drawing. Confirm the included instruments before purchase.</p>
-          <p class="price">₹100</p>
-          <p><strong>Condition:</strong> Used</p>
-          <p><strong>Collection:</strong> Arrange a public campus meetup.</p>
-          <button class="primary-btn contact-seller" type="button" data-item="Geometry Kit" data-price="₹100">Contact Seller</button>
-        </article>
-
-        <article class="content-card market-item" data-category="books" data-search="Python programming notes coding">
-          <span class="event-icon">📗</span>
-          <span class="tag">Books</span>
-          <h3>Python Programming Notes</h3>
-          <p>Notes covering Python basics, conditions, loops, functions, and examples. Ask to preview them before buying.</p>
-          <p class="price">₹80</p>
-          <p><strong>Condition:</strong> Pre-owned notes</p>
-          <p><strong>Collection:</strong> Arrange a public campus meetup.</p>
-          <button class="primary-btn contact-seller" type="button" data-item="Python Programming Notes" data-price="₹80">Contact Seller</button>
-        </article>
-      </div>
-
-      <p id="marketEmpty" class="empty-message" hidden>No items match your search or category.</p>
-
-      <div class="form-card">
-        <h3>How to Get an Item</h3>
-        <p><strong>1.</strong> Choose the item you want.</p>
-        <p><strong>2.</strong> Click Contact Seller and provide your contact details in the email draft.</p>
-        <p><strong>3.</strong> Agree on the final price, condition, and availability.</p>
-        <p><strong>4.</strong> Arrange collection in a public campus location. Inspect the item before paying.</p>
-        <p><strong>Important:</strong> Listings are examples. Contact details must be supplied by the actual seller.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p><strong>CampusConnect</strong> — Your Smart College Companion</p>
-    <p>Announcements • Events • Lost & Found • Student Marketplace</p>
-    <p>Student project demonstration. Confirm official college information independently.</p>
-  </footer>
-
-  <script>
-    // NAVIGATION: show exactly the selected page.
-    const pageButtons = document.querySelectorAll("[data-page]");
-    const pages = document.querySelectorAll(".page-section");
-
-    function showPage(pageId) {
-      const target = document.getElementById(pageId);
-      if (!target || !target.classList.contains("page-section")) return;
-
-      pages.forEach(page => {
-        page.classList.toggle("active", page.id === pageId);
-      });
-
-      pageButtons.forEach(button => {
-        const selected = button.dataset.page === pageId;
-        button.classList.toggle("active", selected);
-        button.setAttribute("aria-current", selected ? "page" : "false");
-      });
-
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    pageButtons.forEach(button => {
-      button.addEventListener("click", () => showPage(button.dataset.page));
-    });
-
-    document.querySelectorAll("[data-go]").forEach(button => {
-      button.addEventListener("click", () => showPage(button.dataset.go));
-    });
-
-    // SEARCH: filter announcements.
-    const noticeSearch = document.getElementById("noticeSearch");
-    const noticeItems = [...document.querySelectorAll(".notice-item")];
-
-    noticeSearch.addEventListener("input", () => {
-      const query = noticeSearch.value.trim().toLowerCase();
-      let visible = 0;
-
-      noticeItems.forEach(item => {
-        const matches = item.textContent.toLowerCase().includes(query) ||
-          (item.dataset.search || "").toLowerCase().includes(query);
-        item.hidden = !matches;
-        if (matches) visible++;
-      });
-
-      document.getElementById("noticeEmpty").hidden = visible > 0;
-    });
-
-    // SEARCH: filter events.
-    const eventSearch = document.getElementById("eventSearch");
-    const eventItems = [...document.querySelectorAll(".event-item")];
-
-    eventSearch.addEventListener("input", () => {
-      const query = eventSearch.value.trim().toLowerCase();
-      let visible = 0;
-
-      eventItems.forEach(item => {
-        const matches = item.textContent.toLowerCase().includes(query) ||
-          (item.dataset.search || "").toLowerCase().includes(query);
-        item.hidden = !matches;
-        if (matches) visible++;
-      });
-
-      document.getElementById("eventEmpty").hidden = visible > 0;
-    });
-
-    // MARKETPLACE: category and search filters work together.
-    let selectedCategory = "all";
-    const marketSearch = document.getElementById("marketSearch");
-    const marketItems = [...document.querySelectorAll(".market-item")];
-    const categoryButtons = [...document.querySelectorAll(".category-btn")];
-
-    function filterMarketplace() {
-      const query = marketSearch.value.trim().toLowerCase();
-      let visible = 0;
-
-      marketItems.forEach(item => {
-        const categoryMatches = selectedCategory === "all" ||
-          item.dataset.category === selectedCategory;
-
-        const searchText = (
-          item.textContent + " " + (item.dataset.search || "")
-        ).toLowerCase();
-
-        const searchMatches = searchText.includes(query);
-        const matches = categoryMatches && searchMatches;
-
-        item.hidden = !matches;
-        if (matches) visible++;
-      });
-
-      document.getElementById("marketEmpty").hidden = visible > 0;
-    }
-
-    categoryButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        selectedCategory = button.dataset.category;
-
-        categoryButtons.forEach(categoryButton => {
-          const selected = categoryButton === button;
-          categoryButton.classList.toggle("active", selected);
-          categoryButton.setAttribute("aria-pressed", String(selected));
-        });
-
-        filterMarketplace();
-      });
-    });
-
-    marketSearch.addEventListener("input", filterMarketplace);
-
-    // MARKETPLACE: open a prefilled email draft.
-    // Replace the placeholder with each real seller's email.
-    document.querySelectorAll(".contact-seller").forEach(button => {
-      button.addEventListener("click", () => {
-        const item = button.dataset.item;
-        const price = button.dataset.price;
-
-        const recipient = prompt(
-          "Enter the seller's actual email address for " + item + ":"
-        );
-
-        if (!recipient) return;
-
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(recipient.trim())) {
-          alert("Please enter a valid email address.");
-          return;
-        }
-
-        const subject = "CampusConnect item enquiry: " + item;
-        const body =
-          "Hello,\n\nI am interested in your CampusConnect listing.\n" +
-          "Item: " + item + "\n" +
-          "Listed price: " + price + "\n\n" +
-          "Is the item still available? Could we arrange a safe campus collection?\n\n" +
-          "My name and contact details:\n";
-
-        const mailto = "mailto:" + recipient.trim() +
-          "?subject=" + encodeURIComponent(subject) +
-          "&body=" + encodeURIComponent(body);
-
-        window.location.href = mailto;
-      });
-    });
-
-    // LOST & FOUND: save reports in this browser.
-    // This is not a shared database; other visitors cannot see these reports.
-    const lostForm = document.getElementById("lostForm");
-    const lostList = document.getElementById("lostList");
-    const lostEmpty = document.getElementById("lostEmpty");
-    const lostStorageKey = "campusconnect-lost-reports-v1";
-
-    function loadLostReports() {
-      try {
-        const stored = JSON.parse(localStorage.getItem(lostStorageKey) || "[]");
-        return Array.isArray(stored) ? stored : [];
-      } catch {
-        return [];
-      }
-    }
-
-    function renderLostReports() {
-      const reports = loadLostReports();
-      lostList.replaceChildren();
-      lostEmpty.hidden = reports.length > 0;
-
-      reports.forEach(report => {
-        const card = document.createElement("article");
-        card.className = "content-card";
-
-        const tag = document.createElement("span");
-        tag.className = "tag";
-        tag.textContent = report.type;
-
-        const heading = document.createElement("h3");
-        heading.textContent = report.name;
-
-        const location = document.createElement("p");
-        location.textContent = "Location: " + report.location;
-
-        const description = document.createElement("p");
-        description.textContent = report.description;
-
-        card.append(tag, heading, location, description);
-        lostList.appendChild(card);
-      });
-    }
-
-    lostForm.addEventListener("submit", event => {
-      event.preventDefault();
-
-      const report = {
-        type: document.getElementById("lostType").value,
-        name: document.getElementById("lostName").value.trim(),
-        location: document.getElementById("lostLocation").value.trim(),
-        description: document.getElementById("lostDescription").value.trim()
-      };
-
-      if (!report.name || !report.location || !report.description) {
-        alert("Please complete all fields.");
-        return;
-      }
-
-      const reports = loadLostReports();
-      reports.unshift(report);
-
-      try {
-        localStorage.setItem(lostStorageKey, JSON.stringify(reports));
-      } catch {
-        alert("This browser could not save the report. Please check browser storage settings.");
-        return;
-      }
-
-      lostForm.reset();
-      renderLostReports();
-      alert("Report added in this browser.");
-    });
-
-    // Initial page setup.
-    renderLostReports();
-    filterMarketplace();
-    showPage("home");
-  </script>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">🎓</div><div><strong>CampusConnect</strong><small>Your campus, together</small></div></div>
+  <div><div class="nav-label">CAMPUS MENU</div>
+    <nav class="nav" aria-label="Main navigation">
+      <button class="active" data-page="dashboard"><span>▦</span> Dashboard</button>
+      <button data-page="announcements"><span>📢</span> Announcements</button>
+      <button data-page="events"><span>🎉</span> Events</button>
+      <button data-page="lostfound"><span>🔎</span> Lost & Found</button>
+      <button data-page="marketplace"><span>🛍️</span> Marketplace</button>
+    </nav>
+  </div>
+  <div class="side-bottom"><div style="font-size:25px;margin-bottom:8px">💜</div><strong>Campus life, simplified.</strong><p>Discover activities, share useful items and stay connected with your campus community.</p><button class="btn small" data-go="events">Explore events →</button></div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div><div class="crumb">CampusConnect / <span id="crumb">Dashboard</span></div><h1 class="page-title" id="pageTitle">Your campus at a glance ✨</h1></div>
+  <div class="top-actions"><label class="search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Search this section..." aria-label="Search current section"></label><div class="avatar" title="Student">S</div></div>
+</header>
+
+<section class="view active" id="view-dashboard">
+  <div class="hero">
+    <div class="eyebrow">🌈 Your student community</div>
+    <h2>Big campus energy.<br>One connected community.</h2>
+    <p>Find what's happening, discover student deals, share important updates and make every campus day count.</p>
+    <button class="btn" data-go="events">Discover campus events →</button>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-top"><span class="muted" style="font-size:12px">Campus notices</span><span class="stat-icon purple-bg">📢</span></div><strong id="statNotices">0</strong><small>Updates to explore</small></div>
+    <div class="stat"><div class="stat-top"><span class="muted" style="font-size:12px">Upcoming events</span><span class="stat-icon pink-bg">🎉</span></div><strong id="statEvents">0</strong><small>Sample campus activities</small></div>
+    <div class="stat"><div class="stat-top"><span class="muted" style="font-size:12px">Market listings</span><span class="stat-icon blue-bg">🛍️</span></div><strong id="statMarket">0</strong><small>Student-to-student finds</small></div>
+    <div class="stat"><div class="stat-top"><span class="muted" style="font-size:12px">Lost & found</span><span class="stat-icon green-bg">🔎</span></div><strong id="statLost">0</strong><small>Items reported</small></div>
+  </div>
+  <div class="two-grid">
+    <div class="card"><div class="section-head" style="margin:0 0 8px"><h2>📢 Latest announcements</h2><button class="link-btn" data-go="announcements">View all →</button></div><div id="dashboardNotices"></div></div>
+    <div class="card"><div class="section-head" style="margin:0 0 12px"><h2>📅 Coming up</h2><button class="link-btn" data-go="events">All events →</button></div><div id="dashboardEvents" class="grid" style="grid-template-columns:1fr"></div></div>
+  </div>
+  <div class="section-head"><div><h2>✨ Explore your campus</h2><p>Your next useful discovery could be one click away.</p></div></div>
+  <div class="grid">
+    <div class="card"><span class="tag pink">STUDENT LIFE</span><h3>🎤 Find your next event</h3><p>Explore club meets, workshops, cultural activities and more.</p><button class="btn light" data-go="events">Explore events</button></div>
+    <div class="card"><span class="tag blue">SMART SAVINGS</span><h3>📚 Give items a second life</h3><p>Browse books, calculators and other student essentials.</p><button class="btn light" data-go="marketplace">Visit marketplace</button></div>
+    <div class="card"><span class="tag green">HELP EACH OTHER</span><h3>🔍 Lost something?</h3><p>Post a report or check what other students have found.</p><button class="btn light" data-go="lostfound">Open Lost & Found</button></div>
+  </div>
+</section>
+
+<section class="view" id="view-announcements">
+  <div class="hero" style="background:linear-gradient(110deg,#4285ed,#7b72f4)"><div class="eyebrow">📢 THE CAMPUS BULLETIN</div><h2>Stay in the loop.</h2><p>Academic reminders, club news, placement preparation and community updates—all in one place.</p></div>
+  <div class="toolbar"><div class="filter-row" data-filter-group="announcements"><button class="chip active" data-filter="all">All updates</button><button class="chip" data-filter="Academic">🎓 Academic</button><button class="chip" data-filter="Clubs">🎭 Clubs</button><button class="chip" data-filter="Careers">💼 Careers</button><button class="chip" data-filter="Community">💜 Community</button></div></div>
+  <div class="grid" id="announcementsGrid"></div>
+</section>
+
+<section class="view" id="view-events">
+  <div class="hero" style="background:linear-gradient(110deg,#e963a3,#f4a16e)"><div class="eyebrow">🎉 MAKE MEMORIES</div><h2>Your next campus story starts here.</h2><p>Discover workshops, creative meetups, coding sessions and cultural events. Use the filters to find your vibe.</p><button class="btn" data-filter-jump="events">Show all events</button></div>
+  <div class="filter-row" data-filter-group="events"><button class="chip active" data-filter="all">All events</button><button class="chip" data-filter="Technology">💻 Technology</button><button class="chip" data-filter="Culture">🎨 Culture</button><button class="chip" data-filter="Workshop">🧠 Workshops</button><button class="chip" data-filter="Clubs">🤝 Clubs</button></div>
+  <div class="grid" id="eventsGrid"></div>
+</section>
+
+<section class="view" id="view-lostfound">
+  <div class="hero" style="background:linear-gradient(110deg,#12a887,#58c9ba)"><div class="eyebrow">🔎 LOOK OUT FOR EACH OTHER</div><h2>Lost something? Found something?</h2><p>Post useful details so classmates can help reconnect people with their belongings. Meet in a safe, public campus location to exchange items.</p><button class="btn" data-toggle-form="lostForm">＋ Report an item</button></div>
+  <div class="form-panel" id="lostForm"><h3>Report a lost or found item</h3><p>Demo posts are saved in this browser only.</p><form id="lostSubmit"><div class="form-grid">
+    <div class="field"><label for="lostType">Report type</label><select id="lostType" required><option value="Lost">I lost an item</option><option value="Found">I found an item</option></select></div>
+    <div class="field"><label for="lostCategory">Category</label><select id="lostCategory" required><option>Electronics</option><option>Books & notes</option><option>ID card</option><option>Bag & accessories</option><option>Keys</option><option>Other</option></select></div>
+    <div class="field full"><label for="lostTitle">Item name</label><input id="lostTitle" required maxlength="70" placeholder="e.g. Blue water bottle"></div>
+    <div class="field"><label for="lostPlace">Where?</label><input id="lostPlace" required maxlength="100" placeholder="e.g. Library, first floor"></div>
+    <div class="field"><label for="lostDate">Date</label><input id="lostDate" type="date" required></div>
+    <div class="field full"><label for="lostDetails">Details</label><textarea id="lostDetails" maxlength="500" placeholder="Describe the item or any identifying features"></textarea></div>
+  </div><div class="form-actions"><button class="btn">Publish report</button><button type="button" class="btn light" data-toggle-form="lostForm">Cancel</button></div></form></div>
+  <div class="toolbar"><div class="filter-row" data-filter-group="lost"><button class="chip active" data-filter="all">All reports</button><button class="chip" data-filter="Lost">🔴 Lost</button><button class="chip" data-filter="Found">🟢 Found</button></div><button class="btn" data-toggle-form="lostForm">＋ Add report</button></div>
+  <div class="grid" id="lostGrid"></div>
+</section>
+
+<section class="view" id="view-marketplace">
+  <div class="hero" style="background:linear-gradient(110deg,#6754dd,#a66ce9)"><div class="eyebrow">🛍️ THE STUDENT MARKETPLACE</div><h2>Good finds. Student prices.</h2><p>Browse second-hand books, study essentials and useful everyday items. Listings below are examples, not verified offers.</p><button class="btn" data-toggle-form="marketForm">＋ List an item</button></div>
+  <div class="form-panel" id="marketForm"><h3>List something for students</h3><p>Use demo listings to try the form. Avoid posting personal addresses or sensitive information.</p><form id="marketSubmit"><div class="form-grid">
+    <div class="field full"><label for="marketTitle">Item name</label><input id="marketTitle" required maxlength="70" placeholder="e.g. Engineering mathematics textbook"></div>
+    <div class="field"><label for="marketCategory">Category</label><select id="marketCategory"><option>Books</option><option>Electronics</option><option>Study supplies</option><option>Accessories</option><option>Other</option></select></div>
+    <div class="field"><label for="marketPrice">Price in ₹</label><input id="marketPrice" type="number" min="0" max="1000000" required placeholder="e.g. 250"></div>
+    <div class="field"><label for="marketCondition">Condition</label><select id="marketCondition"><option>Like new</option><option>Good</option><option>Used</option></select></div>
+    <div class="field"><label for="marketEmoji">Choose an icon</label><select id="marketEmoji"><option value="📚">📚 Books</option><option value="💻">💻 Electronics</option><option value="🧮">🧮 Study supplies</option><option value="🎒">🎒 Accessories</option><option value="📦">📦 Other</option></select></div>
+    <div class="field full"><label for="marketDetails">Description</label><textarea id="marketDetails" maxlength="400" placeholder="Describe the item and its condition"></textarea></div>
+  </div><div class="form-actions"><button class="btn">Publish listing</button><button type="button" class="btn light" data-toggle-form="marketForm">Cancel</button></div></form></div>
+  <div class="toolbar"><div class="filter-row" data-filter-group="market"><button class="chip active" data-filter="all">All items</button><button class="chip" data-filter="Books">📚 Books</button><button class="chip" data-filter="Electronics">💻 Electronics</button><button class="chip" data-filter="Study supplies">🧮 Study supplies</button><button class="chip" data-filter="Accessories">🎒 Accessories</button></div><button class="btn" data-toggle-form="marketForm">＋ Sell an item</button></div>
+  <div class="grid" id="marketGrid"></div>
+</section>
+<div class="footer">Made for campus life 💜 · CampusConnect demo · Keep personal information safe.</div>
+</main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+/* Demo content: replace these examples with verified campus information. */
+const notices = [
+ {id:"n1",cat:"Academic",icon:"📚",color:"purple-bg",title:"Plan ahead for assignment deadlines",desc:"Check your course portal and confirm submission dates with your faculty. Keep a backup of your work.",date:"Academic reminder"},
+ {id:"n2",cat:"Careers",icon:"💼",color:"blue-bg",title:"Build your placement-ready portfolio",desc:"Update your resume, organise project links and practise explaining your technical contributions.",date:"Career preparation"},
+ {id:"n3",cat:"Clubs",icon:"🎭",color:"pink-bg",title:"Thinking of joining a student club?",desc:"Explore technical, cultural and creative groups. Check official campus channels for current joining details.",date:"Club community"},
+ {id:"n4",cat:"Community",icon:"💜",color:"green-bg",title:"Help keep shared spaces welcoming",desc:"Return borrowed items, keep classrooms tidy and be considerate of other students in common areas.",date:"Community note"},
+ {id:"n5",cat:"Academic",icon:"🧠",color:"blue-bg",title:"Try a focused study session",desc:"Set one clear goal, put distractions away and review your notes with practice questions.",date:"Study tip"},
+ {id:"n6",cat:"Careers",icon:"🚀",color:"pink-bg",title:"Showcase your project work",desc:"Document the problem, approach, tools and lessons learned. Never include passwords or private keys in public repositories.",date:"Portfolio tip"}
+];
+const events = [
+ {id:"e1",cat:"Technology",emoji:"💻",title:"Code & Create Meetup",date:"2026-11-06",time:"4:00 PM",place:"Student activity space",desc:"An example peer meetup to discuss beginner-friendly coding ideas and share project inspiration.",art:"art-purple"},
+ {id:"e2",cat:"Culture",emoji:"🎨",title:"Creative Campus Hour",date:"2026-11-10",time:"3:30 PM",place:"Common area",desc:"A sample creative gathering for sketching, design ideas and informal student collaboration.",art:"art-pink"},
+ {id:"e3",cat:"Workshop",emoji:"🧠",title:"AI Project Brainstorm",date:"2026-11-13",time:"2:00 PM",place:"Seminar room",desc:"A sample workshop concept for discussing AI project problems, datasets and evaluation.",art:"art-blue"},
+ {id:"e4",cat:"Clubs",emoji:"🤝",title:"Student Club Discovery",date:"2026-11-18",time:"1:00 PM",place:"Student activity space",desc:"An example session to learn about student clubs, volunteering and campus activities.",art:"art-green"},
+ {id:"e5",cat:"Technology",emoji:"🛠️",title:"Mini Project Showcase",date:"2026-11-21",time:"11:00 AM",place:"Presentation room",desc:"A sample showcase format for students to explain a prototype and receive constructive feedback.",art:"art-dark"},
+ {id:"e6",cat:"Culture",emoji:"🎶",title:"Open Mic & Talent Hour",date:"2026-11-27",time:"4:30 PM",place:"Campus gathering area",desc:"A sample event idea celebrating music, poetry, storytelling and student talent.",art:"art-orange"}
+];
+const marketSeed = [
+ {id:"m1",cat:"Books",emoji:"📚",title:"Engineering maths reference books",price:280,condition:"Good",desc:"Example listing: a set of used reference books for maths revision."},
+ {id:"m2",cat:"Electronics",emoji:"💻",title:"USB keyboard",price:350,condition:"Good",desc:"Example listing: a compact keyboard for study and everyday typing."},
+ {id:"m3",cat:"Study supplies",emoji:"🧮",title:"Scientific calculator",price:450,condition:"Used",desc:"Example listing: check model compatibility and condition before buying."},
+ {id:"m4",cat:"Books",emoji:"📖",title:"Python programming notes",price:120,condition:"Like new",desc:"Example listing: printed revision notes for beginner programming."},
+ {id:"m5",cat:"Accessories",emoji:"🎒",title:"College backpack",price:500,condition:"Good",desc:"Example listing: a used backpack with multiple compartments."},
+ {id:"m6",cat:"Study supplies",emoji:"✏️",title:"Drawing and stationery set",price:180,condition:"Like new",desc:"Example listing: basic stationery for assignments and diagrams."}
+];
+const lostSeed = [
+ {id:"l1",type:"Found",cat:"Electronics",title:"Wireless earbud case",place:"Example: library study area",date:"2026-10-25",details:"Sample report only. Please confirm ownership privately before collecting."},
+ {id:"l2",type:"Lost",cat:"Books & notes",title:"Blue notebook",place:"Example: classroom block",date:"2026-10-24",details:"Sample report only. Add identifying details when making your own report."},
+ {id:"l3",type:"Found",cat:"Keys",title:"Single key on a keyring",place:"Example: common area",date:"2026-10-23",details:"Sample report only. For real items, hand valuables to authorised campus staff."}
+];
+const titles = {dashboard:"Your campus at a glance ✨",announcements:"Campus announcements 📢",events:"Events worth showing up for 🎉",lostfound:"Lost & Found 🔎",marketplace:"Student marketplace 🛍️"};
+const store = {
+ get(key,fallback){try{const v=localStorage.getItem("cc_"+key);return v?JSON.parse(v):fallback}catch{return fallback}},
+ set(key,value){try{localStorage.setItem("cc_"+key,JSON.stringify(value));return true}catch{toast("Browser storage is unavailable. Changes may not be saved.");return false}}
+};
+let userEvents=store.get("events",[]);
+let userMarket=store.get("market",[]);
+let userLost=store.get("lost",[]);
+let activePage="dashboard";
+let filters={announcements:"all",events:"all",lost:"all",market:"all"};
+let searchText="";
+let toastTimer;
+
+function toast(message){
+ const el=document.getElementById("toast");el.textContent=message;el.classList.add("show");
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2800);
+}
+function allMarket(){return [...userMarket,...marketSeed]}
+function allLost(){return [...userLost,...lostSeed]}
+function allEvents(){return [...userEvents,...events].sort((a,b)=>a.date.localeCompare(b.date))}
+function fmtDate(value){
+ if(!value)return "Date not set";
+ const d=new Date(value+"T12:00:00");
+ return Number.isNaN(d.getTime())?value:d.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
+}
+function safe(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function searchable(item){return Object.values(item).join(" ").toLowerCase().includes(searchText)}
+function empty(message,sub){return `<div class="empty"><strong>${safe(message)}</strong>${safe(sub||"Try another search or category.")}</div>`}
+function go(page){
+ if(!titles[page])return;
+ activePage=page;
+ document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id==="view-"+page));
+ document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+ document.getElementById("crumb").textContent=page==="lostfound"?"Lost & Found":page[0].toUpperCase()+page.slice(1);
+ document.getElementById("pageTitle").textContent=titles[page];
+ document.getElementById("globalSearch").value="";
+ searchText="";
+ renderAll();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function setFilter(group,value){
+ filters[group]=value;
+ const navGroup=document.querySelector(`[data-filter-group="${group}"]`);
+ if(navGroup)navGroup.querySelectorAll("[data-filter]").forEach(b=>b.classList.toggle("active",b.dataset.filter===value));
+ renderAll();
+}
+function applyFilter(group,item){
+ return (filters[group]==="all"||item.cat===filters[group]||item.type===filters[group])&&searchable(item);
+}
+function noticeCard(n){
+ return `<article class="card"><span class="tag ${n.cat==="Careers"?"blue":n.cat==="Clubs"?"pink":n.cat==="Community"?"green":""}">${safe(n.cat)}</span><h3>${safe(n.icon)} ${safe(n.title)}</h3><p>${safe(n.desc)}</p><div class="meta"><span>ℹ️ ${safe(n.date)}</span></div></article>`;
+}
+function noticeRow(n){
+ return `<div class="notice"><div class="notice-icon ${safe(n.color)}">${safe(n.icon)}</div><div><h3>${safe(n.title)}</h3><p>${safe(n.desc)}</p><time>${safe(n.date)}</time></div></div>`;
+}
+function eventCard(e){
+ const joined=userEvents.some(x=>x.id===e.id&&x.joined)||store.get("joined",[]).includes(e.id);
+ return `<article class="card"><div class="event-art ${safe(e.art||"art-purple")}"><div><span class="eyebrow">${safe(e.cat)}</span><strong>${safe(e.title)}</strong></div><span class="big">${safe(e.emoji)}</span></div><div class="meta"><span>📅 ${safe(fmtDate(e.date))}</span><span>🕒 ${safe(e.time||"Time to be confirmed")}</span></div><p>${safe(e.desc)}</p><div class="meta"><span>📍 ${safe(e.place||"Location to be confirmed")}</span></div><div class="card-actions"><button class="btn ${joined?"green":"small"}" data-rsvp="${safe(e.id)}" ${joined?"disabled":""}>${joined?"✓ Saved locally":"＋ Register interest"}</button><button class="btn light small" data-event-info="${safe(e.id)}">Details</button></div></article>`;
+}
+function marketCard(m){
+ return `<article class="card"><div class="product-icon">${safe(m.emoji||"📦")}</div><span class="tag blue">${safe(m.cat)}</span><h3>${safe(m.title)}</h3><div class="price">₹${Number(m.price).toLocaleString("en-IN")}</div><div class="meta"><span>🏷️ ${safe(m.condition||"Condition not specified")}</span></div><p>${safe(m.desc||"Contact the lister for more details.")}</p><div class="card-actions"><button class="btn small" data-contact="${safe(m.id)}">Contact lister</button><button class="btn light small" data-market-info="${safe(m.id)}">Details</button></div></article>`;
+}
+function lostCard(l){
+ const isFound=l.type==="Found";
+ return `<article class="card"><span class="tag ${isFound?"green":"pink"}">${isFound?"🟢 Found":"🔴 Lost"} · ${safe(l.cat)}</span><h3>${safe(l.title)}</h3><div class="meta"><span>📍 ${safe(l.place)}</span><span>📅 ${safe(fmtDate(l.date))}</span></div><p>${safe(l.details||"No extra details provided.")}</p><div class="card-actions"><button class="btn small" data-lost-contact="${safe(l.id)}">Respond to report</button></div></article>`;
+}
+function renderGrid(id,items,render,emptyTitle,emptySub){
+ const el=document.getElementById(id);if(!el)return;
+ el.innerHTML=items.length?items.map(render).join(""):empty(emptyTitle,emptySub);
+}
+function renderAll(){
+ renderGrid("announcementsGrid",notices.filter(n=>applyFilter("announcements",n)),noticeCard,"No matching announcements","Try a different category or search term.");
+ renderGrid("eventsGrid",allEvents().filter(e=>applyFilter("events",e)),eventCard,"No matching events","Try another filter or search term.");
+ renderGrid("marketGrid",allMarket().filter(m=>applyFilter("market",m)),marketCard,"No matching listings","Try another category or add a listing.");
+ renderGrid("lostGrid",allLost().filter(l=>applyFilter("lost",l)),lostCard,"No matching reports","Try another category or report an item.");
+ const ns=notices.filter(searchable);
+ document.getElementById("dashboardNotices").innerHTML=ns.slice(0,4).map(noticeRow).join("")||empty("No matching updates");
+ const es=allEvents().filter(searchable).slice(0,2);
+ renderGrid("dashboardEvents",es,eventCard,"No matching events");
+ document.getElementById("statNotices").textContent=notices.length;
+ document.getElementById("statEvents").textContent=allEvents().length;
+ document.getElementById("statMarket").textContent=allMarket().length;
+ document.getElementById("statLost").textContent=allLost().length;
+}
+document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+document.addEventListener("click",e=>{
+ const goBtn=e.target.closest("[data-go]");
+ if(goBtn){go(goBtn.dataset.go);return}
+ const toggle=e.target.closest("[data-toggle-form]");
+ if(toggle){const panel=document.getElementById(toggle.dataset.toggleForm);panel.classList.toggle("open");if(panel.classList.contains("open"))panel.scrollIntoView({behavior:"smooth",block:"nearest"});return}
+ const chip=e.target.closest("[data-filter]");
+ if(chip){setFilter(chip.closest("[data-filter-group]").dataset.filterGroup,chip.dataset.filter);return}
+ const jump=e.target.closest("[data-filter-jump]");
+ if(jump){setFilter(jump.dataset.filterJump,"all");return}
+ const rsvp=e.target.closest("[data-rsvp]");
+ if(rsvp){
+   const joined=store.get("joined",[]);
+   if(!joined.includes(rsvp.dataset.rsvp)){joined.push(rsvp.dataset.rsvp);store.set("joined",joined);toast("Interest saved in this browser. This is not an official registration.");renderAll()}
+   return;
+ }
+ const details=e.target.closest("[data-event-info]");
+ if(details){const item=allEvents().find(x=>x.id===details.dataset.eventInfo);if(item)toast(`${item.title} · ${fmtDate(item.date)} · ${item.place}. Demo event—verify details with your college.`);return}
+ const marketInfo=e.target.closest("[data-market-info]");
+ if(marketInfo){const item=allMarket().find(x=>x.id===marketInfo.dataset.marketInfo);if(item)toast(`${item.title} · ₹${item.price} · Example listing, not a verified offer.`);return}
+ const contact=e.target.closest("[data-contact]");
+ if(contact){const item=allMarket().find(x=>x.id===contact.dataset.contact);if(!item)return;const email=prompt("Enter the lister's email address if they have shared it with you. Leave blank to cancel:");if(email&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){location.href=`mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent("CampusConnect enquiry: "+item.title)}&body=${encodeURIComponent("Hi, I saw your example listing on CampusConnect: "+item.title+". Is it still available?")}`}else if(email)toast("Please enter a valid email address.");return}
+ const lostContact=e.target.closest("[data-lost-contact]");
+ if(lostContact){toast("No contact details are published in this demo. Use an official campus channel or hand valuables to authorised staff.");return}
+});
+document.getElementById("globalSearch").addEventListener("input",e=>{searchText=e.target.value.trim().toLowerCase();renderAll()});
+
+document.getElementById("lostSubmit").addEventListener("submit",e=>{
+ e.preventDefault();
+ const item={id:"lu"+Date.now(),type:document.getElementById("lostType").value,cat:document.getElementById("lostCategory").value,title:document.getElementById("lostTitle").value.trim(),place:document.getElementById("lostPlace").value.trim(),date:document.getElementById("lostDate").value,details:document.getElementById("lostDetails").value.trim()};
+ if(!item.title||!item.place||!item.date){toast("Please complete the required fields.");return}
+ userLost.unshift(item);store.set("lost",userLost);e.target.reset();document.getElementById("lostForm").classList.remove("open");setFilter("lost","all");go("lostfound");toast("Report added in this browser only.");
+});
+document.getElementById("marketSubmit").addEventListener("submit",e=>{
+ e.preventDefault();
+ const item={id:"mu"+Date.now(),title:document.getElementById("marketTitle").value.trim(),cat:document.getElementById("marketCategory").value,price:Number(document.getElementById("marketPrice").value),condition:document.getElementById("marketCondition").value,emoji:document.getElementById("marketEmoji").value,desc:document.getElementById("marketDetails").value.trim()||"No extra details provided."};
+ if(!item.title||!Number.isFinite(item.price)||item.price<0){toast("Enter an item name and valid price.");return}
+ userMarket.unshift(item);store.set("market",userMarket);e.target.reset();document.getElementById("marketForm").classList.remove("open");setFilter("market","all");go("marketplace");toast("Listing added in this browser only.");
+});
+/* Default dates for the new Lost & Found form. */
+document.getElementById("lostDate").value=new Date().toLocaleDateString("en-CA");
+renderAll();
+</script>
 </body>
 </html>
