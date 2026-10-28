@@ -19,9 +19,7 @@
   --danger: #d94848;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -50,9 +48,7 @@ header {
   font-weight: 800;
 }
 
-.logo span {
-  color: var(--text);
-}
+.logo span { color: var(--text); }
 
 nav {
   display: flex;
@@ -86,9 +82,7 @@ button {
   color: white;
 }
 
-.primary:hover {
-  background: var(--dark);
-}
+.primary:hover { background: var(--dark); }
 
 .secondary {
   background: var(--light);
@@ -101,13 +95,8 @@ main {
   margin: auto;
 }
 
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-}
+.page { display: none; }
+.page.active { display: block; }
 
 .hero {
   background: linear-gradient(130deg, #07545c, #109eaa);
@@ -142,9 +131,7 @@ main {
   margin: 22px 0 16px;
 }
 
-.section-heading h2 {
-  margin: 0;
-}
+.section-heading h2 { margin: 0; }
 
 .muted {
   color: var(--muted);
@@ -225,10 +212,14 @@ main {
   border-radius: 9px;
   font-size: 13px;
   line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
-.contact strong {
-  color: var(--dark);
+.contact strong { color: var(--dark); }
+
+.contact a {
+  color: var(--primary);
+  overflow-wrap: anywhere;
 }
 
 .toolbar {
@@ -269,9 +260,7 @@ textarea {
   margin-bottom: 22px;
 }
 
-.form-panel h3 {
-  margin-top: 0;
-}
+.form-panel h3 { margin-top: 0; }
 
 .form-grid {
   display: grid;
@@ -285,9 +274,7 @@ textarea {
   gap: 7px;
 }
 
-.field.full {
-  grid-column: 1 / -1;
-}
+.field.full { grid-column: 1 / -1; }
 
 .actions {
   display: flex;
@@ -333,13 +320,8 @@ dialog {
   box-shadow: 0 15px 50px #0003;
 }
 
-dialog::backdrop {
-  background: #102a30a8;
-}
-
-dialog h2 {
-  margin-top: 0;
-}
+dialog::backdrop { background: #102a30a8; }
+dialog h2 { margin-top: 0; }
 
 .close-row {
   display: flex;
@@ -353,22 +335,16 @@ dialog h2 {
     padding: 14px;
   }
 
-  nav {
-    width: 100%;
-  }
+  nav { width: 100%; }
 
   nav button {
     flex: 1;
     padding: 9px 6px;
   }
 
-  main {
-    padding: 20px 13px 40px;
-  }
+  main { padding: 20px 13px 40px; }
 
-  .hero {
-    padding: 27px 20px;
-  }
+  .hero { padding: 27px 20px; }
 }
 </style>
 </head>
@@ -417,17 +393,13 @@ dialog h2 {
 
     <div class="section-heading">
       <h2>Latest Marketplace Listings</h2>
-      <button class="secondary" onclick="showPage('marketplace')">
-        View all
-      </button>
+      <button class="secondary" onclick="showPage('marketplace')">View all</button>
     </div>
     <div id="homeMarketplace" class="grid"></div>
 
     <div class="section-heading">
       <h2>Recent Lost &amp; Found Posts</h2>
-      <button class="secondary" onclick="showPage('lostfound')">
-        View all
-      </button>
+      <button class="secondary" onclick="showPage('lostfound')">View all</button>
     </div>
     <div id="homeLost" class="grid"></div>
   </section>
@@ -439,9 +411,7 @@ dialog h2 {
         <h2>Student Marketplace</h2>
         <p class="muted">Buy, sell, or exchange items on campus.</p>
       </div>
-      <button class="primary" onclick="toggleForm('marketForm')">
-        + Add Listing
-      </button>
+      <button class="primary" onclick="toggleForm('marketForm')">+ Add Listing</button>
     </div>
 
     <div id="marketForm" class="form-panel" hidden>
@@ -452,6 +422,7 @@ dialog h2 {
             <label for="mTitle">Item name *</label>
             <input id="mTitle" required maxlength="80" placeholder="e.g. Engineering textbook">
           </div>
+
           <div class="field">
             <label for="mCategory">Category *</label>
             <select id="mCategory" required>
@@ -462,10 +433,12 @@ dialog h2 {
               <option value="Other">Other</option>
             </select>
           </div>
+
           <div class="field">
             <label for="mPrice">Price (₹) *</label>
             <input id="mPrice" type="number" min="0" step="1" required placeholder="e.g. 250">
           </div>
+
           <div class="field">
             <label for="mCondition">Condition</label>
             <select id="mCondition">
@@ -475,15 +448,18 @@ dialog h2 {
               <option>New</option>
             </select>
           </div>
+
           <div class="field full">
             <label for="mDescription">Description *</label>
             <textarea id="mDescription" required maxlength="500" placeholder="Describe your item..."></textarea>
           </div>
+
           <div class="field">
             <label for="mSeller">Seller name *</label>
             <select id="mSeller" required></select>
           </div>
         </div>
+
         <div class="actions">
           <button class="primary" type="submit">Publish Listing</button>
           <button class="secondary" type="button" onclick="toggleForm('marketForm')">Cancel</button>
@@ -513,9 +489,7 @@ dialog h2 {
         <h2>Lost &amp; Found</h2>
         <p class="muted">Help fellow students find their missing belongings.</p>
       </div>
-      <button class="primary" onclick="toggleForm('lostForm')">
-        + Create Post
-      </button>
+      <button class="primary" onclick="toggleForm('lostForm')">+ Create Post</button>
     </div>
 
     <div id="lostForm" class="form-panel" hidden>
@@ -529,27 +503,33 @@ dialog h2 {
               <option value="Found">Found Item</option>
             </select>
           </div>
+
           <div class="field">
             <label for="lTitle">Item name *</label>
             <input id="lTitle" required maxlength="80" placeholder="e.g. Water bottle">
           </div>
+
           <div class="field">
             <label for="lLocation">Last seen / found at *</label>
             <input id="lLocation" required maxlength="100" placeholder="e.g. Library">
           </div>
+
           <div class="field">
             <label for="lDate">Date</label>
             <input id="lDate" type="date">
           </div>
+
           <div class="field full">
             <label for="lDescription">Description *</label>
             <textarea id="lDescription" required maxlength="500" placeholder="Add useful identifying details..."></textarea>
           </div>
+
           <div class="field">
             <label for="lPoster">Posted by *</label>
             <select id="lPoster" required></select>
           </div>
         </div>
+
         <div class="actions">
           <button class="primary" type="submit">Publish Post</button>
           <button class="secondary" type="button" onclick="toggleForm('lostForm')">Cancel</button>
@@ -608,20 +588,19 @@ dialog h2 {
 <dialog id="detailDialog">
   <div id="dialogContent"></div>
   <div class="close-row">
-    <button class="secondary" onclick="document.getElementById('detailDialog').close()">
-      Close
-    </button>
+    <button class="secondary" onclick="document.getElementById('detailDialog').close()">Close</button>
   </div>
 </dialog>
 
 <script>
 "use strict";
 
-/* --------------------------------
-   SAMPLE STUDENT NAMES AND EMAILS
---------------------------------- */
-
+/* STUDENT NAMES AND EMAILS — YOUR NAME IS FIRST */
 const STUDENTS = [
+  {
+    name: "MAHIVARDHAN PASILA",
+    email: "mahivardhan.pasila138969@marwadiuniversity.ac.in"
+  },
   { name: "Rajesh", email: "rajesh@example.com" },
   { name: "Yashwanth", email: "yashwanth@example.com" },
   { name: "Nishanth", email: "nishanth@example.com" },
@@ -632,21 +611,14 @@ function studentByName(name) {
   return STUDENTS.find(student => student.name === name) || STUDENTS[0];
 }
 
-function randomStudent() {
-  return STUDENTS[Math.floor(Math.random() * STUDENTS.length)];
-}
-
 function fillStudentOptions(selectId) {
   const select = document.getElementById(selectId);
   select.innerHTML = STUDENTS.map(student =>
-    `<option value="${student.name}">${student.name}</option>`
+    `<option value="${escapeHTML(student.name)}">${escapeHTML(student.name)}</option>`
   ).join("");
 }
 
-/* --------------------------------
-   SAMPLE LISTINGS
---------------------------------- */
-
+/* SAMPLE MARKETPLACE LISTINGS */
 const defaultMarketplace = [
   {
     id: "m1",
@@ -683,9 +655,19 @@ const defaultMarketplace = [
     condition: "Used",
     description: "Working table lamp suitable for hostel study.",
     seller: "Raghava"
+  },
+  {
+    id: "m5",
+    title: "Engineering Study Notes",
+    category: "Books",
+    price: 150,
+    condition: "Good",
+    description: "Organised revision notes for engineering subjects.",
+    seller: "MAHIVARDHAN PASILA"
   }
 ];
 
+/* SAMPLE LOST AND FOUND POSTS */
 const defaultLostFound = [
   {
     id: "l1",
@@ -722,9 +704,19 @@ const defaultLostFound = [
     date: "",
     description: "A set of keys was found near the main entrance.",
     poster: "Raghava"
+  },
+  {
+    id: "l5",
+    type: "Found",
+    title: "Notebook",
+    location: "College Library",
+    date: "",
+    description: "A notebook was found in the library. Contact the poster to confirm identifying details.",
+    poster: "MAHIVARDHAN PASILA"
   }
 ];
 
+/* SAMPLE EVENTS */
 const events = [
   {
     title: "Technical Workshop",
@@ -764,16 +756,13 @@ const announcements = [
   }
 ];
 
-/* --------------------------------
-   LOCAL STORAGE
---------------------------------- */
-
+/* LOCAL STORAGE */
 function loadData(key, fallback) {
   try {
     const stored = localStorage.getItem(key);
-    return stored ? JSON.parse(stored) : structuredClone(fallback);
+    return stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(fallback));
   } catch (error) {
-    return structuredClone(fallback);
+    return JSON.parse(JSON.stringify(fallback));
   }
 }
 
@@ -789,10 +778,7 @@ function saveData() {
   }
 }
 
-/* --------------------------------
-   SAFE HTML HELPERS
---------------------------------- */
-
+/* SAFE HTML HELPERS */
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"']/g, character => ({
     "&": "&amp;",
@@ -807,34 +793,32 @@ function formatText(value) {
   return escapeHTML(value).replace(/\n/g, "<br>");
 }
 
-function contactHTML(name) {
+/* CONTACT DETAILS USED IN DETAIL POPUPS */
+function contactHTML(name, heading) {
   const student = studentByName(name);
 
   return `
     <div class="contact">
-      <strong>Contact Details</strong><br>
+      <strong>${escapeHTML(heading)}</strong><br>
       Name: ${escapeHTML(student.name)}<br>
       Email:
-      <a href="mailto:${escapeHTML(student.email)}">
-        ${escapeHTML(student.email)}
-      </a>
+      <a href="mailto:${escapeHTML(student.email)}">${escapeHTML(student.email)}</a>
     </div>
   `;
 }
 
 function showDetails(title, content) {
   const dialog = document.getElementById("detailDialog");
+
   document.getElementById("dialogContent").innerHTML = `
     <h2>${escapeHTML(title)}</h2>
     ${content}
   `;
+
   dialog.showModal();
 }
 
-/* --------------------------------
-   NAVIGATION
---------------------------------- */
-
+/* NAVIGATION */
 function showPage(pageId) {
   document.querySelectorAll(".page").forEach(page => {
     page.classList.toggle("active", page.id === pageId);
@@ -856,10 +840,9 @@ function toggleForm(formId) {
   form.hidden = !form.hidden;
 }
 
-/* --------------------------------
-   MARKETPLACE CARDS
---------------------------------- */
-
+/* MARKETPLACE CARDS
+   Seller name and email appear on the card.
+*/
 function marketplaceCard(item) {
   const student = studentByName(item.seller);
 
@@ -887,6 +870,9 @@ function marketplaceCard(item) {
   `;
 }
 
+/* MARKETPLACE DETAIL POPUP
+   Seller name and email also appear in View Details.
+*/
 function viewMarketplace(id) {
   const item = marketplace.find(entry => entry.id === id);
   if (!item) return;
@@ -896,7 +882,7 @@ function viewMarketplace(id) {
     <p><strong>Price:</strong> ₹${Number(item.price).toLocaleString("en-IN")}</p>
     <p><strong>Condition:</strong> ${escapeHTML(item.condition)}</p>
     <p><strong>Description:</strong><br>${formatText(item.description)}</p>
-    ${contactHTML(item.seller)}
+    ${contactHTML(item.seller, "Seller")}
   `);
 }
 
@@ -906,7 +892,10 @@ function renderMarketplace() {
 
   const filtered = marketplace.filter(item => {
     const matchesSearch = [
-      item.title, item.description, item.category, item.seller
+      item.title,
+      item.description,
+      item.category,
+      item.seller
     ].some(value => String(value).toLowerCase().includes(search));
 
     return matchesSearch && (category === "All" || item.category === category);
@@ -926,6 +915,7 @@ function renderMarketplace() {
 document.getElementById("marketSearch").addEventListener("input", renderMarketplace);
 document.getElementById("marketFilter").addEventListener("change", renderMarketplace);
 
+/* CREATE MARKETPLACE LISTING */
 document.getElementById("marketCreateForm").addEventListener("submit", event => {
   event.preventDefault();
 
@@ -939,24 +929,25 @@ document.getElementById("marketCreateForm").addEventListener("submit", event => 
     seller: document.getElementById("mSeller").value
   };
 
-  if (!item.title || !item.description || item.price < 0) {
+  if (!item.title || !item.description || !Number.isFinite(item.price) || item.price < 0) {
     alert("Please enter valid listing details.");
     return;
   }
 
   marketplace.unshift(item);
   saveData();
+
   event.target.reset();
   fillStudentOptions("mSeller");
   document.getElementById("marketForm").hidden = true;
+
   renderMarketplace();
   alert("Marketplace listing added!");
 });
 
-/* --------------------------------
-   LOST & FOUND CARDS
---------------------------------- */
-
+/* LOST AND FOUND CARDS
+   Poster name and email appear on the card.
+*/
 function lostCard(item) {
   const student = studentByName(item.poster);
 
@@ -984,6 +975,9 @@ function lostCard(item) {
   `;
 }
 
+/* LOST AND FOUND DETAIL POPUP
+   Poster name and email also appear in View Details.
+*/
 function viewLost(id) {
   const item = lostFound.find(entry => entry.id === id);
   if (!item) return;
@@ -993,7 +987,7 @@ function viewLost(id) {
     <p><strong>Location:</strong> ${escapeHTML(item.location)}</p>
     <p><strong>Date:</strong> ${escapeHTML(item.date || "Not specified")}</p>
     <p><strong>Description:</strong><br>${formatText(item.description)}</p>
-    ${contactHTML(item.poster)}
+    ${contactHTML(item.poster, "Posted by")}
   `);
 }
 
@@ -1003,7 +997,11 @@ function renderLostFound() {
 
   const filtered = lostFound.filter(item => {
     const matchesSearch = [
-      item.title, item.description, item.location, item.poster, item.type
+      item.title,
+      item.description,
+      item.location,
+      item.poster,
+      item.type
     ].some(value => String(value).toLowerCase().includes(search));
 
     return matchesSearch && (type === "All" || item.type === type);
@@ -1023,6 +1021,7 @@ function renderLostFound() {
 document.getElementById("lostSearch").addEventListener("input", renderLostFound);
 document.getElementById("lostFilter").addEventListener("change", renderLostFound);
 
+/* CREATE LOST AND FOUND POST */
 document.getElementById("lostCreateForm").addEventListener("submit", event => {
   event.preventDefault();
 
@@ -1043,17 +1042,16 @@ document.getElementById("lostCreateForm").addEventListener("submit", event => {
 
   lostFound.unshift(item);
   saveData();
+
   event.target.reset();
   fillStudentOptions("lPoster");
   document.getElementById("lostForm").hidden = true;
+
   renderLostFound();
   alert("Lost & Found post added!");
 });
 
-/* --------------------------------
-   EVENTS AND COMMUNITY
---------------------------------- */
-
+/* EVENTS */
 function renderEvents() {
   document.getElementById("eventCount").textContent = events.length;
 
@@ -1068,6 +1066,7 @@ function renderEvents() {
   `).join("");
 }
 
+/* COMMUNITY BULLETIN */
 function renderCommunity() {
   document.getElementById("communityListings").innerHTML = announcements.map(item => `
     <article class="card">
@@ -1078,10 +1077,7 @@ function renderCommunity() {
   `).join("");
 }
 
-/* --------------------------------
-   INITIALIZE WEBSITE
---------------------------------- */
-
+/* INITIALIZE WEBSITE */
 fillStudentOptions("mSeller");
 fillStudentOptions("lPoster");
 
